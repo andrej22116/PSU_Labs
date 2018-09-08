@@ -11,7 +11,13 @@ class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
+    enum Math {
+        Null, Add, Sub, Div, Mul, Pow
+    };
+
     int task2_number;
+    double task7_number;
+    Math task7_math = Null;
 
 public:
     explicit MainWindow(QWidget *parent = nullptr);

@@ -50,7 +50,7 @@ public:
 
     void retranslateUi(QMainWindow *MainWindow)
     {
-        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", nullptr));
+        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "Calculator", nullptr));
 #ifndef QT_NO_WHATSTHIS
         MainWindow->setWhatsThis(QString());
 #endif // QT_NO_WHATSTHIS
