@@ -1,0 +1,7 @@
+F:\lern\MyLabs\4 cours\First\PnP.NET\LR_1\Console\PnP_NET LR_1_Console\PnP_NET LR_1_Console\bin\Debug\PnP_NET LR_1_Console.exe.config
+F:\lern\MyLabs\4 cours\First\PnP.NET\LR_1\Console\PnP_NET LR_1_Console\PnP_NET LR_1_Console\bin\Debug\PnP_NET LR_1_Console.exe
+F:\lern\MyLabs\4 cours\First\PnP.NET\LR_1\Console\PnP_NET LR_1_Console\PnP_NET LR_1_Console\bin\Debug\PnP_NET LR_1_Console.pdb
+F:\lern\MyLabs\4 cours\First\PnP.NET\LR_1\Console\PnP_NET LR_1_Console\PnP_NET LR_1_Console\obj\Debug\PnP_NET LR_1_Console.csprojAssemblyReference.cache
+F:\lern\MyLabs\4 cours\First\PnP.NET\LR_1\Console\PnP_NET LR_1_Console\PnP_NET LR_1_Console\obj\Debug\PnP_NET LR_1_Console.csproj.CoreCompileInputs.cache
+F:\lern\MyLabs\4 cours\First\PnP.NET\LR_1\Console\PnP_NET LR_1_Console\PnP_NET LR_1_Console\obj\Debug\PnP_NET LR_1_Console.exe
+F:\lern\MyLabs\4 cours\First\PnP.NET\LR_1\Console\PnP_NET LR_1_Console\PnP_NET LR_1_Console\obj\Debug\PnP_NET LR_1_Console.pdb
