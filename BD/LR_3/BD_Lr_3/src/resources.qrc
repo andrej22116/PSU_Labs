@@ -1,0 +1,10 @@
+<RCC>
+    <qresource prefix="/images/icons">
+        <file>BD_Add.png</file>
+        <file>BD_Drop.png</file>
+        <file>BD_Load.png</file>
+        <file>BD_Save.png</file>
+        <file>BD_Bin.png</file>
+        <file>BD_Txt.png</file>
+    </qresource>
+</RCC>
