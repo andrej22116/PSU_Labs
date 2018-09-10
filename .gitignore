@@ -1,3 +1,5 @@
-*.user
-**/*Debug
-**/*Release
+**/*.user
+**/*Debug/
+**/*Release/
+**/bin/
+**/obj/
