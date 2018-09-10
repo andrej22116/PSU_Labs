@@ -122,7 +122,7 @@ QPushButton {
              </column>
              <column>
               <property name="text">
-               <string>Новый столбец</string>
+               <string>Группа</string>
               </property>
               <property name="font">
                <font>

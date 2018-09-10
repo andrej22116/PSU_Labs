@@ -348,7 +348,7 @@ public:
         QTableWidgetItem *___qtablewidgetitem1 = dataTable->horizontalHeaderItem(1);
         ___qtablewidgetitem1->setText(QApplication::translate("MainWindow", "\320\224\320\260\321\202\320\260 \321\200\320\276\320\266\320\264\320\265\320\275\320\270\321\217", nullptr));
         QTableWidgetItem *___qtablewidgetitem2 = dataTable->horizontalHeaderItem(2);
-        ___qtablewidgetitem2->setText(QApplication::translate("MainWindow", "\320\235\320\276\320\262\321\213\320\271 \321\201\321\202\320\276\320\273\320\261\320\265\321\206", nullptr));
+        ___qtablewidgetitem2->setText(QApplication::translate("MainWindow", "\320\223\321\200\321\203\320\277\320\277\320\260", nullptr));
         QTableWidgetItem *___qtablewidgetitem3 = dataTable->horizontalHeaderItem(3);
         ___qtablewidgetitem3->setText(QApplication::translate("MainWindow", "\320\242\320\265\320\273\320\265\321\204\320\276\320\275", nullptr));
         QTableWidgetItem *___qtablewidgetitem4 = dataTable->horizontalHeaderItem(4);
