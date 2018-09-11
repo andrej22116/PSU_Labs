@@ -1,0 +1,15 @@
+<RCC>
+    <qresource prefix="/images/icons">
+        <file>BD_ZoomAdd.png</file>
+        <file>BD_ZoomSub.png</file>
+        <file>BD_Circle.png</file>
+        <file>BD_Ellips.png</file>
+        <file>BD_Rect.png</file>
+        <file>BD_Square.png</file>
+        <file>BD_Palitra.png</file>
+        <file>BD_Full.png</file>
+        <file>BD_Horizontalpng.png</file>
+        <file>BD_Vertical.png</file>
+        <file>BD_Line.png</file>
+    </qresource>
+</RCC>

@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>BD Lr 5 - Paint</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QGridLayout" name="gridLayout">
@@ -71,6 +71,47 @@
      <height>21</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menuScale">
+    <property name="title">
+     <string>Масштаб</string>
+    </property>
+    <addaction name="menuAddTen"/>
+    <addaction name="menuSubTen"/>
+    <addaction name="separator"/>
+   </widget>
+   <widget class="QMenu" name="menuFigure">
+    <property name="title">
+     <string>Фигура</string>
+    </property>
+    <addaction name="menuFigureLine"/>
+    <addaction name="separator"/>
+    <addaction name="menuFigureQuad"/>
+    <addaction name="menuFigureRect"/>
+    <addaction name="separator"/>
+    <addaction name="menuFigureCircle"/>
+    <addaction name="menuFigureSphere"/>
+    <addaction name="separator"/>
+   </widget>
+   <widget class="QMenu" name="menuFill">
+    <property name="title">
+     <string>Заливка</string>
+    </property>
+    <widget class="QMenu" name="menuFillType">
+     <property name="title">
+      <string>Стиль</string>
+     </property>
+     <addaction name="menuFillTypeFull"/>
+     <addaction name="menuFillTypeHorizontalLines"/>
+     <addaction name="menuFillTypeVerticalLines"/>
+     <addaction name="separator"/>
+    </widget>
+    <addaction name="menuFillType"/>
+    <addaction name="menuFillColor"/>
+    <addaction name="separator"/>
+   </widget>
+   <addaction name="menuScale"/>
+   <addaction name="menuFigure"/>
+   <addaction name="menuFill"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <property name="minimumSize">
@@ -85,10 +126,122 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
+   <addaction name="menuAddTen"/>
+   <addaction name="menuSubTen"/>
+   <addaction name="menuFigureLine"/>
+   <addaction name="menuFigureRect"/>
+   <addaction name="menuFigureQuad"/>
+   <addaction name="menuFigureCircle"/>
+   <addaction name="menuFigureSphere"/>
+   <addaction name="menuFillColor"/>
+   <addaction name="menuFillTypeFull"/>
+   <addaction name="menuFillTypeHorizontalLines"/>
+   <addaction name="menuFillTypeVerticalLines"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
+  <action name="menuAddTen">
+   <property name="icon">
+    <iconset resource="src/resouce.qrc">
+     <normaloff>:/images/icons/BD_ZoomAdd.png</normaloff>:/images/icons/BD_ZoomAdd.png</iconset>
+   </property>
+   <property name="text">
+    <string>+ 10%</string>
+   </property>
+  </action>
+  <action name="menuSubTen">
+   <property name="icon">
+    <iconset resource="src/resouce.qrc">
+     <normaloff>:/images/icons/BD_ZoomSub.png</normaloff>:/images/icons/BD_ZoomSub.png</iconset>
+   </property>
+   <property name="text">
+    <string>- 10%</string>
+   </property>
+  </action>
+  <action name="menuFigureQuad">
+   <property name="icon">
+    <iconset resource="src/resouce.qrc">
+     <normaloff>:/images/icons/BD_Square.png</normaloff>:/images/icons/BD_Square.png</iconset>
+   </property>
+   <property name="text">
+    <string>Квадрат</string>
+   </property>
+  </action>
+  <action name="menuFigureRect">
+   <property name="icon">
+    <iconset resource="src/resouce.qrc">
+     <normaloff>:/images/icons/BD_Rect.png</normaloff>:/images/icons/BD_Rect.png</iconset>
+   </property>
+   <property name="text">
+    <string>Прямоугольник</string>
+   </property>
+  </action>
+  <action name="menuFigureCircle">
+   <property name="icon">
+    <iconset resource="src/resouce.qrc">
+     <normaloff>:/images/icons/BD_Circle.png</normaloff>:/images/icons/BD_Circle.png</iconset>
+   </property>
+   <property name="text">
+    <string>Круг</string>
+   </property>
+  </action>
+  <action name="menuFigureSphere">
+   <property name="icon">
+    <iconset resource="src/resouce.qrc">
+     <normaloff>:/images/icons/BD_Ellips.png</normaloff>:/images/icons/BD_Ellips.png</iconset>
+   </property>
+   <property name="text">
+    <string>Овал</string>
+   </property>
+  </action>
+  <action name="menuFillColor">
+   <property name="icon">
+    <iconset resource="src/resouce.qrc">
+     <normaloff>:/images/icons/BD_Palitra.png</normaloff>:/images/icons/BD_Palitra.png</iconset>
+   </property>
+   <property name="text">
+    <string>Цвет</string>
+   </property>
+  </action>
+  <action name="menuFillTypeFull">
+   <property name="icon">
+    <iconset resource="src/resouce.qrc">
+     <normaloff>:/images/icons/BD_Full.png</normaloff>:/images/icons/BD_Full.png</iconset>
+   </property>
+   <property name="text">
+    <string>Сплошная заливка</string>
+   </property>
+  </action>
+  <action name="menuFillTypeHorizontalLines">
+   <property name="icon">
+    <iconset resource="src/resouce.qrc">
+     <normaloff>:/images/icons/BD_Horizontalpng.png</normaloff>:/images/icons/BD_Horizontalpng.png</iconset>
+   </property>
+   <property name="text">
+    <string>Горизонтальная штриховка</string>
+   </property>
+  </action>
+  <action name="menuFillTypeVerticalLines">
+   <property name="icon">
+    <iconset resource="src/resouce.qrc">
+     <normaloff>:/images/icons/BD_Vertical.png</normaloff>:/images/icons/BD_Vertical.png</iconset>
+   </property>
+   <property name="text">
+    <string>Вертикальная штриховка</string>
+   </property>
+  </action>
+  <action name="menuFigureLine">
+   <property name="icon">
+    <iconset resource="src/resouce.qrc">
+     <normaloff>:/images/icons/BD_Line.png</normaloff>:/images/icons/BD_Line.png</iconset>
+   </property>
+   <property name="text">
+    <string>Линия</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources/>
+ <resources>
+  <include location="src/resouce.qrc"/>
+ </resources>
  <connections/>
 </ui>

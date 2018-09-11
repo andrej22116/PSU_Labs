@@ -17,26 +17,37 @@ public:
         Ellipse
     };
 
+    enum FillMode {
+        Full,
+        VerticalLines,
+        HorizontalLines
+    };
+
 
 private:
     bool onPaint = false;
     PaintMode _currentPaintMode = Circle;
     QPointF _beginPoint;
-    QGraphicsItem* _drawingItem;
+    QGraphicsItem* _drawingItem = nullptr;
+
+    QBrush _fillBrush;
+    QColor _fillColor;
 
     Q_OBJECT
 public:
     explicit PaintScene(QObject *parent = nullptr);
 
+    void setPaintMode(PaintMode newPaintMode);
+
+    void setFillColor(QColor newColor);
+    void setFillMode(FillMode newFillMode);
+
 private:
     void mousePressEvent(QGraphicsSceneMouseEvent* event) override;
     void mouseMoveEvent(QGraphicsSceneMouseEvent* event) override;
 
-    void beginDrawLine(const QPointF& beginPoint);
-    void drawLine(const QPointF& endPoint);
-    void endDrawLine();
-
     void beginDrawFigure(const QPointF& beginPoint);
+    void drawLine(const QPointF& endPoint);
     void drawSquare(const QPointF& endPoint);
     void drawRectangle(const QPointF& endPoint);
     void drawCircle(const QPointF& endPoint);
@@ -47,7 +58,7 @@ private:
     QRectF getFigureSquare(const QPointF& endPoint);
 
     using DrawingController = decltype(&PaintScene::drawSquare);
-    DrawingController _drawingController;
+    DrawingController _drawingController = nullptr;
 };
 
 #endif // PAINTWIDGET_H

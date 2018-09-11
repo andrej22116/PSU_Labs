@@ -5,18 +5,40 @@
 #include <QGraphicsRectItem>
 #include <QGraphicsEllipseItem>
 #include <QtMath>
+#include <QBrush>
 
 PaintScene::PaintScene(QObject* parent) : QGraphicsScene(parent)
 {
+    setFillMode(Full);
 }
+
+
+void PaintScene::setPaintMode(PaintMode newPaintMode)
+{
+    _currentPaintMode = newPaintMode;
+}
+
+
+void PaintScene::setFillColor(QColor newColor)
+{
+    _fillColor = std::move(newColor);
+    _fillBrush.setColor(_fillColor);
+}
+
+
+void PaintScene::setFillMode(FillMode newFillMode)
+{
+    switch (newFillMode) {
+    case Full: { _fillBrush = std::move(QBrush(_fillColor)); } break;
+    case VerticalLines: { _fillBrush = std::move(QBrush(_fillColor, Qt::BrushStyle::VerPattern)); } break;
+    case HorizontalLines: { _fillBrush = std::move(QBrush(_fillColor, Qt::BrushStyle::HorPattern)); } break;
+    }
+}
+
 
 void PaintScene::mousePressEvent(QGraphicsSceneMouseEvent* event)
 {
-    if ( _currentPaintMode == Line ) {
-        beginDrawLine(event->scenePos());
-    } else {
-        beginDrawFigure(event->scenePos());
-    }
+    beginDrawFigure(event->scenePos());
 }
 
 
@@ -28,55 +50,23 @@ void PaintScene::mouseMoveEvent(QGraphicsSceneMouseEvent* event)
 }
 
 
-void PaintScene::beginDrawLine(const QPointF& beginPoint)
-{
-    onPaint = true;
-    addEllipse(beginPoint.x() - 5,
-               beginPoint.y() - 5,
-               10,
-               10,
-               QPen(Qt::NoPen),
-               QBrush(Qt::red));
-
-    _beginPoint = beginPoint;
-}
-
-
-void PaintScene::drawLine(const QPointF& endPoint)
-{
-    addLine(_beginPoint.x(),
-            _beginPoint.y(),
-            endPoint.x(),
-            endPoint.y(),
-            QPen(Qt::red, 10, Qt::SolidLine, Qt::RoundCap));
-
-    _beginPoint = endPoint;
-}
-
-
-void PaintScene::endDrawLine()
-{
-    onPaint = false;
-}
-
-
 void PaintScene::beginDrawFigure(const QPointF& beginPoint)
 {
     onPaint = true;
     _beginPoint = beginPoint;
 
     switch(_currentPaintMode) {
+    case Line: {
+        addEllipse(beginPoint.x() - 2.5, beginPoint.y() - 2.5, 5, 5,
+                   QPen(Qt::NoPen), QBrush(_fillColor));
+    } break;
     case Square: case Rectangle: {
-        _drawingItem = addRect(_beginPoint.x(),
-                               _beginPoint.y(),
-                               1, 1,
-                               QPen(Qt::red, 10, Qt::SolidLine, Qt::RoundCap));
+        _drawingItem = addRect(_beginPoint.x(), _beginPoint.y(), 1, 1,
+                               QPen(_fillColor, 1), _fillBrush);
     } break;
     case Circle: case Ellipse: {
-        _drawingItem = addEllipse(_beginPoint.x(),
-                                  _beginPoint.y(),
-                                  1, 1,
-                                  QPen(Qt::red, 10, Qt::SolidLine, Qt::RoundCap));
+        _drawingItem = addEllipse(_beginPoint.x(), _beginPoint.y(), 1, 1,
+                                  QPen(_fillColor, 1), _fillBrush);
     } break;
     }
 
@@ -87,6 +77,18 @@ void PaintScene::beginDrawFigure(const QPointF& beginPoint)
     case Circle: { _drawingController = &PaintScene::drawCircle; } break;
     case Ellipse: { _drawingController = &PaintScene::drawEllipse; } break;
     }
+}
+
+
+void PaintScene::drawLine(const QPointF& endPoint)
+{
+    addLine(_beginPoint.x(),
+            _beginPoint.y(),
+            endPoint.x(),
+            endPoint.y(),
+            QPen(_fillColor, 5, Qt::SolidLine, Qt::RoundCap));
+
+    _beginPoint = endPoint;
 }
 
 
