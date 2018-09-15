@@ -1,13 +1,12 @@
 package sample;
 
+import sample.pages.library.LibraryController;
+import sample.pages.settings.SettingsController;
+import sample.pages.store.StoreController;
+
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.geometry.Orientation;
-import javafx.geometry.Pos;
-import javafx.geometry.Rectangle2D;
-import javafx.geometry.Side;
+import javafx.geometry.*;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.image.Image;
@@ -18,20 +17,18 @@ import javafx.stage.Stage;
 
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
-import javafx.event.ActionEvent;
 
 public class Main extends Application {
 
     Label statusBar = new Label();
-    GridPane mainPane = new GridPane();
+    BorderPane mainPane = new BorderPane();
     TilePane headPane = new TilePane();
 
     TabPane tabPane = new TabPane();
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        BorderPane root = new BorderPane();//FXMLLoader.load(getClass().getResource("sample.fxml"));
+        BorderPane root = new BorderPane();
         primaryStage.setTitle("Hello World");
 
         root.setTop(headPane);
@@ -47,7 +44,8 @@ public class Main extends Application {
         makeHeader();
         makeCenter();
 
-        primaryStage.setScene(new Scene(root, 800, 600));
+        Scene scene = new Scene(root, 800, 600);
+        primaryStage.setScene(scene);
         primaryStage.setMinWidth(800);
         primaryStage.setMinHeight(600);
         primaryStage.show();
@@ -55,47 +53,38 @@ public class Main extends Application {
 
     private void makeHeader()
     {
-        //headPane.setOrientation(Orientation.HORIZONTAL);
-        //headPane.set
     }
 
     private void makeCenter()
     {
-        tabPane.setSide(Side.LEFT);
         statusBar.setText("Trololo!");
 
-        Button button = new Button("Press me!");
-        button.setOnAction((e) -> {
-            statusBar.setText(e.toString());
-        });
+        castomizeTabPane();
 
-        //mainPane.add(button, 0, 0);
-        mainPane.add(tabPane, 0, 1);
+        mainPane.setCenter(tabPane);
 
+        tabPane.getTabs().add(makeTabForMainScene(new StoreController("МАГАЗИН ИГР"),
+                null, "sample/images/icons/MarketIcon.png"));
+        tabPane.getTabs().add(makeTabForMainScene(new LibraryController("БИБЛИОТЕКА ИГР"),
+                null, "sample/images/icons/GamesIcon.png"));
+        tabPane.getTabs().add(makeTabForMainScene(new SettingsController("НАСТРОЙКИ"),
+                null, "sample/images/icons/OptionsIcon.png"));
+    }
+
+    private void castomizeTabPane()
+    {
+        tabPane.setSide(Side.LEFT);
 
         tabPane.setTabMinHeight(50);
         tabPane.setTabMaxHeight(50);
         tabPane.setTabMinWidth(60);
         tabPane.setTabMaxWidth(60);
-        Tab tab = makeTabForMainScene("pinus", "sample/images/icons/MarketIcon.png");
-        button.setMaxWidth(Double.MAX_VALUE);
-        tab.setContent(button);
-        /*
-        //tab.setText("TROLOLO");
-        tab.setContent(button);
 
-        VBox content = new VBox();
-        ImageView icon = new ImageView(new Image(".\\images\\icons\\MarketIcon.png"));
-        tab.setGraphic(icon);
-        */
-        tabPane.getTabs().add(tab);
-
-        tab = new Tab();
-        tab.setText("AZAZAZA");
-        tabPane.getTabs().add(tab);
+        tabPane.setTabDragPolicy(TabPane.TabDragPolicy.FIXED);
+        tabPane.setPadding(new Insets(0));
     }
 
-    private Tab makeTabForMainScene(String text, String pathToImage)
+    private Tab makeTabForMainScene(Tab tab, String text, String pathToImage)
     {
         VBox content = new VBox();
         if (pathToImage != null) {
@@ -114,7 +103,6 @@ public class Main extends Application {
             content.getChildren().add(textLabel);
         }
 
-        Tab tab = new Tab();
         tab.setGraphic(content);
 
         return tab;
@@ -126,6 +114,7 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
+        System.setProperty("prism.lcdtext", "false");
         launch(args);
     }
 }

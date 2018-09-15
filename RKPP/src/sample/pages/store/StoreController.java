@@ -1,31 +1,70 @@
-package sample.store;
+package sample.pages.store;
 
-import javafx.geometry.Pos;
-import javafx.scene.control.Label;
-import javafx.scene.control.Tab;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.text.Font;
-import javafx.scene.text.TextAlignment;
+import javafx.geometry.Insets;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.FlowPane;
+import sample.pages.BaseController;
 
-public class StoreController extends Tab {
-    private BorderPane content = new BorderPane();
+public class StoreController extends BaseController {
+    public FlowPane storeContent = new FlowPane();
+    ScrollPane scrollPane = new ScrollPane(storeContent);
 
-    public StoreController()
+    public StoreController(String name)
     {
-        content.setTop(makeHeader());
+        super(name);
+        scrollPane.setMaxWidth(Double.MAX_VALUE);
+        scrollPane.setFitToWidth(true);
+        scrollPane.setFitToHeight(true);
+        storeContent.setMaxWidth(Double.MAX_VALUE);
 
-        this.setContent(content);
-    }
+        storeContent.setVgap(10);
+        storeContent.setHgap(10);
+        storeContent.setPadding(new Insets(10));
 
-    private Label makeHeader()
-    {
-        Label headLabel = new Label("МАГАЗИН");
-        headLabel.setTextAlignment(TextAlignment.CENTER);
-        headLabel.setAlignment(Pos.CENTER);
-        headLabel.setFont(new Font("Arial", 36));
-        headLabel.setStyle("-fx-border-width: 0 0 1 0; -fx-border-color: #e0e0e0;");
-        headLabel.setMaxWidth(Double.MAX_VALUE);
+        storeContent.getChildren().addAll(
+                new GameCell("Игра 1", "Инфа об игре 1!"),
+                new GameCell("Игра 2", "Инфа об игре 2!"),
+                new GameCell("Игра 3", "Инфа об игре 3!"),
+                new GameCell("Игра 4", "Инфа об игре 4!"),
+                new GameCell("Игра 5", "Инфа об игре 5!"),
+                new GameCell("Игра 6", "Инфа об игре 6!"),
+                new GameCell("Игра 7", "Инфа об игре 7!"),
+                new GameCell("Игра 8", "Инфа об игре 8!"),
+                new GameCell("Игра 1", "Инфа об игре 1!"),
+                new GameCell("Игра 2", "Инфа об игре 2!"),
+                new GameCell("Игра 3", "Инфа об игре 3!"),
+                new GameCell("Игра 4", "Инфа об игре 4!"),
+                new GameCell("Игра 5", "Инфа об игре 5!"),
+                new GameCell("Игра 6", "Инфа об игре 6!"),
+                new GameCell("Игра 7", "Инфа об игре 7!"),
+                new GameCell("Игра 8", "Инфа об игре 8!"),
+                new GameCell("Игра 1", "Инфа об игре 1!"),
+                new GameCell("Игра 2", "Инфа об игре 2!"),
+                new GameCell("Игра 3", "Инфа об игре 3!"),
+                new GameCell("Игра 4", "Инфа об игре 4!"),
+                new GameCell("Игра 5", "Инфа об игре 5!"),
+                new GameCell("Игра 6", "Инфа об игре 6!"),
+                new GameCell("Игра 7", "Инфа об игре 7!"),
+                new GameCell("Игра 8", "Инфа об игре 8!"),
+                new GameCell("Игра 1", "Инфа об игре 1!"),
+                new GameCell("Игра 2", "Инфа об игре 2!"),
+                new GameCell("Игра 3", "Инфа об игре 3!"),
+                new GameCell("Игра 4", "Инфа об игре 4!"),
+                new GameCell("Игра 5", "Инфа об игре 5!"),
+                new GameCell("Игра 6", "Инфа об игре 6!"),
+                new GameCell("Игра 7", "Инфа об игре 7!"),
+                new GameCell("Игра 8", "Инфа об игре 8!"),
+                new GameCell("Игра 1", "Инфа об игре 1!"),
+                new GameCell("Игра 2", "Инфа об игре 2!"),
+                new GameCell("Игра 3", "Инфа об игре 3!"),
+                new GameCell("Игра 4", "Инфа об игре 4!"),
+                new GameCell("Игра 5", "Инфа об игре 5!"),
+                new GameCell("Игра 6", "Инфа об игре 6!"),
+                new GameCell("Игра 7", "Инфа об игре 7!"),
+                new GameCell("Игра 8", "Инфа об игре 8!"),
+                new GameCell("Игра 9", "Инфа об игре 9!")
+        );
 
-        return headLabel;
+        content.setCenter(scrollPane);
     }
 }
