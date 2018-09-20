@@ -12,7 +12,7 @@
 #include <random>
 #include <ctime>
 
-#define TASK_7
+#define TASK_5
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -211,7 +211,7 @@ void MainWindow::makeTask5()
             return;
         }
 
-        QLocale locale(QLocale::C);
+        QLocale locale;
         double width = locale.toDouble(customLineEdit_width->text());
         double height = locale.toDouble(customLineEdit_height->text());
         labelResult->setText(QString("Площадь: %1").arg(width * height, 0, 'g', 30));

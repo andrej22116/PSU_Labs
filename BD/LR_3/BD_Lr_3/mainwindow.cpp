@@ -280,8 +280,13 @@ bool MainWindow::loadFromBinaryFile(const QString& path)
 
     QDataStream stream(&file);
     QStringList list;
+    QString string;
     while (!stream.atEnd()) {
-        for (int i = 0; i < 5; i++) { stream >> list; }
+        for (int i = 0; i < 5; i++)
+        {
+            stream >> string;
+            list << string;
+        }
         if (list.size() != 5) {
             file.close();
             return false;
