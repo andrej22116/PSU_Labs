@@ -20,7 +20,7 @@ import javafx.scene.layout.BorderPane;
 
 public class Main extends Application {
 
-    Label statusBar = new Label();
+    public static Label statusBar = new Label();
     BorderPane mainPane = new BorderPane();
     TilePane headPane = new TilePane();
 
@@ -29,7 +29,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         BorderPane root = new BorderPane();
-        primaryStage.setTitle("Hello World");
+        primaryStage.setTitle("Game store - RKPP JavaFX project");
 
         root.setTop(headPane);
         root.setCenter(mainPane);
@@ -57,7 +57,7 @@ public class Main extends Application {
 
     private void makeCenter()
     {
-        statusBar.setText("Trololo!");
+        statusBar.setText("Fuck me, oh Ya Ya Schnelle, sehr SCHNELLE, YA!");
 
         castomizeTabPane();
 

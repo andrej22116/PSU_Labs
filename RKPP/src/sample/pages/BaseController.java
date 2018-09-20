@@ -16,7 +16,7 @@ public abstract class BaseController extends Tab {
         headLabel.setTextAlignment(TextAlignment.CENTER);
         headLabel.setAlignment(Pos.CENTER);
         headLabel.setFont(new Font("Arial", 36));
-        headLabel.setStyle("-fx-border-width: 0 0 1 0; -fx-border-color: #e0e0e0;");
+        //headLabel.setStyle("-fx-border-width: 0 0 1 0; -fx-border-color: #e0e0e0;");
         headLabel.setMaxWidth(Double.MAX_VALUE);
 
         content.setTop(headLabel);
