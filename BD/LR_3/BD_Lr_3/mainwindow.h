@@ -5,6 +5,8 @@
 #include <QMessageBox>
 #include <QFileDialog>
 
+#include "src/ClassDataBaseConnectDialog/DataBaseConnectDialog.h"
+
 class QValidator;
 
 namespace Ui {
@@ -20,6 +22,8 @@ class MainWindow : public QMainWindow
 
     QMessageBox removeQuestionDialog;
     QFileDialog fileDialog;
+
+    QSqlDatabase database;
 
 public:
     explicit MainWindow(QWidget *parent = nullptr);
@@ -40,12 +44,14 @@ private:
     bool loadFromTxtFile(const QString& path);
     bool saveToBinaryFile(const QString& path);
     bool loadFromBinaryFile(const QString& path);
+    bool saveToDataBase();
+    bool loadFromDataBase();
 
 private slots:
-    void onClick_buttonAdd(bool checked);
-    void onClick_buttonRem(bool checked);
-    void onClick_buttonLoad(bool checked);
-    void onClick_buttonSave(bool checked);
+    void onClick_buttonAdd();
+    void onClick_buttonRem();
+    void onClick_buttonLoad();
+    void onClick_buttonSave();
 
 private:
     Ui::MainWindow *ui;

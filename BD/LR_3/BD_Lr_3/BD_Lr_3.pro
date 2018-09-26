@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui widgets
+QT       += core gui widgets sql
 
 TARGET = BD_Lr_3
 TEMPLATE = app
@@ -25,11 +25,13 @@ CONFIG += c++11
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    src/ClassDateValidator/datevalidator.cpp
+    src/ClassDateValidator/datevalidator.cpp \
+    src/ClassDataBaseConnectDialog/DataBaseConnectDialog.cpp
 
 HEADERS += \
         mainwindow.h \
-    src/ClassDateValidator/datevalidator.h
+    src/ClassDateValidator/datevalidator.h \
+    src/ClassDataBaseConnectDialog/DataBaseConnectDialog.h
 
 FORMS += \
         mainwindow.ui
@@ -41,3 +43,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 RESOURCES += \
     src/resources.qrc
+
+QTPLUGIN += QPSQL

@@ -13,6 +13,10 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    auto dialog = new DataBaseConnectDialog(this);
+    dialog->exec();
+    database = dialog->getDatabaseConnect();
+
     initValidators();
     initControls();
     initTable();
@@ -63,18 +67,10 @@ void MainWindow::initDialogs()
     removeQuestionDialog.setIcon(QMessageBox::Icon::Question);
 
     fileDialog.setFileMode(QFileDialog::AnyFile);
-    //fileDialog.setLabelText("Открытие текстового файла");
-    //fileDialog.setLabelText("Открытие бинарного файла");
-    //fileDialog.setLabelText("Сохранение в текстовый файл");
-    //fileDialog.setLabelText("Сохранение в бинарный файл");
-    //fileDialog.setAcceptMode(QFileDialog::AcceptOpen);
-    //fileDialog.setAcceptMode(QFileDialog::AcceptSave);
-    //fileDialog.setNameFilter(tr("Text (*.txt)"));
-    //fileDialog.setNameFilter(tr("Binary (*.bin)"));
 }
 
 
-void MainWindow::onClick_buttonAdd(bool checked)
+void MainWindow::onClick_buttonAdd()
 {
     if ( !ui->lineEditFio->hasAcceptableInput() ) { return; }
     if ( !ui->lineEditBornDate->hasAcceptableInput() ) { return; }
@@ -94,7 +90,7 @@ void MainWindow::onClick_buttonAdd(bool checked)
     ui->statusBar->showMessage("Запись успешно добавлена!", 5000);
 }
 
-void MainWindow::onClick_buttonRem(bool checked)
+void MainWindow::onClick_buttonRem()
 {
     auto select = ui->dataTable->selectionModel();
     auto selectedRows = select->selectedRows();
@@ -123,8 +119,13 @@ void MainWindow::onClick_buttonRem(bool checked)
     }
 }
 
-void MainWindow::onClick_buttonLoad(bool checked)
+void MainWindow::onClick_buttonLoad()
 {
+    if (ui->radioButtonSql->isChecked()) {
+        loadFromDataBase();
+        return;
+    }
+
     fileDialog.setAcceptMode(QFileDialog::AcceptOpen);
     fileDialog.selectFile("");
     bool openTxtFile = ui->radioButtonTxt->isChecked();
@@ -158,7 +159,7 @@ void MainWindow::onClick_buttonLoad(bool checked)
     }
 }
 
-void MainWindow::onClick_buttonSave(bool checked)
+void MainWindow::onClick_buttonSave()
 {
     fileDialog.setAcceptMode(QFileDialog::AcceptSave);
     fileDialog.selectFile("");
@@ -301,4 +302,32 @@ bool MainWindow::loadFromBinaryFile(const QString& path)
     return true;
 }
 
+bool MainWindow::saveToDataBase()
+{
+    return true;
+}
+
+bool MainWindow::loadFromDataBase()
+{
+    QSqlQuery query(database);
+    query.setForwardOnly(true);
+    if (!query.exec("select * from public.\"Students\""))
+    {
+        ui->statusBar->showMessage("Проблемесы, йпта.", 5000);
+        return false;
+    }
+
+    QSqlRecord rec = query.record();
+    while (query.next()) {
+        addLineToTable(
+                    query.value(rec.indexOf("fio")).toString(),
+                    query.value(rec.indexOf("date_born")).toString(),
+                    query.value(rec.indexOf("group")).toString(),
+                    query.value(rec.indexOf("number")).toString(),
+                    query.value(rec.indexOf("adres")).toString()
+                    );
+    }
+
+    return true;
+}
 

@@ -6,5 +6,6 @@
         <file>BD_Save.png</file>
         <file>BD_Bin.png</file>
         <file>BD_Txt.png</file>
+        <file>BD_Sql.png</file>
     </qresource>
 </RCC>
