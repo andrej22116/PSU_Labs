@@ -4,6 +4,9 @@
 #include <QFile>
 #include <QTextStream>
 #include <QDataStream>
+#include <iostream>
+#include <string>
+#include <sstream>
 
 #include "src/ClassDateValidator/datevalidator.h"
 
@@ -161,6 +164,11 @@ void MainWindow::onClick_buttonLoad()
 
 void MainWindow::onClick_buttonSave()
 {
+    if (ui->radioButtonSql->isChecked()) {
+        saveToDataBase();
+        return;
+    }
+
     fileDialog.setAcceptMode(QFileDialog::AcceptSave);
     fileDialog.selectFile("");
     bool openTxtFile = ui->radioButtonTxt->isChecked();
@@ -304,6 +312,34 @@ bool MainWindow::loadFromBinaryFile(const QString& path)
 
 bool MainWindow::saveToDataBase()
 {
+    QSqlQuery query(database);
+    query.setForwardOnly(true);
+
+    std::stringstream stream;
+    for (int i = 0, count = ui->dataTable->rowCount(); i < count; i++) {
+        stream << "insert into public.\"Students\" (\"fio\", \"date_born\", \"group\", \"number\", \"addres\") values('"
+               << ui->dataTable->item(i, 0)->text().toStdString() << "', '"
+               << ui->dataTable->item(i, 1)->text().toStdString() << "', '"
+               << ui->dataTable->item(i, 2)->text().toStdString() << "', '"
+               << ui->dataTable->item(i, 3)->text().toStdString() << "', '"
+               << ui->dataTable->item(i, 4)->text().toStdString() << "');" << std::endl;
+        /*stream << QString("insert into public.\"Students\" "
+                "(\"fio\", \"date_born\", \"group\", \"number\", \"addres\")"
+                " values (\"%0\", \"%1\", \"%2\", \"%3\", \"%4\")")
+                .arg(ui->dataTable->item(i, 0)->text())
+                .arg(ui->dataTable->item(i, 1)->text())
+                .arg(ui->dataTable->item(i, 2)->text())
+                .arg(ui->dataTable->item(i, 3)->text())
+                .arg(ui->dataTable->item(i, 4)->text())
+               << endl;*/
+    }
+
+    if (!query.exec(QString(stream.str().c_str())))
+    {
+        ui->statusBar->showMessage("Проблемесы, йпта.", 5000);
+        return false;
+    }
+
     return true;
 }
 
@@ -324,7 +360,7 @@ bool MainWindow::loadFromDataBase()
                     query.value(rec.indexOf("date_born")).toString(),
                     query.value(rec.indexOf("group")).toString(),
                     query.value(rec.indexOf("number")).toString(),
-                    query.value(rec.indexOf("adres")).toString()
+                    query.value(rec.indexOf("addres")).toString()
                     );
     }
 
