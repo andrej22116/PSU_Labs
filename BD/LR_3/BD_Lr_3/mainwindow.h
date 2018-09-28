@@ -21,7 +21,8 @@ class MainWindow : public QMainWindow
     QValidator* dateValidator = nullptr;
 
     QMessageBox removeQuestionDialog;
-    QFileDialog fileDialog;
+    QFileDialog fileOpenDialog;
+    QFileDialog fileSaveDialog;
 
     QSqlDatabase database;
 

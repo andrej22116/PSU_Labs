@@ -4,9 +4,7 @@
 #include <QFile>
 #include <QTextStream>
 #include <QDataStream>
-#include <iostream>
-#include <string>
-#include <sstream>
+#include <QStringBuilder>
 
 #include "src/ClassDateValidator/datevalidator.h"
 
@@ -69,7 +67,11 @@ void MainWindow::initDialogs()
     removeQuestionDialog.setDefaultButton(QMessageBox::StandardButton::No);
     removeQuestionDialog.setIcon(QMessageBox::Icon::Question);
 
-    fileDialog.setFileMode(QFileDialog::AnyFile);
+    fileOpenDialog.setFileMode(QFileDialog::AnyFile);
+    fileOpenDialog.setAcceptMode(QFileDialog::AcceptOpen);
+
+    fileSaveDialog.setFileMode(QFileDialog::AnyFile);
+    fileSaveDialog.setAcceptMode(QFileDialog::AcceptSave);
 }
 
 
@@ -116,7 +118,7 @@ void MainWindow::onClick_buttonRem()
         }
     }
 
-    if (canBeRemoved) {
+    if ( canBeRemoved ) {
         removeLineFromTable(lineSelected);
         ui->statusBar->showMessage("Запись удалена!", 5000);
     }
@@ -124,81 +126,96 @@ void MainWindow::onClick_buttonRem()
 
 void MainWindow::onClick_buttonLoad()
 {
-    if (ui->radioButtonSql->isChecked()) {
-        loadFromDataBase();
-        return;
+    if ( ui->radioButtonSql->isChecked() ) {
+        if ( !database.isOpen() || !loadFromDataBase() ) {
+            ui->statusBar->showMessage("Не удалось загрузить данные из базы данных.", 5000);
+        }
+        else {
+            ui->statusBar->showMessage("Данные загружены из базы данных - " + database.databaseName(), 5000);
+        }
     }
+    else {
+        fileOpenDialog.setAcceptMode(QFileDialog::AcceptOpen);
+        fileOpenDialog.selectFile("");
 
-    fileDialog.setAcceptMode(QFileDialog::AcceptOpen);
-    fileDialog.selectFile("");
-    bool openTxtFile = ui->radioButtonTxt->isChecked();
+        bool openTxtFile = ui->radioButtonTxt->isChecked();
 
-    if (openTxtFile) {
-        fileDialog.setWindowTitle("Открытие текстового файла");
-        fileDialog.setNameFilter(tr("Text (*.txt)"));
-    } else {
-        fileDialog.setWindowTitle("Открытие бинарного файла");
-        fileDialog.setNameFilter(tr("Binary (*.bin)"));
-    }
+        if ( openTxtFile ) {
+            fileOpenDialog.setWindowTitle("Открытие текстового файла");
+            fileOpenDialog.setNameFilter(tr("Text (*.txt)"));
+        } else {
+            fileOpenDialog.setWindowTitle("Открытие бинарного файла");
+            fileOpenDialog.setNameFilter(tr("Binary (*.bin)"));
+        }
 
-    if (!fileDialog.exec()) {
-        ui->statusBar->showMessage("Загрузка данных из файла отменена.", 5000);
-        return;
-    }
+        if ( !fileOpenDialog.exec() ) {
+            ui->statusBar->showMessage("Загрузка данных из файла отменена.", 5000);
+            return;
+        }
 
-    auto filePath = fileDialog.selectedFiles()[0];
+        bool result = true;
+        auto filePath = fileOpenDialog.selectedFiles()[0];
 
-    bool result = false;
-    if (ui->radioButtonTxt->isChecked()) {
-        result = loadFromTxtFile(filePath);
-    } else {
-        result = loadFromBinaryFile(filePath);
-    }
+        if (ui->radioButtonTxt->isChecked()) {
+            result = loadFromTxtFile(filePath);
+        }
+        else {
+            result = loadFromBinaryFile(filePath);
+        }
 
-    if (result) {
-        ui->statusBar->showMessage("Открыт файл - " + filePath, 5000);
-    } else {
-        ui->statusBar->showMessage("Не удалось загрузить файл - " + filePath, 5000);
+        if (result) {
+            ui->statusBar->showMessage("Открыт файл - " + filePath, 5000);
+        }
+        else {
+            ui->statusBar->showMessage("Не удалось загрузить файл - " + filePath, 5000);
+        }
     }
 }
 
 void MainWindow::onClick_buttonSave()
 {
-    if (ui->radioButtonSql->isChecked()) {
-        saveToDataBase();
-        return;
+    if ( ui->radioButtonSql->isChecked() ) {
+        if ( !database.isOpen() || !saveToDataBase() ) {
+            ui->statusBar->showMessage("Не удалось сохранить данные в базу данных.", 5000);
+        }
+        else {
+            ui->statusBar->showMessage("Данные сохранены в базу данных - " + database.databaseName(), 5000);
+        }
     }
+    else {
+        fileSaveDialog.selectFile("");
+        bool openTxtFile = ui->radioButtonTxt->isChecked();
 
-    fileDialog.setAcceptMode(QFileDialog::AcceptSave);
-    fileDialog.selectFile("");
-    bool openTxtFile = ui->radioButtonTxt->isChecked();
+        if ( openTxtFile ) {
+            fileSaveDialog.setWindowTitle("Сохранение текстового файла");
+            fileSaveDialog.setNameFilter(tr("Text (*.txt)"));
+        }
+        else {
+            fileSaveDialog.setWindowTitle("Сохранение бинарного файла");
+            fileSaveDialog.setNameFilter(tr("Binary (*.bin)"));
+        }
 
-    if (openTxtFile) {
-        fileDialog.setWindowTitle("Сохранение текстового файла");
-        fileDialog.setNameFilter(tr("Text (*.txt)"));
-    } else {
-        fileDialog.setWindowTitle("Сохранение бинарного файла");
-        fileDialog.setNameFilter(tr("Binary (*.bin)"));
-    }
+        if ( !fileSaveDialog.exec() ) {
+            ui->statusBar->showMessage("Сохранение данных в файл отменена.", 5000);
+            return;
+        }
 
-    if (!fileDialog.exec()) {
-        ui->statusBar->showMessage("Сохранение данных в файл отменена.", 5000);
-        return;
-    }
+        auto filePath = fileSaveDialog.selectedFiles()[0];
 
-    auto filePath = fileDialog.selectedFiles()[0];
+        bool result = false;
+        if (ui->radioButtonTxt->isChecked()) {
+            result = saveToTxtFile(filePath);
+        }
+        else {
+            result = saveToBinaryFile(filePath);
+        }
 
-    bool result = false;
-    if (ui->radioButtonTxt->isChecked()) {
-        result = saveToTxtFile(filePath);
-    } else {
-        result = saveToBinaryFile(filePath);
-    }
-
-    if (result) {
-        ui->statusBar->showMessage(QString("Файл \"%1\" успешно сохранён!").arg(filePath), 5000);
-    } else {
-        ui->statusBar->showMessage("Не удалось сохранить файл - " + filePath, 5000);
+        if ( result ) {
+            ui->statusBar->showMessage(QString("Файл \"%1\" успешно сохранён!").arg(filePath), 5000);
+        }
+        else {
+            ui->statusBar->showMessage("Не удалось сохранить файл - " + filePath, 5000);
+        }
     }
 }
 
@@ -226,7 +243,7 @@ bool MainWindow::saveToTxtFile(const QString& path)
     if ( !file.open(QIODevice::WriteOnly) ) { return false; }
 
     QTextStream stream(&file);
-    for (int i = 0, count = ui->dataTable->rowCount(); i < count; i++) {
+    for ( int i = 0, count = ui->dataTable->rowCount(); i < count; i++ ) {
         stream << ui->dataTable->item(i, 0)->text() << "|"
                << ui->dataTable->item(i, 1)->text() << "|"
                << ui->dataTable->item(i, 2)->text() << "|"
@@ -246,9 +263,9 @@ bool MainWindow::loadFromTxtFile(const QString& path)
     if ( !file.exists() || !file.open(QIODevice::ReadOnly) ) { return false; }
 
     QTextStream stream(&file);
-    while (!stream.atEnd()) {
+    while ( !stream.atEnd() ) {
         auto list = stream.readLine().split("|");
-        if (list.size() != 5) {
+        if ( list.size() != 5 ) {
             file.close();
             return false;
         }
@@ -290,13 +307,13 @@ bool MainWindow::loadFromBinaryFile(const QString& path)
     QDataStream stream(&file);
     QStringList list;
     QString string;
-    while (!stream.atEnd()) {
-        for (int i = 0; i < 5; i++)
+    while ( !stream.atEnd() ) {
+        for ( int i = 0; i < 5; i++ )
         {
             stream >> string;
             list << string;
         }
-        if (list.size() != 5) {
+        if ( list.size() != 5 ) {
             file.close();
             return false;
         }
@@ -315,26 +332,17 @@ bool MainWindow::saveToDataBase()
     QSqlQuery query(database);
     query.setForwardOnly(true);
 
-    std::stringstream stream;
-    for (int i = 0, count = ui->dataTable->rowCount(); i < count; i++) {
-        stream << "insert into public.\"Students\" (\"fio\", \"date_born\", \"group\", \"number\", \"addres\") values('"
-               << ui->dataTable->item(i, 0)->text().toStdString() << "', '"
-               << ui->dataTable->item(i, 1)->text().toStdString() << "', '"
-               << ui->dataTable->item(i, 2)->text().toStdString() << "', '"
-               << ui->dataTable->item(i, 3)->text().toStdString() << "', '"
-               << ui->dataTable->item(i, 4)->text().toStdString() << "');" << std::endl;
-        /*stream << QString("insert into public.\"Students\" "
-                "(\"fio\", \"date_born\", \"group\", \"number\", \"addres\")"
-                " values (\"%0\", \"%1\", \"%2\", \"%3\", \"%4\")")
+    QString queryString;
+    for ( int i = 0, count = ui->dataTable->rowCount(); i < count; i++ ) {
+        queryString += QString("select * from public.\"addStudent\"('%0', '%1', '%2', '%3', '%4'); ")
                 .arg(ui->dataTable->item(i, 0)->text())
                 .arg(ui->dataTable->item(i, 1)->text())
                 .arg(ui->dataTable->item(i, 2)->text())
                 .arg(ui->dataTable->item(i, 3)->text())
-                .arg(ui->dataTable->item(i, 4)->text())
-               << endl;*/
+                .arg(ui->dataTable->item(i, 4)->text());
     }
 
-    if (!query.exec(QString(stream.str().c_str())))
+    if ( !query.exec(queryString) )
     {
         ui->statusBar->showMessage("Проблемесы, йпта.", 5000);
         return false;
@@ -347,21 +355,21 @@ bool MainWindow::loadFromDataBase()
 {
     QSqlQuery query(database);
     query.setForwardOnly(true);
-    if (!query.exec("select * from public.\"Students\""))
+    if ( !query.exec("select * from public.\"Students\"") )
     {
         ui->statusBar->showMessage("Проблемесы, йпта.", 5000);
         return false;
     }
 
     QSqlRecord rec = query.record();
-    while (query.next()) {
+    while ( query.next() ) {
         addLineToTable(
-                    query.value(rec.indexOf("fio")).toString(),
-                    query.value(rec.indexOf("date_born")).toString(),
-                    query.value(rec.indexOf("group")).toString(),
-                    query.value(rec.indexOf("number")).toString(),
-                    query.value(rec.indexOf("addres")).toString()
-                    );
+                query.value(rec.indexOf("fio")).toString(),
+                query.value(rec.indexOf("date_born")).toString(),
+                query.value(rec.indexOf("group")).toString(),
+                query.value(rec.indexOf("number")).toString(),
+                query.value(rec.indexOf("addres")).toString()
+                );
     }
 
     return true;
