@@ -1,5 +1,9 @@
 package sample;
 
+import sample.CustomControls.BaseExtendsTextField;
+import sample.CustomControls.DoubleTextField;
+import sample.CustomControls.IntegerTextField;
+import sample.CustomControls.RegexTextField;
 import sample.pages.library.LibraryController;
 import sample.pages.settings.SettingsController;
 import sample.pages.store.StoreController;
@@ -53,6 +57,17 @@ public class Main extends Application {
 
     private void makeHeader()
     {
+        RegexTextField text = new RegexTextField();
+        text.addState("^$", BaseExtendsTextField.State.Invalid);
+        text.addState("^([A-ZА-Я][a-zа-я]*)$", BaseExtendsTextField.State.Middle);
+        text.addState("^(([A-ZА-Я][a-zа-я]*)((\\s)|(\\s[A-ZА-Я][a-zа-я]*)))$", BaseExtendsTextField.State.Middle);
+        text.addState("^(([A-ZА-Я][a-zа-я]*)((\\s)|(\\s[A-ZА-Я][a-zа-я]*))(\\s))$", BaseExtendsTextField.State.Middle);
+        text.addState("^(([A-ZА-Я][a-zа-я]*)((\\s)|(\\s[A-ZА-Я][a-zа-я]*))((\\s[A-ZА-Я][a-zа-я]*)))$",
+                BaseExtendsTextField.State.Acceptable);
+
+        headPane.getChildren().add(new IntegerTextField());
+        headPane.getChildren().add(new DoubleTextField());
+        headPane.getChildren().add(text);
     }
 
     private void makeCenter()
