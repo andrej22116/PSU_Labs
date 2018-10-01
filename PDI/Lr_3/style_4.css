@@ -36,7 +36,11 @@ td::before {
 }
 
 tr:nth-child(even):hover, tr:nth-child(odd):hover,
-td:hover, td:hover::before, td:hover::after {
+td:hover::after {
+    background-color: #ffe2c6;
+}
+
+td:hover, td:hover::before {
     background-color: #ffb871;
 }
 
