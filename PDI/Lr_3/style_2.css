@@ -1,0 +1,27 @@
+h1 {
+    color: red;
+}
+
+ul {
+    color: green;
+    text-decoration: overline;
+}
+
+ol {
+    color: #dda0dd;
+    text-align: center;
+    text-decoration: line-through;
+}
+
+p {
+    color: rgb(0, 0, 255);
+    letter-spacing: 1cm;
+}
+
+li {
+    letter-spacing: 5px;
+}
+
+span.back {
+    background-color: gray;
+}

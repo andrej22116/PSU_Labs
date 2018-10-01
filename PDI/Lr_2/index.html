@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="ru">
+
+<head>
+	<meta charset="utf-8">
+	<title>ПДИ Лабораторная работа №2</title>
+</head>
+
+<body>
+	<form method="POST">
+		<fieldset> <legend>Задание 1</legend>
+			<input type="text" placeholder="Логин" 					required pattern="[A-Za-z]{1,20}" />
+			<input type="password" placeholder="Пароль" 			required pattern=".{5,30}"/>
+			<input type="text" placeholder="Фамилия Имя Отчество" 	required pattern="[А-Яа-я\s]{1,25}"/>
+			<input type="tel" placeholder="Номер телефона"/>
+			<button>Run!</button>
+		</fieldset>
+	</form>
+
+	<form method="POST">
+		<fieldset> <legend>Задание 2</legend>
+			<input type="text" placeholder="Имя" 					required pattern="[А-Яа-я\s]{1,10}"/>
+			<input type="text" placeholder="Фамилия" 				required pattern="[А-Яа-я\s]{1,10}"/>
+			<select name="Выбирите город">
+				<option>Выбирите город</option>
+				<option>Новополоцк</option>
+				<option>Полоцк</option>
+				<option>Витебск</option>
+				<option>Брест</option>
+				<option>Минск</option>
+				<option>Трололо</option>
+			</select>
+			<input type="email" placeholder="Электронная почта"/>
+			<input type="password" placeholder="Пароль" 			required pattern=".{5,30}"/>
+			<button>Run!</button>
+		</fieldset>
+	</form>
+
+	<form method="POST">
+		<fieldset> <legend>Задание 3</legend>
+				<input type="text" placeholder="ФИО" 				required pattern="[А-Яа-я\s]{1,25}"/>
+				<input type="text" placeholder="Номер карты"		required pattern="[0-9]{4}_[0-9]{4}_[0-9]{4}_[0-9]{4}"/>
+				<input type="text" placeholder="CVV"				required pattern="[0-9]{3}"/>
+				<input type="number" placeholder="Сумма"			required>
+				<button>Run!</button>
+		</fieldset>
+	</form>
+</body>
+
+</html>

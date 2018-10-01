@@ -1,0 +1,21 @@
+body {
+    background-image: url(smile.png);
+    background-repeat: no-repeat;
+    background-position: top center;
+}
+
+h1 {
+    background-color: rgb(140, 220, 200);
+}
+
+ul {
+    background-color: rgb(200, 160, 200);
+}
+
+ol {
+    background-color: #daffc3;
+}
+
+p {
+    background-color: grey;
+}
