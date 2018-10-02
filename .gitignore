@@ -1,0 +1,11 @@
+#files
+#############
+**/*.user
+**/*.log
+
+#folders
+#############
+**/*Debug/
+**/*Release/
+**/bin/
+**/obj/
