@@ -4,13 +4,14 @@
 <head>
     <meta charset="utf8" /> </head>
 <body>
-    <form>
-        <input type="text" placeholder="Текст_1" data-hint="Лол!">
-        <input type="text" placeholder="Текст_2" />
-        <input type="text" placeholder="Текст_3" />
-        <input type="text" placeholder="Текст_4" data-hint="Кек!" />
-        <input type="text" placeholder="Текст_5" />
-        <input type="text" placeholder="Текст_6" data-hint="Чебурек!" />
+    <form onsubmit="validate(this)">
+        <input type="text" placeholder="От 100 до 500" extype="integer" minrange="100" maxrange="500" /><br>
+        <input type="text" placeholder="От -200 до 1000" extype="integer"  minrange="-200" maxrange="1000" /><br>
+        <input type="text" placeholder="От 1000" extype="integer" minrange="1000" /><br>
+        <input type="text" placeholder="До 100" extype="integer" maxrange="100" /><br>
+        <input type="text" placeholder="Нет лимита" extype="integer" /><br>
+        <input type="text" placeholder="Нет лимита" extype="integer" /><br>
+        <input type="submit" value="Отправить!">
     </form>
 </body>
 
