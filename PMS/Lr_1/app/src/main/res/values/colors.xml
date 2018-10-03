@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="view_bkg_color">#FF0</color>
+    <color name="screen_bkg_color">#F88</color>
+    <color name="text_color">#8004</color>
+</resources>
