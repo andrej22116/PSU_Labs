@@ -4,6 +4,7 @@ import sample.CustomControls.BaseExtendsTextField;
 import sample.CustomControls.DoubleTextField;
 import sample.CustomControls.IntegerTextField;
 import sample.CustomControls.RegexTextField;
+import sample.database.DataBaseController;
 import sample.pages.library.LibraryController;
 import sample.pages.settings.SettingsController;
 import sample.pages.store.StoreController;
@@ -53,21 +54,12 @@ public class Main extends Application {
         primaryStage.setMinWidth(800);
         primaryStage.setMinHeight(600);
         primaryStage.show();
+
+        //DataBaseController.connect("postgres", "andrej22116", "rkpp", "127.0.0.1", "5432");
     }
 
     private void makeHeader()
     {
-        RegexTextField text = new RegexTextField();
-        text.addState("^$", BaseExtendsTextField.State.Invalid);
-        text.addState("^([A-ZА-Я][a-zа-я]*)$", BaseExtendsTextField.State.Middle);
-        text.addState("^(([A-ZА-Я][a-zа-я]*)((\\s)|(\\s[A-ZА-Я][a-zа-я]*)))$", BaseExtendsTextField.State.Middle);
-        text.addState("^(([A-ZА-Я][a-zа-я]*)((\\s)|(\\s[A-ZА-Я][a-zа-я]*))(\\s))$", BaseExtendsTextField.State.Middle);
-        text.addState("^(([A-ZА-Я][a-zа-я]*)((\\s)|(\\s[A-ZА-Я][a-zа-я]*))((\\s[A-ZА-Я][a-zа-я]*)))$",
-                BaseExtendsTextField.State.Acceptable);
-
-        headPane.getChildren().add(new IntegerTextField());
-        headPane.getChildren().add(new DoubleTextField());
-        headPane.getChildren().add(text);
     }
 
     private void makeCenter()

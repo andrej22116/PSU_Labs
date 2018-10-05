@@ -1,0 +1,63 @@
+.cell {
+    -fx-background-color: #eaeaea;
+    -fx-font-family: Verdana, sans-serif, fantasy;
+
+}
+
+.cell:hover {
+    -fx-background-color: #5e0529;
+}
+
+.cell:pressed {
+    -fx-background-color: #300315;
+}
+
+.cell-head {
+    -fx-background-color: #abd7eaaa;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.8), 7, 0, 0, 1);
+}
+
+.cell-center {
+    -fx-background-color: #e0a1baaa;
+}
+
+.cell-base {
+    -fx-background-color: #a993a8aa;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.8), -3, 0, 0, 3);
+}
+
+.name {
+    -fx-text-fill: #100f59aa;
+    -fx-font-weight: bold;
+    -fx-effect: innershadow(three-pass-box , rgba(0, 0, 0, 0.7), 5, 1.0, 0, 0);
+}
+
+.info {
+    -fx-text-fill: #3a262e;
+    -fx-font-weight: bold;
+    -fx-effect: innershadow(three-pass-box , rgba(0, 0, 0, 0.7), 8, 0, 0, 0);
+}
+
+.date {
+    -fx-font-style: italic;
+}
+
+.author {
+}
+
+.cost {
+    -fx-background-color: #adeaabaa;
+}
+
+.name, .date, .author, .cost, .info {
+    -fx-padding: 3px 5px 3px 5px;
+}
+
+.name, .cost {
+    -fx-font-size: 32px;
+}
+
+.date, .author {
+    -fx-font-size: 14px;
+    -fx-text-fill: #f0f0f0aa;
+}
