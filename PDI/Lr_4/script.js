@@ -77,8 +77,17 @@ function task_6(text, word) {
     return text.split(word).length - 1;
 }
 
-function task_7(text, word) {
-// НАПИСАТЬ!
+function task_7(text) {
+	var res = ""
+	text.split(" ").forEach( word => {		
+		word = word.split("").reverse().join("");
+		
+		if (res.length > 0) {
+			res += " ";
+		}
+		res += word;
+	});
+	return res;
 }
 
 function task_8(str)
