@@ -212,15 +212,11 @@ LoginOrRegisterDialog::LoginOrRegisterDialog(QWidget* parent, QWidget* blurTarge
 
 LoginOrRegisterDialog::~LoginOrRegisterDialog()
 {
-    //delete _loginWidget;
-    //delete _registerWidget;
 }
 
 
 void LoginOrRegisterDialog::showLoginDialog()
 {
-    //qDebug() << "Show login dialog!";
-    //_registration->addTransition(_authorization);
     emit onShowLoginDialog();
     showModal(_blurTarget);
 }
@@ -228,7 +224,6 @@ void LoginOrRegisterDialog::showLoginDialog()
 
 void LoginOrRegisterDialog::showRegisterDialog()
 {
-    //_authorization->addTransition(_registration);
     emit onShowRegisterDialog();
     showModal(_blurTarget);
 }

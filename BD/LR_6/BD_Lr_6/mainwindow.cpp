@@ -67,7 +67,7 @@ MainWindow::~MainWindow()
 void MainWindow::makeAxisX()
 {
     _axisX->setTitleText("Время");
-    _axisX->setFormat("MMM yy");
+    _axisX->setFormat("MMMM yyyy");
     _axisX->setTickCount(12);
     _axisX->setTitleFont(QFont("Arial", 12, 900));
     _chart->setAxisX(_axisX, _area);
@@ -78,6 +78,7 @@ void MainWindow::makeAxisY()
 {
     _axisY->setTitleText("Популярность");
     _axisY->setTitleFont(QFont("Arial", 12, 900));
+    _axisY->setLabelFormat("%i");
     _chart->setAxisY(_axisY, _area);
 }
 
