@@ -8,6 +8,8 @@
 #include <QLineEdit>
 #include <QPushButton>
 
+#include <QMessageBox>
+
 #include <QDebug>
 
 #include <QGraphicsOpacityEffect>
@@ -24,10 +26,64 @@ LoginOrRegisterDialog::LoginOrRegisterDialog(QWidget* parent, QWidget* blurTarge
     auto editLine_password = new QLineEdit();
     auto editLine_repeatPassword = new QLineEdit();
 
+    editLine_userFirstName->setMaxLength(16);
+    editLine_userLastName->setMaxLength(16);
+    editLine_login->setMaxLength(24);
+    editLine_password->setMaxLength(32);
+    editLine_repeatPassword->setMaxLength(32);
+
     auto button_authorization = new QPushButton("Есть аккаунт (авторизация)");
     auto button_registracion = new QPushButton("Нет аккаунта (регистрация)");
     auto button_register = new QPushButton("Зарегестрировать");
     auto button_login = new QPushButton("Авторизоваться");
+
+    connect(button_register, &QPushButton::clicked, this, [=](){
+        QString errorMsg = "";
+        if (editLine_userFirstName->text().length() == 0) {
+            errorMsg += "Введите своё имя!\n";
+        }
+        if (editLine_userLastName->text().length() == 0) {
+            errorMsg += "Введите свою фамилию!\n";
+        }
+        if (editLine_login->text().length() == 0) {
+            errorMsg += "Введите логин!\n";
+        }
+        if (editLine_password->text().length() == 0) {
+            errorMsg += "Введите пароль!\n";
+        }
+        else if (editLine_repeatPassword->text().length() == 0) {
+            errorMsg += "Повторите пароль!\n";
+        }
+        else if (editLine_password->text() != editLine_repeatPassword->text()) {
+            errorMsg += "Пароли не совпадают!\n";
+        }
+
+        if (errorMsg.length() == 0) { return; }
+
+        QMessageBox msg(this);
+        msg.setIcon(QMessageBox::Icon::Critical);
+        msg.setText(errorMsg);
+        msg.setWindowTitle("Error!");
+        msg.exec();
+    });
+
+    connect(button_login, &QPushButton::clicked, this, [=](){
+        QString errorMsg = "";
+        if (editLine_login->text().length() == 0) {
+            errorMsg += "Введите логин!\n";
+        }
+        if (editLine_password->text().length() == 0) {
+            errorMsg += "Введите пароль!\n";
+        }
+
+        if (errorMsg.length() == 0) { return; }
+
+        QMessageBox msg(this);
+        msg.setIcon(QMessageBox::Icon::Critical);
+        msg.setText(errorMsg);
+        msg.setWindowTitle("Error!");
+        msg.exec();
+    });
 
     auto button_cancel = new QPushButton("Отмена");
 
