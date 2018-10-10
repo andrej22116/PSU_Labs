@@ -1,24 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>MainWindow</class>
- <widget class="QMainWindow" name="MainWindow" >
-  <property name="geometry" >
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>761</width>
+    <height>519</height>
    </rect>
   </property>
-  <property name="windowTitle" >
-   <string>MainWindow</string>
+  <property name="windowTitle">
+   <string>БД Лр 6 - график</string>
   </property>
-  <widget class="QMenuBar" name="menuBar" />
-  <widget class="QToolBar" name="mainToolBar" />
-  <widget class="QWidget" name="centralWidget" />
-  <widget class="QStatusBar" name="statusBar" />
+  <property name="styleSheet">
+   <string notr="true">QWidget {
+	background-color: rgb(54, 57, 68);
+	color: rgb(255, 255, 255);
+	font-size: 16px;
+	font-weight: bold;
+}
+QMenu::item:selected, QMenuBar::item:selected {
+	background-color: rgb(71, 75, 90);
+}</string>
+  </property>
+  <widget class="QWidget" name="centralWidget"/>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>761</width>
+     <height>27</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menu_options">
+    <property name="title">
+     <string>Функции</string>
+    </property>
+    <addaction name="action_connectToDB"/>
+    <addaction name="action_update"/>
+   </widget>
+   <addaction name="menu_options"/>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
+  <action name="action_connectToDB">
+   <property name="text">
+    <string>Подключиться к БД</string>
+   </property>
+  </action>
+  <action name="action_update">
+   <property name="text">
+    <string>Обновить график</string>
+   </property>
+  </action>
  </widget>
- <layoutDefault spacing="6" margin="11" />
- <pixmapfunction></pixmapfunction>
+ <layoutdefault spacing="6" margin="11"/>
  <resources/>
  <connections/>
 </ui>

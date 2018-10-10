@@ -24,10 +24,12 @@ CONFIG += c++11
 
 SOURCES += \
         main.cpp \
-        mainwindow.cpp
+        mainwindow.cpp \
+    src/ClassDataBaseConnectDialog/DataBaseConnectDialog.cpp
 
 HEADERS += \
-        mainwindow.h
+        mainwindow.h \
+    src/ClassDataBaseConnectDialog/DataBaseConnectDialog.h
 
 FORMS += \
         mainwindow.ui
