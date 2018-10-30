@@ -1,0 +1,101 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Второе задание</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+    <body>
+		<main>
+			<h1>ПДИ | Вариант 6 | Задача 2, номер задания: 4</h1>
+			<div class="task">
+				<div class="task-head">Задание</div>
+				<div class="task-body">
+					Вычисление объемов тел (параллелепипед, куб, сфера, тетраэдр, тор, шар, эллипсоид и т.д.)
+					с точностью и параметрами, указываемыми пользователем.
+				</div>
+			</div>
+			<div class="task">
+				<div class="task-head">Выполнение</div>
+				<div class="task-body">
+					<table class="task_2_table">
+						<tr>
+							<td>
+								<div class="task_2_task_head">Куб</div>
+								<form action="task_2" method="get" class="task-content">
+									<input type="hidden" name="command" value="cube"/>
+									<div>
+										<input name="length" class="input transition" pattern="\d+(\.\d+)?" required placeholder="Длинна ребра">
+									</div>
+									<input class="link-btn transition" type="submit" value="Вычислить">
+								</form>
+							</td>
+							<td>
+								<div class="task_2_task_head">Шар</div>
+								<form action="task_2" method="get" class="task-content">
+									<input type="hidden" name="command" value="sphere"/>
+									<div>
+										<input name="radius" class="input transition" pattern="\d+(\.\d+)?" required placeholder="Радиус">
+									</div>
+									<input class="link-btn transition" type="submit" value="Вычислить">
+								</form>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div class="task_2_task_head">Прямоугольный параллелепипед</div>
+								<form action="task_2" method="get" class="task-content">
+									<input type="hidden" name="command" value="parallelepiped"/>
+									<div>
+										<input name="length" class="input transition" pattern="\d+(\.\d+)?" required placeholder="Длинна основания"><br>
+										<input name="width" class="input transition" pattern="\d+(\.\d+)?" required placeholder="Ширина основания"><br>
+										<input name="height" class="input transition" pattern="\d+(\.\d+)?" required placeholder="Высота фигуры">
+									</div>
+									<input class="link-btn transition" type="submit" value="Вычислить">
+								</form>
+							</td>
+							<td>
+								<div class="task_2_task_head">Эллипсоид</div>
+								<form action="task_2" method="get" class="task-content">
+									<input type="hidden" name="command" value="ellipsoid"/>
+									<div>
+										<input name="a" class="input transition" pattern="\d+(\.\d+)?" required placeholder="Полуось A"><br>
+										<input name="b" class="input transition" pattern="\d+(\.\d+)?" required placeholder="Полуось B"><br>
+										<input name="c" class="input transition" pattern="\d+(\.\d+)?" required placeholder="Полуось C">
+									</div>
+									<input class="link-btn transition" type="submit" value="Вычислить">
+								</form>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div class="task_2_task_head">Тэтраэдр</div>
+								<form action="task_2" method="get" class="task-content">
+									<input type="hidden" name="command" value="tetra"/>
+									<div>
+										<input name="length" class="input transition" pattern="\d+(\.\d+)?" required placeholder="Длинна ребра">
+									</div>
+									<input class="link-btn transition" type="submit" value="Вычислить">
+								</form>
+							</td>
+							<td>
+								<div class="task_2_task_head">Тор</div>
+								<form action="task_2" method="get" class="task-content">
+									<input type="hidden" name="command" value="tor"/>
+									<div>
+										<input name="r_big" class="input transition" pattern="\d+(\.\d+)?" required placeholder="Радиус вращения образующей"><br>
+										<input name="r_small" class="input transition" pattern="\d+(\.\d+)?" required placeholder="Радиус образующей">
+									</div>
+									<input class="link-btn transition" type="submit" value="Вычислить">
+								</form>
+							</td>
+						</tr>
+					</table>
+					<div class="task_2_task_head" style="display: %s">%s</div>
+				</div>
+			</div>
+			<a class="link-btn transition" href="./">Главная</a>
+			<h6>Выполнил: Стеняев Андрей, студент группы 15-ИТ-1</h6>
+		</main>
+    </body>
+</html>
