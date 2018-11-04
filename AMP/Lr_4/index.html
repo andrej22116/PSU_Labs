@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Тест</title>
+		
+		<link rel="stylesheet" type="text/css" href="style.css">
+	</head>
+	<body>
+		<div id="main" class="main">
+			<button id="button-power" class="link-btn transition"
+				value="off" onclick="onButtonPowerClick()">Включить</button>
+			<form action="index.php" method="post">
+				<div class="line-content">
+					<p>Интенсивность свечения:</p>
+					<input id="power-range" name="power" 
+						type="range" min="0" max="100" value="100" 
+						oninput="onPowerInput()">
+					<div id="power-output">100%</div>
+				</div>
+			</form>
+			<button id="button-blick" class="link-btn transition"
+				onclick="onButtonBlickClick()">Мигание</button>
+		</div>
+		<div id="overhead" class="overhead transition">
+			<div class="lds-heart">
+				<div>
+				</div>
+			</div>
+		</div>
+		<script src="script.js"></script>
+	</body>
+</html>
