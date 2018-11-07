@@ -1,41 +1,53 @@
 .cell {
     -fx-background-color: #eaeaea;
-    -fx-font-family: Verdana, sans-serif, fantasy;
-
+    -fx-font-family: Helvetica, Western, fantasy, Helvetica;
 }
 
 .cell:hover {
+    -fx-effect: dropshadow(three-pass-box, #a3faffaa, 12, 0.5, 0, 0);
+    /* -fx-background-color: #5e0529; */
+}
+/*
+.cell:after:hover {
+    -fx-width: 100%;
+    -fx-height: 100%;
     -fx-background-color: #5e0529;
 }
+*/
 
 .cell:pressed {
-    -fx-background-color: #300315;
+    /*-fx-background-color: #300315;*/
+    -fx-effect: dropshadow(gaussian, #f4be41aa, 16, 0.5, 0, 0);
 }
 
 .cell-head {
     -fx-background-color: #abd7eaaa;
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.8), 7, 0, 0, 1);
+    -fx-effect: dropshadow(gaussian, #000C, 7, 0, 0, 1);
+    -fx-border-width: 1px;
+    -fx-border-color: #FFFFFF10;
 }
 
 .cell-center {
+    -fx-padding: 0 -2px 0 0;
     -fx-background-color: #e0a1baaa;
+    /*-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 4, 0, 0, 3);*/
 }
 
 .cell-base {
     -fx-background-color: #a993a8aa;
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.8), -3, 0, 0, 3);
+    -fx-effect: dropshadow(gaussian , rgba(0, 0, 0, 0.5), 3, 0, 1, 2);
 }
 
 .name {
     -fx-text-fill: #100f59aa;
     -fx-font-weight: bold;
-    -fx-effect: innershadow(three-pass-box , rgba(0, 0, 0, 0.7), 5, 1.0, 0, 0);
+    -fx-effect: innershadow(gaussian , rgba(0, 0, 0, 0.3), 2, 0, 0, 0);
 }
 
 .info {
     -fx-text-fill: #3a262e;
     -fx-font-weight: bold;
-    -fx-effect: innershadow(three-pass-box , rgba(0, 0, 0, 0.7), 8, 0, 0, 0);
+    -fx-effect: innershadow(gaussian , rgba(0, 0, 0, 0.7), 8, 0, 0, 0);
 }
 
 .date {

@@ -9,16 +9,17 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
 import sample.Main;
+import sample.StatusBar;
 
 public class GameCell extends BorderPane {
 
-    private static final double CELL_MAX_WIDTH = 750;
-    private static final double CELL_MIN_WIDTH = 400;
-    private static final double CELL_HEIGHT = 205;
-    private static final double IMAGE_WIDTH = 205;
-    private static final double IMAGE_HEIGHT = 205;
-    private static final double IMAGE_VIEW_WIDTH = IMAGE_WIDTH;
-    private static final double IMAGE_VIEW_HEIGHT = IMAGE_HEIGHT;
+    public static final double CELL_MAX_WIDTH = 750;
+    public static final double CELL_MIN_WIDTH = 400;
+    public static final double CELL_HEIGHT = 205;
+    public static final double IMAGE_WIDTH = 205;
+    public static final double IMAGE_HEIGHT = 205;
+    public static final double IMAGE_VIEW_WIDTH = IMAGE_WIDTH;
+    public static final double IMAGE_VIEW_HEIGHT = IMAGE_HEIGHT;
 
     private Image image;
     private Label label_name = new Label();
@@ -32,17 +33,6 @@ public class GameCell extends BorderPane {
 
     private static Font headerTextFont = new Font("Arial", 24);
     private static Font footerTextFont = new Font("Arial", 14);
-    private static String css =
-                    "-fx-border-width: 0 0 5 0;" +
-                    "-fx-border-color: #e4e4e4;" +
-                    "-fx-background-color: #eaeaea;" +
-                    "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 7, -7, 2, 7);";
-    private static String cssHover = css + "-fx-background-color: #f0f0f0;";
-    private static String cssPressed = css +
-            "-fx-background-color: #e0e0e0;" +
-            "-fx-border-width: 2 0 3 0;" +
-            "-fx-border-color: #f4f4f4 black #d0d0d0 black;" +
-            "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 5, -5, 2, 5);";
 
     public GameCell(int gameId, int authorId, String gameName, String gameInfo,
                     String dateOfCreate, String author, Integer gameCost, Image gameImage)
@@ -101,7 +91,7 @@ public class GameCell extends BorderPane {
 
     private void setHandlers() {
         this.setOnMouseClicked( e -> {
-            Main.statusBar.setText("Game: " + label_name.getText());
+            StatusBar.s_showMessage("Game: " + label_name.getText(), 5);
         });
     }
 

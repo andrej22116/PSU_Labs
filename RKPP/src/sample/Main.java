@@ -25,11 +25,11 @@ import javafx.scene.layout.BorderPane;
 
 public class Main extends Application {
 
-    public static Label statusBar = new Label();
-    BorderPane mainPane = new BorderPane();
-    TilePane headPane = new TilePane();
+    private Label statusBar = new Label();
+    private BorderPane mainPane = new BorderPane();
+    private TilePane headPane = new TilePane();
 
-    TabPane tabPane = new TabPane();
+    private TabPane tabPane = new TabPane();
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -42,6 +42,7 @@ public class Main extends Application {
 
         statusBar.setMaxSize(Double.MAX_VALUE, 30);
         statusBar.getStylesheets().add(loadStyleSheetFromFile("StatusBarStyle.css"));
+        StatusBar.getInstance().setLabel(statusBar);
 
         tabPane.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
         tabPane.getStylesheets().add(loadStyleSheetFromFile("TabBarStyleSheet"));
