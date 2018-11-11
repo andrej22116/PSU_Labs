@@ -24,10 +24,12 @@ CONFIG += c++11
 
 SOURCES += \
         main.cpp \
-        mainwindow.cpp
+        mainwindow.cpp \
+    src/ClassPostgreSqlView/postgresqlview.cpp
 
 HEADERS += \
-        mainwindow.h
+        mainwindow.h \
+    src/ClassPostgreSqlView/postgresqlview.h
 
 FORMS += \
         mainwindow.ui
