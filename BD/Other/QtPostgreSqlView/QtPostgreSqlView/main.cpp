@@ -1,6 +1,9 @@
 #include "mainwindow.h"
 #include <QApplication>
 
+#include <QDebug>
+#include <src/ClassPostgreSqlView/postgresqlview.h>
+
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);

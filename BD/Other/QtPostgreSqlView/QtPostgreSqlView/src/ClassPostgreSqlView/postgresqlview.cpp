@@ -44,25 +44,23 @@ void PostgreSqlView::setConnectInfo(const QString& url, int databasePort,
 DbList PostgreSqlView::getDatabasesList()
 {
     static const QString queryTemplateGetDatabases =
-            "select pg_database.datname"
-            "from pg_database"
+            "select pg_database.datname as \"datname\" "
+            "from pg_database "
             "where pg_database.datistemplate = false;";
 
     const QString connectionName = getDatabaseConnectionName(dbName_);
-    auto connect = QSqlDatabase::database(connectionName);
 
-    QSqlQuery query(connect);
-    if ( !query.exec(queryTemplateGetDatabases) ) {
-        disconnectFromDatabase(connectionName);
-        throw QString("Error on exec get databases list query!");
-    }
-
-    DbList resultList;
-    QSqlRecord record = query.record();
-    int indexOfColumn = record.indexOf("datname");
-    while ( query.next() ) {
-        resultList.push_back(query.value(indexOfColumn).toString());
-    }
+    SchemasList resultList = makeListWithNamesFromQuery(
+            connectionName,
+            queryTemplateGetDatabases,
+            [](QSqlRecord record) -> QString {
+                return record.value("datname").toString();
+            },
+            [this, &connectionName]() {
+                disconnectFromDatabase(connectionName);
+                throw QString("Error on exec get databases list query!");
+            }
+        );
 
     disconnectFromDatabase(connectionName);
 
@@ -72,24 +70,23 @@ DbList PostgreSqlView::getDatabasesList()
 SchemasList PostgreSqlView::getDatabaseSchemasList(const QString& databaseName)
 {
     static const QString queryTemplateGetSchemas =
-            "select schemata.schema_name"
+            "select schemata.schema_name "
             "from information_schema.schemata schemata;";
 
     const QString connectionName = getDatabaseConnectionName(databaseName);
-    auto connect = QSqlDatabase::database(connectionName);
 
-    QSqlQuery query(connect);
-    if ( !query.exec(queryTemplateGetSchemas) ) {
-        disconnectFromDatabase(connectionName);
-        throw QString("Error on exec get database schemas list query!");
-    }
-
-    SchemasList resultList;
-    QSqlRecord record = query.record();
-    int indexOfColumn = record.indexOf("schema_name");
-    while ( query.next() ) {
-        resultList.push_back(query.value(indexOfColumn).toString());
-    }
+    SchemasList resultList = makeListWithNamesFromQuery(
+            connectionName,
+            queryTemplateGetSchemas,
+            [](QSqlRecord record) -> QString {
+                return record.value("schema_name").toString();
+            },
+            [this, &connectionName]() {
+                disconnectFromDatabase(connectionName);
+                throw QString("Error on exec get database "
+                              "schemas list query!");
+            }
+        );
 
     disconnectFromDatabase(connectionName);
 
@@ -100,60 +97,61 @@ TablesList PostgreSqlView::getDatabaseSchemaTablesList(
         const QString& databaseName, const QString& schemaName)
 {
     static const QString queryTemplateGetSchemaTables =
-            "select t_table.table_name"
-            "from information_schema.tables t_table"
+            "select t_table.table_name "
+            "from information_schema.tables t_table "
             "where t_table.table_schema = '%1';";
 
     const QString connectionName = getDatabaseConnectionName(databaseName);
-    auto connect = QSqlDatabase::database(connectionName);
 
-    QSqlQuery query(connect);
-    if ( !query.exec(queryTemplateGetSchemaTables.arg(schemaName)) ) {
-        disconnectFromDatabase(connectionName);
-        throw QString("Error on exec get database schema tables list query!");
-    }
+    const QString queryString = queryTemplateGetSchemaTables
+                                .arg(schemaName);
 
-    TablesList resultList;
-    QSqlRecord record = query.record();
-    int indexOfColumn = record.indexOf("table_name");
-    while ( query.next() ) {
-        resultList.push_back(query.value(indexOfColumn).toString());
-    }
+    TablesList resultList = makeListWithNamesFromQuery(
+            connectionName,
+            queryString,
+            [](QSqlRecord record) -> QString {
+                return record.value("table_name").toString();
+            },
+            [this, &connectionName]() {
+                disconnectFromDatabase(connectionName);
+                throw QString("Error on exec get database "
+                              "schema tables list query!");
+            }
+        );
 
     disconnectFromDatabase(connectionName);
 
     return resultList;
 }
 
-ColumnsList PostgreSqlView::getDatavaseSchemaTableColumnsList(
+ColumnsList PostgreSqlView::getDatabaseSchemaTableColumnsList(
         const QString& databaseName, const QString& schemaName,
         const QString& tableName)
 {
     static const QString queryTemplateGetSchemaTableColumns =
-            "select t_columns.column_name"
-            "from information_schema.columns t_columns"
-            "where t_columns.table_schema = '%1'"
+            "select t_columns.column_name "
+            "from information_schema.columns t_columns "
+            "where t_columns.table_schema = '%1' "
             "and t_columns.table_name = '%2';";
 
     const QString connectionName = getDatabaseConnectionName(databaseName);
-    auto connect = QSqlDatabase::database(connectionName);
 
-    QSqlQuery query(connect);
-    bool isError = !query.exec(queryTemplateGetSchemaTableColumns
-                               .arg(schemaName)
-                               .arg(tableName));
-    if ( isError ) {
-        disconnectFromDatabase(connectionName);
-        throw QString("Error on exec get database schema "
-                      "table columns list query!");
-    }
+    const QString queryString = queryTemplateGetSchemaTableColumns
+                                .arg(schemaName)
+                                .arg(tableName);
 
-    ColumnsList resultList;
-    QSqlRecord record = query.record();
-    int indexOfColumn = record.indexOf("column_name");
-    while ( query.next() ) {
-        resultList.push_back(query.value(indexOfColumn).toString());
-    }
+    ColumnsList resultList = makeListWithNamesFromQuery(
+            connectionName,
+            queryString,
+            [](QSqlRecord record) -> QString {
+                return record.value("column_name").toString();
+            },
+            [this, &connectionName]() {
+                disconnectFromDatabase(connectionName);
+                throw QString("Error on exec get database schema "
+                              "table columns list query!");
+            }
+        );
 
     disconnectFromDatabase(connectionName);
 
@@ -164,26 +162,27 @@ FunctionsList PostgreSqlView::getDatabaseFunctionsList(
         const QString& databaseName, const QString& schemaName)
 {
     static const QString queryTemplateGetSchemaFunctions =
-            "select routines.routine_name"
-            "from information_schema.routines"
+            "select routines.routine_name "
+            "from information_schema.routines "
             "where routines.specific_schema = '%1';";
 
     const QString connectionName = getDatabaseConnectionName(databaseName);
-    auto connect = QSqlDatabase::database(connectionName);
 
-    QSqlQuery query(connect);
-    if ( !query.exec(queryTemplateGetSchemaFunctions.arg(schemaName)) ) {
-        disconnectFromDatabase(connectionName);
-        throw QString("Error on exec get database "
-                      "schema functions list query!");
-    }
+    const QString queryString = queryTemplateGetSchemaFunctions
+                                .arg(schemaName);
 
-    FunctionsList resultList;
-    QSqlRecord record = query.record();
-    int indexOfColumn = record.indexOf("routine_name");
-    while ( query.next() ) {
-        resultList.push_back(query.value(indexOfColumn).toString());
-    }
+    FunctionsList resultList = makeListWithNamesFromQuery(
+            connectionName,
+            queryString,
+            [](QSqlRecord record) -> QString {
+                return record.value("routine_name").toString();
+            },
+            [this, &connectionName]() {
+                disconnectFromDatabase(connectionName);
+                throw QString("Error on exec get database "
+                              "schema functions list query!");
+            }
+        );
 
     disconnectFromDatabase(connectionName);
 
@@ -195,36 +194,33 @@ FunctionParametersList PostgreSqlView::getDatabaseFunctionParametersList(
         const QString& functionName)
 {
     static const QString queryTemplateGetSchemaFunctionParameters =
-            "select parameters.parameter_mode, parameters.data_type"
-            "from information_schema.routines"
-            "left join information_schema.parameters"
-            "on routines.specific_name = parameters.specific_name"
-            "where routines.specific_schema = '%1'"
-            "and routines.routine_name = '%2'"
+            "select parameters.parameter_mode, parameters.data_type "
+            "from information_schema.routines "
+            "left join information_schema.parameters "
+            "on routines.specific_name = parameters.specific_name "
+            "where routines.specific_schema = '%1' "
+            "and routines.routine_name = '%2' "
             "order by routines.routine_name, parameters.ordinal_position;";
 
     const QString connectionName = getDatabaseConnectionName(databaseName);
-    auto connect = QSqlDatabase::database(connectionName);
+    const QString queryString = queryTemplateGetSchemaFunctionParameters
+                          .arg(schemaName)
+                          .arg(functionName);
 
-    QSqlQuery query(connect);
-    bool isError = !query.exec(queryTemplateGetSchemaFunctionParameters
-                              .arg(schemaName)
-                              .arg(functionName));
-    if ( isError ) {
-        disconnectFromDatabase(connectionName);
-        throw QString("Error on exec get database "
-                      "schema function parameters list query!");
-    }
-
-    FunctionParametersList resultList;
-    QSqlRecord record = query.record();
-    int indexOfColumnMode = record.indexOf("parameter_mode");
-    int indexOfColumnType = record.indexOf("data_type");
-    while ( query.next() ) {
-        QString item = query.value(indexOfColumnMode).toString() +
-                " " + query.value(indexOfColumnType).toString();
-        resultList.push_back(item);
-    }
+    FunctionParametersList resultList = makeListWithNamesFromQuery(
+            connectionName,
+            queryString,
+            [](QSqlRecord record) -> QString {
+                QString item = record.value("parameter_mode").toString() +
+                        " " + record.value("data_type").toString();
+                return item;
+            },
+            [this, &connectionName]() {
+                disconnectFromDatabase(connectionName);
+                throw QString("Error on exec get database "
+                              "schema function parameters list query!");
+            }
+        );
 
     disconnectFromDatabase(connectionName);
 
@@ -233,7 +229,10 @@ FunctionParametersList PostgreSqlView::getDatabaseFunctionParametersList(
 
 QString PostgreSqlView::getDatabaseConnectionName(const QString &databaseName)
 {
-    QString connectionName = serverUrl_ + ":" + serverPort_ + databaseName;
+    QString connectionName = QString("%1:%2/%3")
+                             .arg(serverUrl_)
+                             .arg(serverPort_)
+                             .arg(databaseName);
     QSqlDatabase connection = QSqlDatabase::addDatabase("QPSQL", connectionName);
 
     if ( !connection.isValid() ) {
@@ -249,6 +248,27 @@ QString PostgreSqlView::getDatabaseConnectionName(const QString &databaseName)
     }
 
     return connectionName;
+}
+
+NamesList PostgreSqlView::makeListWithNamesFromQuery(
+        const QString &connectionName, const QString &queryString,
+        const std::function<QString (QSqlRecord)>& fn,
+        const std::function<void(void)>& onError)
+{
+    auto connect = QSqlDatabase::database(connectionName);
+
+    QSqlQuery query(connect);
+    if ( !query.exec(queryString) ) {
+        onError();
+    }
+
+    NamesList resultList;
+    while ( query.next() ) {
+        QSqlRecord record = query.record();
+        resultList.push_back(fn(record));
+    }
+
+    return resultList;
 }
 
 void PostgreSqlView::disconnectFromDatabase(const QString &connectionName)

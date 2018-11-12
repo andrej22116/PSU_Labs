@@ -13,9 +13,11 @@ using ColumnsList = NamesList;
 using FunctionsList = NamesList;
 using FunctionParametersList = NamesList;
 
+class QSqlRecord;
+
 class PostgreSqlView
 {    
-private:
+private:    
     QString serverUrl_;
     int serverPort_ = 5432;
     QString dbName_;
@@ -118,7 +120,7 @@ public:
      * \param tableName
      * \return all column names in database schema table
      */
-    ColumnsList getDatavaseSchemaTableColumnsList
+    ColumnsList getDatabaseSchemaTableColumnsList
                     ( const QString& databaseName
                     , const QString& schemaName
                     , const QString& tableName
@@ -152,6 +154,12 @@ public:
 
 private:
     QString getDatabaseConnectionName(const QString& databaseName) noexcept(false);
+
+    NamesList makeListWithNamesFromQuery( const QString& connectionName
+                                        , const QString& queryString
+                                        , const std::function<QString(QSqlRecord)>& fn
+                                        , const std::function<void(void)>& onError
+                                        ) noexcept(false);
 
     void disconnectFromDatabase(const QString& connectionName) noexcept(false);
 };
