@@ -31,12 +31,20 @@ private slots:
 
     void on_actionClearTree_triggered();
 
+    void on_dbTreeWidget_itemDoubleClicked(QTreeWidgetItem *item, int column);
+
+    void on_actionAddRow_triggered();
+
+    void on_actionRemoveRow_triggered();
+
+    void on_buttonHideQueryResult_clicked();
+
 private:
     void makeRootItem();
     void makeRouterMap();
     void makeBranchFromList( const NamesList& namesList
                            , QTreeWidgetItem* root
-                           , const std::function<void(QTreeWidgetItem*)> fn
+                           , const std::function<void(QTreeWidgetItem*)>& fn
                            );
 
     void loadDatabaseItems(QTreeWidgetItem* rootItem);

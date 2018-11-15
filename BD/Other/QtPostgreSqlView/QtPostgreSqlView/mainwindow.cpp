@@ -4,6 +4,7 @@
 
 #include <QtSvg/QSvgRenderer>
 #include <QPixmap>
+#include <QDebug>
 
 enum TreeTextColors {
     Color_Database = 0xe0c58f,
@@ -24,6 +25,12 @@ MainWindow::MainWindow(QWidget *parent) :
 
     auto selectionModel = ui->dbTreeWidget->selectionModel();
     connect(selectionModel, &QItemSelectionModel::selectionChanged, this, &MainWindow::on_dbTreeNodeSelected);
+    //connect(selectionModel, &QItemSelectionModel::selection, this, &MainWindow::on_dbTreeNodeSelected);
+
+    ui->widget->hide();
+
+    ui->queryResult->addAction(ui->actionAddRow);
+    ui->queryResult->addAction(ui->actionRemoveRow);
 }
 
 MainWindow::~MainWindow()
@@ -31,7 +38,7 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::on_dbTreeNodeSelected(const QItemSelection& selected , const QItemSelection& deselected)
+void MainWindow::on_dbTreeNodeSelected(const QItemSelection& , const QItemSelection&)
 {
     auto item = ui->dbTreeWidget->currentItem();
     ui->dbTreeWidget->clearSelection();
@@ -69,7 +76,7 @@ void MainWindow::makeRouterMap()
 }
 
 void MainWindow::makeBranchFromList(const NamesList& namesList, QTreeWidgetItem* root,
-                                    const std::function<void(QTreeWidgetItem*)> fn)
+                                    const std::function<void(QTreeWidgetItem*)>& fn)
 {
     for (const auto& itemName : namesList) {
         auto item = new QTreeWidgetItem();
@@ -211,7 +218,7 @@ QLinearGradient MainWindow::getGradientBrush(const QColor &beginColor, const QCo
 void MainWindow::on_actionSetConnectInfo_triggered()
 {
     QDialog dialog;
-    Ui_Dialog dialog_ui;
+    Ui_Dialog dialog_ui{};
     dialog_ui.setupUi(&dialog);
 
     if ( dialog.exec() == QDialog::DialogCode::Accepted ) {
@@ -241,4 +248,72 @@ void MainWindow::on_actionClearTree_triggered()
 {
     ui->dbTreeWidget->clear();
     makeRootItem();
+}
+
+void MainWindow::on_dbTreeWidget_itemDoubleClicked(QTreeWidgetItem* item, int)
+{
+    if ( !item->parent() || item->parent()->text(0) != "Tables") { return; }
+
+    try {
+        QTreeWidgetItem* schemaItem = item->parent()->parent();
+        QTreeWidgetItem* databaseItem = schemaItem->parent()->parent();
+
+        QString tableName = QString("\"%1\"").arg(item->text(0));
+
+        if ( ui->queryResult->model() ) {
+            delete ui->queryResult->model();
+        }
+
+        auto model = pgView.getSqlTableModel( ui->queryResult,
+                    databaseItem->text(0), schemaItem->text(0), tableName);
+
+        ui->labelDatabaseTableName->setText(item->text(0));
+        ui->queryResult->setModel(model);
+        ui->widget->show();
+    }
+    catch (QString errorMsg) {
+        ui->statusBar->showMessage(errorMsg);
+        ui->widget->hide();
+    }
+    catch (...) {
+        ui->statusBar->showMessage("Error on \"on_dbTreeWidget_itemDoubleClicked\" method");
+        ui->widget->hide();
+    }
+}
+
+void MainWindow::on_actionAddRow_triggered()
+{
+    auto model = qobject_cast<QSqlTableModel *>(ui->queryResult->model());
+    if ( !model ) {
+        return;
+    }
+
+    QModelIndex insertIndex = ui->queryResult->currentIndex();
+    int row = insertIndex.row() == -1 ? 0 : insertIndex.row();
+    model->insertRow(row);
+    insertIndex = model->index(row, 0);
+    ui->queryResult->setCurrentIndex(insertIndex);
+    ui->queryResult->edit(insertIndex);
+}
+
+void MainWindow::on_actionRemoveRow_triggered()
+{
+    auto model = qobject_cast<QSqlTableModel *>(ui->queryResult->model());
+    if ( !model ) {
+        return;
+    }
+
+    QModelIndexList currentSelection = ui->queryResult->selectionModel()->selectedIndexes();
+    for (int i = 0; i < currentSelection.count(); ++i) {
+        if ( currentSelection.at(i).column() != 0 ) {
+            continue;
+        }
+        model->removeRow(currentSelection.at(i).row());
+    }
+    model->select();
+}
+
+void MainWindow::on_buttonHideQueryResult_clicked()
+{
+    ui->widget->hide();
 }

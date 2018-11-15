@@ -1,5 +1,6 @@
 #include "postgresqlview.h"
 #include <QtSql>
+#include <QTableView>
 
 PostgreSqlView::PostgreSqlView(const PostgreSqlView &pgSqlView) noexcept
 {
@@ -227,12 +228,36 @@ FunctionParametersList PostgreSqlView::getDatabaseFunctionParametersList(
     return resultList;
 }
 
+QSqlTableModel* PostgreSqlView::getSqlTableModel( QTableView* tableView,
+        const QString &databaseName, const QString&, const QString &tableName)
+{
+    QString connectionName = getDatabaseConnectionName(databaseName, "TableView");
+    QSqlDatabase database = QSqlDatabase::database(connectionName);
+
+    QSqlTableModel* model = new QSqlTableModel(tableView, database);
+    model->setTable(tableName);
+    model->setEditStrategy(QSqlTableModel::OnRowChange);
+    //model->setTable(database.driver()->escapeIdentifier(tableName, QSqlDriver::TableName));
+    model->select();
+    if (model->lastError().type() != QSqlError::NoError) {
+        throw "Error: " + model->lastError().text();
+    }
+
+    return model;
+}
+
 QString PostgreSqlView::getDatabaseConnectionName(const QString &databaseName)
 {
-    QString connectionName = QString("%1:%2/%3")
+    return getDatabaseConnectionName(databaseName, "");
+}
+
+QString PostgreSqlView::getDatabaseConnectionName(const QString &databaseName, const QString &postfix)
+{
+    QString connectionName = QString("%1:%2/%3#%4")
                              .arg(serverUrl_)
                              .arg(serverPort_)
-                             .arg(databaseName);
+                             .arg(databaseName)
+                             .arg(postfix);
     QSqlDatabase connection = QSqlDatabase::addDatabase("QPSQL", connectionName);
 
     if ( !connection.isValid() ) {

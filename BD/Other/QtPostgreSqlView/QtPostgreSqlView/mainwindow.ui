@@ -47,56 +47,281 @@ QStatusBar, QMenuBar, QMenu{
 
 #dbTreeWidget {
 	background-color: transparent;
+}
+
+QTableView {
+	background-color: transparent;
+}
+
+QTableView::item *  {
+	color: black;
+}
+
+QTableView::item QMenu::item {
+	color: white;
+}
+
+QHeaderView {
+	background-color: transparent;
+}
+
+QHeaderView::section {
+	color: white;
+    background-color: transparent;
+    padding: 4px;
+    font-size: 14pt;
+    border-style: none;
+    border-bottom: 1px solid white;
+    border-right: 1px solid white;
+}
+
+QHeaderView::section:horizontal
+{
+   border-bottom: 1px solid white;
+}
+
+QHeaderView::section:vertical
+{
+    border-right: 1px solid white;
+}
+
+QSplitter[orientation=&quot;1&quot;]::handle {
+	border: none;
+}
+
+QScrollBar:horizontal {
+    height: 16px;
+    margin: 2px 16px 2px 16px;
+    border: 1px solid #32414B;
+    border-radius: 4px;
+    background-color: #19232D;
+}
+
+QScrollBar::handle:horizontal {
+    background-color: #787878;
+    border: 1px solid #32414B;
+    border-radius: 4px;
+    min-width: 8px;
+
+}
+
+QScrollBar::handle:horizontal:hover {
+    background-color: rgb(255, 255, 38);
+    border: 1px solid rgb(255, 255, 38);
+    border-radius: 4px;
+    min-width: 8px;
+}
+
+QScrollBar::sub-line:vertical,
+QScrollBar::add-line:vertical,
+QScrollBar::sub-line:vertical:hover,
+QScrollBar::sub-line:vertical:on,
+QScrollBar::add-line:vertical:hover,
+QScrollBar::add-line:vertical:on,
+QScrollBar::add-page:vertical,
+QScrollBar::sub-page:vertical,
+QScrollBar::add-page:horizontal,
+QScrollBar::sub-page:horizontal,
+QScrollBar::up-arrow:vertical,
+QScrollBar::down-arrow:vertical,
+QScrollBar::up-arrow:horizontal,
+QScrollBar::down-arrow:horizontal,
+QScrollBar::sub-line:horizontal:hover,
+QScrollBar::sub-line:horizontal:on,
+QScrollBar::sub-line:horizontal,
+QScrollBar::add-line:horizontal,
+QScrollBar::add-line:horizontal:hover,
+QScrollBar::add-line:horizontal:on {
+	width: 0;
+	height: 0;
+	border: none;
+	background: none;
+	color: none;
+}
+
+QScrollBar:vertical {
+    background-color: #19232D;
+    width: 16px;
+    margin: 16px 2px 16px 2px;
+    border: 1px solid #32414B;
+    border-radius: 4px;
+}
+
+QScrollBar::handle:vertical {
+    background-color: #787878;
+    border: 1px solid #32414B;
+    min-height: 8px;
+    border-radius: 4px;
+}
+
+QScrollBar::handle:vertical:hover {
+    background-color: rgb(255, 255, 38);
+    border: 1px solid rgb(255, 255, 38);
+    border-radius: 4px;
+    min-height: 8px;
 }</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QGridLayout" name="gridLayout">
-    <item row="0" column="1">
-     <widget class="QTreeWidget" name="dbTreeWidget">
-      <property name="font">
-       <font>
-        <weight>99</weight>
-        <bold>true</bold>
-       </font>
+    <item row="0" column="0">
+     <widget class="QSplitter" name="splitter">
+      <property name="lineWidth">
+       <number>1</number>
       </property>
-      <property name="focusPolicy">
-       <enum>Qt::NoFocus</enum>
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
       </property>
-      <property name="styleSheet">
-       <string notr="true"/>
-      </property>
-      <property name="selectionMode">
-       <enum>QAbstractItemView::SingleSelection</enum>
-      </property>
-      <property name="iconSize">
-       <size>
-        <width>24</width>
-        <height>24</height>
-       </size>
-      </property>
-      <property name="animated">
+      <property name="opaqueResize">
        <bool>true</bool>
       </property>
-      <property name="wordWrap">
+      <property name="handleWidth">
+       <number>1</number>
+      </property>
+      <property name="childrenCollapsible">
        <bool>true</bool>
       </property>
-      <property name="headerHidden">
-       <bool>true</bool>
-      </property>
-      <attribute name="headerVisible">
-       <bool>false</bool>
-      </attribute>
-      <attribute name="headerCascadingSectionResizes">
-       <bool>true</bool>
-      </attribute>
-      <attribute name="headerHighlightSections">
-       <bool>false</bool>
-      </attribute>
-      <column>
-       <property name="text">
-        <string notr="true">1</string>
+      <widget class="QTreeWidget" name="dbTreeWidget">
+       <property name="font">
+        <font>
+         <weight>99</weight>
+         <bold>true</bold>
+        </font>
        </property>
-      </column>
+       <property name="focusPolicy">
+        <enum>Qt::NoFocus</enum>
+       </property>
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="selectionMode">
+        <enum>QAbstractItemView::SingleSelection</enum>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>24</width>
+         <height>24</height>
+        </size>
+       </property>
+       <property name="animated">
+        <bool>true</bool>
+       </property>
+       <property name="wordWrap">
+        <bool>true</bool>
+       </property>
+       <property name="headerHidden">
+        <bool>true</bool>
+       </property>
+       <attribute name="headerVisible">
+        <bool>false</bool>
+       </attribute>
+       <attribute name="headerCascadingSectionResizes">
+        <bool>true</bool>
+       </attribute>
+       <attribute name="headerHighlightSections">
+        <bool>false</bool>
+       </attribute>
+       <column>
+        <property name="text">
+         <string notr="true">1</string>
+        </property>
+       </column>
+      </widget>
+      <widget class="QWidget" name="widget" native="true">
+       <property name="contextMenuPolicy">
+        <enum>Qt::PreventContextMenu</enum>
+       </property>
+       <layout class="QGridLayout" name="gridLayout_2">
+        <property name="sizeConstraint">
+         <enum>QLayout::SetDefaultConstraint</enum>
+        </property>
+        <property name="leftMargin">
+         <number>1</number>
+        </property>
+        <property name="topMargin">
+         <number>1</number>
+        </property>
+        <property name="rightMargin">
+         <number>1</number>
+        </property>
+        <property name="bottomMargin">
+         <number>1</number>
+        </property>
+        <property name="horizontalSpacing">
+         <number>1</number>
+        </property>
+        <item row="0" column="0">
+         <widget class="QLabel" name="labelDatabaseTableName">
+          <property name="font">
+           <font>
+            <pointsize>-1</pointsize>
+            <weight>99</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">font-size: 18px;
+font-weight: 800;</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="scaledContents">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QPushButton" name="buttonHideQueryResult">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>24</width>
+            <height>24</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>X</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0" colspan="2">
+         <widget class="QTableView" name="queryResult">
+          <property name="contextMenuPolicy">
+           <enum>Qt::ActionsContextMenu</enum>
+          </property>
+          <property name="alternatingRowColors">
+           <bool>false</bool>
+          </property>
+          <property name="selectionBehavior">
+           <enum>QAbstractItemView::SelectRows</enum>
+          </property>
+          <property name="gridStyle">
+           <enum>Qt::SolidLine</enum>
+          </property>
+          <property name="sortingEnabled">
+           <bool>true</bool>
+          </property>
+          <attribute name="horizontalHeaderCascadingSectionResizes">
+           <bool>false</bool>
+          </attribute>
+          <attribute name="verticalHeaderVisible">
+           <bool>false</bool>
+          </attribute>
+          <attribute name="verticalHeaderHighlightSections">
+           <bool>false</bool>
+          </attribute>
+          <attribute name="verticalHeaderShowSortIndicator" stdset="0">
+           <bool>false</bool>
+          </attribute>
+         </widget>
+        </item>
+       </layout>
+      </widget>
      </widget>
     </item>
    </layout>
@@ -128,6 +353,22 @@ QStatusBar, QMenuBar, QMenu{
   <action name="actionClearTree">
    <property name="text">
     <string>Очистить загруженные данные</string>
+   </property>
+  </action>
+  <action name="actionAddRow">
+   <property name="text">
+    <string>Добавить запись</string>
+   </property>
+   <property name="toolTip">
+    <string>Добавляет новую запись</string>
+   </property>
+  </action>
+  <action name="actionRemoveRow">
+   <property name="text">
+    <string>Удалить запись</string>
+   </property>
+   <property name="toolTip">
+    <string>Удаляет выделеную строку</string>
    </property>
   </action>
  </widget>

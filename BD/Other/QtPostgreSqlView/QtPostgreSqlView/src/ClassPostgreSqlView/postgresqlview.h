@@ -3,7 +3,6 @@
 
 #include <QVector>
 #include <QMap>
-#include <exception>
 
 using NamesList = QVector<QString>;
 using DbList = NamesList;
@@ -14,6 +13,8 @@ using FunctionsList = NamesList;
 using FunctionParametersList = NamesList;
 
 class QSqlRecord;
+class QSqlTableModel;
+class QTableView;
 
 class PostgreSqlView
 {    
@@ -151,9 +152,17 @@ public:
                     , const QString& functionName
                     ) noexcept(false);
 
+    QSqlTableModel* getSqlTableModel ( QTableView* tableView
+                                     , const QString& databaseName
+                                     , const QString& schemaName
+                                     , const QString& tableName
+                                     ) noexcept(false);
 
 private:
     QString getDatabaseConnectionName(const QString& databaseName) noexcept(false);
+    QString getDatabaseConnectionName( const QString& databaseName
+                                     , const QString& postfix
+                                     ) noexcept(false);
 
     NamesList makeListWithNamesFromQuery( const QString& connectionName
                                         , const QString& queryString
