@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>DbConnectionDialog.qml</file>
+        <file>DbPermissionMenager.qml</file>
+        <file>qtquickcontrols2.conf</file>
+    </qresource>
+</RCC>
