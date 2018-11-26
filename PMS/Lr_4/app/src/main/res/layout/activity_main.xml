@@ -29,7 +29,7 @@
 
         <Button
             android:id="@+id/btnSelectItemOther"
-            android:text="Выбрать станцию (неявное намерение)"
+            android:text="Выбрать станцию ветви"
 
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"

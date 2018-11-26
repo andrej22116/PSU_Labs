@@ -33,4 +33,39 @@
         <item>Могилёвская</item>
     </string-array>
 
+    <string-array name="first_line_stations">
+        <item>Уручье</item>
+        <item>Борисовский тракт</item>
+        <item>Восток</item>
+        <item>Московская</item>
+        <item>Парк Челюскинцев</item>
+        <item>Академия наук</item>
+        <item>Площадь Якуба Коласа</item>
+        <item>Площадь Победы</item>
+        <item>Октябрьская</item>
+        <item>Площадь Ленина</item>
+        <item>Институт Культуры</item>
+        <item>Грушевка</item>
+        <item>Михалово</item>
+        <item>Петровщина</item>
+        <item>Малиновка</item>
+    </string-array>
+
+    <string-array name="second_line_stations">
+        <item>Каменная Горка</item>
+        <item>Кунцевщина</item>
+        <item>Спортивная</item>
+        <item>Пушкинская</item>
+        <item>Молодёжная</item>
+        <item>Фрунзенская</item>
+        <item>Немига</item>
+        <item>Купаловская</item>
+        <item>Первомайская</item>
+        <item>Пролетарская</item>
+        <item>Тракторный завод</item>
+        <item>Партизанская</item>
+        <item>Автозаводская</item>
+        <item>Могилёвская</item>
+    </string-array>
+
 </resources>

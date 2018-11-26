@@ -17,8 +17,20 @@
             </intent-filter>
         </activity>
         <activity android:name=".MetroListActivity">
+        </activity>
+        <activity android:name=".MetroFirstLineListActivity"
+                  android:label="Синяя ветвь">
             <intent-filter>
                 <action android:name="android.intent.action.GET_STATION" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".MetroSecondLineListActivity"
+                  android:label="Красная ветвь">
+            <intent-filter>
+                <action android:name="android.intent.action.GET_STATION" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
