@@ -1,0 +1,56 @@
+.pushbutton {
+    -fx-background-color: #fff4, #8884;
+    -fx-background-radius: 50px;
+    -fx-background: none;
+    -fx-background-insets:  -1 -1 -1 -1, 0, 1, 2;
+}
+
+.cancel {
+    -fx-text-fill: #f00;
+    -fx-background-color: #f002, #8002;
+}
+
+.cancel:hover {
+    -fx-background-color: #f004, #8004;
+}
+
+.cancel:pressed {
+    -fx-background-color: #f00C, #800C;
+}
+
+.add {
+    -fx-text-fill: #0f0;
+    -fx-background-color: #0f02, #0802;
+}
+
+.add:hover {
+    -fx-background-color: #0f04, #0804;
+}
+
+.add:pressed {
+    -fx-background-color: #0f0C, #080C;
+}
+
+.a:hover {
+    -fx-background-color: #0f0C, #080C;
+}
+
+.e:hover {
+    -fx-background-color: #ff0C, #880C;
+}
+
+.d:hover {
+    -fx-background-color: #f00C, #800C;
+}
+
+.a:pressed {
+    -fx-background-color: #0A0C, #0A0C;
+}
+
+.e:pressed {
+    -fx-background-color: #AA0C, #AA0C;
+}
+
+.d:pressed {
+    -fx-background-color: #A00C, #A00C;
+}

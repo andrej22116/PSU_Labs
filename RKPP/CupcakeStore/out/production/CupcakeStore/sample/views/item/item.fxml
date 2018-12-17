@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
+
+<fx:root maxHeight="80.0" maxWidth="500.0" minHeight="80.0" minWidth="500.0" styleClass="body" stylesheets="@style.css" type="StackPane" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox alignment="BOTTOM_LEFT">
+         <children>
+            <Label fx:id="cupcakeName" text="Label" textAlignment="CENTER" textOverrun="CLIP" underline="true">
+               <textFill>
+                  <LinearGradient endX="1.0" endY="1.0" startX="1.0">
+                     <stops>
+                        <Stop color="WHITE" />
+                        <Stop color="WHITE" offset="0.007662835249042145" />
+                        <Stop color="#ff96cb" offset="1.0" />
+                     </stops>
+                  </LinearGradient>
+               </textFill>
+               <font>
+                  <Font name="System Bold" size="32.0" />
+               </font>
+               <effect>
+                  <InnerShadow blurType="ONE_PASS_BOX" choke="0.17" color="#ff0db8" />
+               </effect>
+            </Label>
+            <Label fx:id="cupcakeInfo" text="Suka" textFill="#c64fff">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
+      <Label fx:id="cost" rotate="20.2" text="Label" textAlignment="CENTER" textFill="#00ff0e" StackPane.alignment="TOP_RIGHT">
+         <font>
+            <Font size="22.0" />
+         </font>
+         <effect>
+            <DropShadow color="#95ff4f87" height="18.03" radius="7.772500000000001" spread="0.8" width="15.06" />
+         </effect>
+      </Label>
+      <Label fx:id="calories" layoutX="458.0" layoutY="10.0" rotate="22.8" text="Label" textAlignment="CENTER" textFill="RED" translateX="-15.0" translateY="25.0" StackPane.alignment="TOP_RIGHT">
+         <font>
+            <Font size="15.0" />
+         </font>
+         <effect>
+            <DropShadow color="#ffc94f" height="11.99" radius="5.5225" spread="0.8" width="12.1" />
+         </effect>
+      </Label>
+   </children>
+</fx:root>

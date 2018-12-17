@@ -1,0 +1,36 @@
+.pushbutton {
+    -fx-background-color: #fff4, #8884;
+    -fx-background-radius: 50px;
+    -fx-background: none;
+    -fx-background-insets:  -1 -1 -1 -1, 0, 1, 2;
+}
+
+.ok {
+    -fx-text-fill: #0f0;
+    -fx-background-color: #0f02, #0802;
+}
+
+.ok:hover {
+    -fx-background-color: #0f04, #0804;
+}
+
+.ok:pressed {
+    -fx-background-color: #0f0C, #080C;
+}
+
+.edit:hover {
+    -fx-background-color: #ff0C, #880C;
+}
+
+.delete:hover {
+    -fx-background-color: #f00C, #800C;
+}
+
+
+.edit:pressed {
+    -fx-background-color: #AA0C, #AA0C;
+}
+
+.delete:pressed {
+    -fx-background-color: #A00C, #A00C;
+}
