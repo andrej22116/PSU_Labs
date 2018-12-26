@@ -33,6 +33,7 @@ as $f_body$
 				0, nickname);
 	end
 $f_body$
+SECURITY DEFINER
 language plpgsql;
 
 
@@ -72,6 +73,7 @@ as $f_body$
 		return token_hash;
 	end;
 $f_body$
+SECURITY DEFINER
 language plpgsql;
 
 
@@ -111,8 +113,8 @@ language sql;
 
 create or replace function public_function_get_game_list(game_amount integer, list_offset integer)
 returns table(	game_name text,
-				game_cost int4,
-				discount int2,
+				game_cost float,
+				discount float4,
 				date_of_release_game date,
 				game_description text )
 as $body$
@@ -126,6 +128,7 @@ as $body$
 	offset list_offset
 	limit game_amount;
 $body$
+SECURITY DEFINER
 language sql;
 
 
@@ -137,8 +140,8 @@ language sql;
 
 create or replace function public_function_get_game_with_developer_list(game_amount integer, list_offset integer)
 returns table(	game_name text,
-				game_cost int4,
-				discount int2,
+				game_cost float,
+				discount float4,
 				date_of_release_game date,
 				game_description text,
 				developer_name text,
@@ -156,6 +159,7 @@ as $body$
 	offset list_offset
 	limit game_amount;
 $body$
+SECURITY DEFINER
 language sql;
 
 
@@ -174,6 +178,7 @@ as $body$
 	from developers
 	where developers.developer_name = name;
 $body$
+SECURITY DEFINER
 language sql;
 
 
@@ -256,6 +261,7 @@ as $body$
 			where id_uuid = user_id;
 	end
 $body$
+SECURITY DEFINER
 language plpgsql;
 
 
@@ -361,6 +367,7 @@ as $body$
 			where users.id_uuid = user_id;
 	end
 $body$
+SECURITY DEFINER
 language plpgsql;
 
 
@@ -377,6 +384,7 @@ as $body$
 		select token from user_sessions where token = user_token
 	);
 $body$
+SECURITY DEFINER
 language sql;
 
 
@@ -397,6 +405,7 @@ as $body$
 		delete from user_sessions where user_sessions.token = user_token;
 	end
 $body$
+SECURITY DEFINER
 language plpgsql;
 
 
@@ -424,6 +433,7 @@ as $body$
 			where id_uuid_user = user_id;
 	end
 $body$
+SECURITY DEFINER
 language plpgsql;
 
 
@@ -499,6 +509,7 @@ as $body$
 		
 	end
 $body$
+SECURITY DEFINER
 language plpgsql;
 
 
@@ -545,6 +556,7 @@ as $body$
 		
 	end
 $body$
+SECURITY DEFINER
 language plpgsql;
 
 
@@ -571,6 +583,7 @@ as $body$
 		delete from users where id_uuid = user_id;
 	end
 $body$
+SECURITY DEFINER
 language plpgsql;
 
 
@@ -587,6 +600,7 @@ as $body$
 		return 99.0;
 	end
 $body$
+SECURITY DEFINER
 language plpgsql;
 
 
@@ -624,6 +638,7 @@ as $body$
 			values(user_id, developer_id, true);
 	end
 $body$
+SECURITY DEFINER
 language plpgsql;
 
 
@@ -632,7 +647,7 @@ language plpgsql;
 /*===================================================================================================*/
 /*---------||------------||------------||------------||---------------||---------------||------------*/
 
-
+/*
 create or replace function public_function_buy_game_for_user(user_token text, target_user_nickname, target_game_name text)
 returns void
 as $body$
@@ -675,7 +690,9 @@ as $body$
 		
 	end
 $body$
+SECURITY DEFINER
 language plpgsql;
+*/
 
 
 
@@ -794,6 +811,7 @@ as $body$
 		return new_comment_id;
 	end
 $body$
+SECURITY DEFINER
 language plpgsql;
 
 
@@ -815,6 +833,7 @@ as $body$
 		execute private_function_modify_comment(comment_uuid, user_id, new_text);
 	end
 $body$
+SECURITY DEFINER
 language plpgsql;
 
 
@@ -845,6 +864,7 @@ as $body$
 		
 	end
 $body$
+SECURITY DEFINER
 language plpgsql;
 
 
@@ -996,6 +1016,7 @@ as $body$
 			values(game_name, current_date, game_cost, developer_id, game_description);
 	end
 $body$
+SECURITY DEFINER
 language plpgsql;
 
 
@@ -1027,6 +1048,7 @@ as $body$
 			values(game_id, game_addon_id);
 	end
 $body$
+SECURITY DEFINER
 language plpgsql;
 
 
@@ -1060,6 +1082,7 @@ select 		commentaries.id_uuid,
 	limit 	commemts_amount
 	offset 	list_offset;
 $body$
+SECURITY DEFINER
 language sql;
 
 
@@ -1096,6 +1119,7 @@ as $body$
 			group by games.game_cost;
 	end
 $body$
+SECURITY DEFINER
 language plpgsql;
 
 
@@ -1113,6 +1137,7 @@ as $body$
 	group by developers.developer_name
 	order by count(commentaries.id_uuid) desc, max(commentaries.comment_time) desc;
 $body$
+SECURITY DEFINER
 language sql;
 
 
@@ -1128,6 +1153,7 @@ as $body$
 			inner join games				on games.id_uuid = games_addons_list.id_uuid_game
 	where	games.game_name = target_game_name;
 $body$
+SECURITY DEFINER
 language sql;
 
 
@@ -1146,6 +1172,7 @@ as $body$
 	order by sum(purchases."cost"::float) desc
 	limit 1;
 $body$
+SECURITY DEFINER
 language sql;
 
 
@@ -1180,6 +1207,7 @@ as $body$
 					games_addons_list.id_uuid_game = game_id;
 	end
 $body$
+SECURITY DEFINER
 language plpgsql;
 
 
@@ -1211,6 +1239,7 @@ as $body$
 			where id_uuid = target_game_name;
 	end
 $body$
+SECURITY DEFINER
 language plpgsql;
 
 
@@ -1226,6 +1255,7 @@ as $body$
 			inner join users			on desired_games.id_uuid_user = users.id_uuid
 	where	users.user_nickname = nickname;
 $body$
+SECURITY DEFINER
 language sql;
 
 
@@ -1264,4 +1294,5 @@ as $body$
 			values (user_id, game_id);
 	end
 $body$
+SECURITY DEFINER
 language plpgsql;
