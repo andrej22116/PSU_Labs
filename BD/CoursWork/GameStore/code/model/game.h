@@ -5,18 +5,19 @@
 #include <QDate>
 #include <QVector>
 
-struct GameBase {
+struct BaseGame {
     QString gameName;
     QDate dateOfReleaseGame;
     double gameCost;
     float discount;
 };
 
-struct Game : public GameBase {
+struct Game : public BaseGame {
     QString gameDiscription;
-
     QString developerName;
+};
 
+struct ExtendedGame : public Game {
     QVector<QString> genres;
     QVector<QString> tags;
     QVector<QString> devices;

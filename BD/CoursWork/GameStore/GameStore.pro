@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui widgets
+QT       += core gui widgets sql
 
 TARGET = GameStore
 TEMPLATE = app
@@ -20,11 +20,16 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
-CONFIG += c++11
+CONFIG += c++1z
 
 SOURCES += \
         main.cpp \
-        mainwindow.cpp
+        mainwindow.cpp \
+    code/control/ClassDatabaseBaseController/databasebasecontroller.cpp \
+    code/control/ClassGameDatabaseController/gamedatabasecontroller.cpp \
+    code/control/ClassUserDatabaseController/userdatabasecontroller.cpp \
+    code/control/ClassNewsDatabaseController/newsdatabasecontroller.cpp \
+    code/control/ClassCommentsDatabaseController/commentsdatabasecontroller.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -34,7 +39,15 @@ HEADERS += \
     code/model/commentary.h \
     code/model/developer.h \
     code/model/news.h \
-    code/model/purchase.h
+    code/model/purchase.h \
+    code/model/constants.h \
+    code/control/ClassDatabaseBaseController/databasebasecontroller.h \
+    code/control/ClassGameDatabaseController/gamedatabasecontroller.h \
+    code/control/ClassUserDatabaseController/userdatabasecontroller.h \
+    code/model/game_statistic.h \
+    code/model/full_game_info.h \
+    code/control/ClassNewsDatabaseController/newsdatabasecontroller.h \
+    code/control/ClassCommentsDatabaseController/commentsdatabasecontroller.h
 
 FORMS += \
         mainwindow.ui

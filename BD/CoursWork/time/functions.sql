@@ -115,14 +115,12 @@ create or replace function public_function_get_game_list(game_amount integer, li
 returns table(	game_name text,
 				game_cost float,
 				discount float4,
-				date_of_release_game date,
-				game_description text )
+				date_of_release_game date )
 as $body$
 	select 	games.game_name,
 			games.game_cost,
 			games.discount,
-			games.date_of_release_game,
-			games.game_description
+			games.date_of_release_game
 	from games
 	where available
 	offset list_offset
@@ -1058,7 +1056,7 @@ language plpgsql;
 /*---------||------------||------------||------------||---------------||---------------||------------*/
 
 /*
- *  ВАЖНЫЙ ЗАПРОС [ЗАДАНИЕ] - Первый запрос
+ *  Р’РђР–РќР«Р™ Р—РђРџР РћРЎ [Р—РђР”РђРќР�Р•] - РџРµСЂРІС‹Р№ Р·Р°РїСЂРѕСЃ
  */
 create or replace function public_function_get_cooments_for_game(name_of_game text, commemts_amount integer, list_offset integer)
 returns table (id_uuid uuid, nickname text, "role" text, status text, add_comment_time timestamp, modify_comment_time timestamp, "comment" text)
@@ -1087,7 +1085,7 @@ language sql;
 
 
 /*
- *  ВАЖНЫЙ ЗАПРОС [ЗАДАНИЕ] - Второй запрос
+ *  Р’РђР–РќР«Р™ Р—РђРџР РћРЎ [Р—РђР”РђРќР�Р•] - Р’С‚РѕСЂРѕР№ Р·Р°РїСЂРѕСЃ
  */
 create or replace function public_function_get_summary_game_cost_with_addons(user_token text, name_of_game text)
 returns table (game_cost float, summary_addons_cost float)
@@ -1124,7 +1122,7 @@ language plpgsql;
 
 
 /*
- *  ВАЖНЫЙ ЗАПРОС [ЗАДАНИЕ] - Третий запрос
+ *  Р’РђР–РќР«Р™ Р—РђРџР РћРЎ [Р—РђР”РђРќР�Р•] - РўСЂРµС‚РёР№ Р·Р°РїСЂРѕСЃ
  */
 create or replace function public_function_get_developer_of_most_discussed_game()
 returns table (developer_name text)
@@ -1142,7 +1140,7 @@ language sql;
 
 
 /*
- *  ВАЖНЫЙ ЗАПРОС [ЗАДАНИЕ] - Пятый запрос
+ *  Р’РђР–РќР«Р™ Р—РђРџР РћРЎ [Р—РђР”РђРќР�Р•] - РџСЏС‚С‹Р№ Р·Р°РїСЂРѕСЃ
  */
 create or replace function public_function_get_game_addons(target_game_name text)
 returns table (addon_name text, addon_cost float, addon_description text)
@@ -1158,7 +1156,7 @@ language sql;
 
 
 /*
- *  ВАЖНЫЙ ЗАПРОС [ЗАДАНИЕ] - Шестой запрос
+ *  Р’РђР–РќР«Р™ Р—РђРџР РћРЎ [Р—РђР”РђРќР�Р•] - РЁРµСЃС‚РѕР№ Р·Р°РїСЂРѕСЃ
  */
 create or replace function public_function_get_top_spending_money(begin_date date, end_date date)
 returns table (user_nickname text)
@@ -1177,11 +1175,11 @@ language sql;
 
 
 /*
- *  ВАЖНЫЙ ЗАПРОС [ЗАДАНИЕ] - Восьмой запрос - см. триггер
+ *  Р’РђР–РќР«Р™ Р—РђРџР РћРЎ [Р—РђР”РђРќР�Р•] - Р’РѕСЃСЊРјРѕР№ Р·Р°РїСЂРѕСЃ - СЃРј. С‚СЂРёРіРіРµСЂ
  */
 
 /*
- *  ВАЖНЫЙ ЗАПРОС [ЗАДАНИЕ] - 11 запрос
+ *  Р’РђР–РќР«Р™ Р—РђРџР РћРЎ [Р—РђР”РђРќР�Р•] - 11 Р·Р°РїСЂРѕСЃ
  */
 create or replace function public_function_get_user_game_addons(user_token text, target_game_name text)
 returns table (addon_name text, addon_description text)
@@ -1212,20 +1210,22 @@ language plpgsql;
 
 
 /*
- *  ВАЖНЫЙ ЗАПРОС [ЗАДАНИЕ] - 12 запрос
+ *  Р’РђР–РќР«Р™ Р—РђРџР РћРЎ [Р—РђР”РђРќР�Р•] - 12 Р·Р°РїСЂРѕСЃ
  */
-create or replace function public_function_get_games_nobody_bought()
+create or replace function public_function_get_games_nobody_bought(game_amount integer, list_offset integer)
 returns table (game_name text, game_cost float, game_discount float4, date_of_release_game date)
 as $body$
 	select 	games.game_name, games.game_cost, games.discount, games.date_of_release_game
 	from	games
 	where	games.available and games.id_uuid not in (
 		select user_games.id_uuid_game from user_games
-	);
+	)
+	limit game_amount
+	offset list_offset;
 $body$
 language sql;
 
--- Вторая часть
+-- Р’С‚РѕСЂР°СЏ С‡Р°СЃС‚СЊ
 create or replace function public_function_lock_game(user_token text, target_game_name text)
 returns void
 as $body$
@@ -1243,8 +1243,25 @@ SECURITY DEFINER
 language plpgsql;
 
 
+create or replace function public_function_unlock_game(user_token text, target_game_name text)
+returns void
+as $body$
+	begin
+		if ( private_function_check_permissions(user_token, 2) = false ) then
+			raise 'Permission denied!';
+		end if;
+	
+		update games
+			set available = true
+			where id_uuid = target_game_name;
+	end
+$body$
+SECURITY DEFINER
+language plpgsql;
+
+
 /*
- *  ВАЖНЫЙ ЗАПРОС [ЗАДАНИЕ] - 13 запрос
+ *  Р’РђР–РќР«Р™ Р—РђРџР РћРЎ [Р—РђР”РђРќР�Р•] - 13 Р·Р°РїСЂРѕСЃ
  */
 create or replace function public_function_get_user_desired_games(nickname text)
 returns table (desired_game text)
@@ -1292,6 +1309,77 @@ as $body$
 	
 		insert into desired_games(id_uuid_user, id_uuid_game)
 			values (user_id, game_id);
+	end
+$body$
+SECURITY DEFINER
+language plpgsql;
+
+
+/*===================================================================================================*/
+/*---------||------------||------------||------------||---------------||---------------||------------*/
+/*===================================================================================================*/
+/*---------||------------||------------||------------||---------------||---------------||------------*/
+
+
+create or replace function public_function_get_user_games(user_token text)
+returns table( game_name text )
+as $body$
+	declare
+		user_id uuid;
+		
+	begin
+		if ( private_function_check_permissions(user_token, 0) = false ) then
+			raise exception using message = 'Permission denied!';
+		end if;
+	
+		user_id := private_function_get_user_id_by_token(user_token);
+	
+		return query
+		select 	games.game_name
+		from	games
+				inner join user_games on games.id_uuid = user_games.id_uuid_game
+		where	user_games.id_uuid_user = user_id;
+	end
+$body$
+SECURITY DEFINER
+language plpgsql;
+
+
+/*===================================================================================================*/
+/*---------||------------||------------||------------||---------------||---------------||------------*/
+/*===================================================================================================*/
+/*---------||------------||------------||------------||---------------||---------------||------------*/
+
+
+create or replace function public_function_get_current_user_info(user_token text)
+returns table( 	user_nickname text,
+				user_role text,
+				user_status text,
+				user_money float,
+				user_cashback float,
+				user_personal_discount float
+			 )
+as $body$
+	declare
+		user_id uuid;
+		
+	begin
+		if ( private_function_check_permissions(user_token, 0) = false ) then
+			raise exception using message = 'Permission denied!';
+		end if;
+	
+		user_id := private_function_get_user_id_by_token(user_token);
+	
+		return query
+		select 	users.user_nickname, roles.role_name,
+				statuses.status_name, user_purses.user_money,
+				user_purses.cashback, user_purses.personal_discount
+		from	users
+				inner join roles on users.id_role = roles.id
+				inner join user_statuses on user_statuses.id_uuid_user = user_id
+				inner join statuses on user_statuses.id_status = statuses
+				inner join user_purses on users.id_uuid = user_purses.id_uuid_user
+		where	users.id_uuid = user_id;
 	end
 $body$
 SECURITY DEFINER
