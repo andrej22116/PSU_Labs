@@ -4,6 +4,9 @@
 #include "code/model/commentary.h"
 #include "code/model/user.h"
 #include "code/model/game.h"
+#include "code/model/news.h"
+
+#include <QVector>
 
 class CommentsDatabaseController
 {
@@ -19,6 +22,8 @@ class CommentsDatabaseController
     static const QString templateQueryModifyCommentaryForGlobalNews;
     static const QString templateQueryDeleteCommentaryForGlobalNews;
     static const QString templateQueryDeleteUserCommentaryForGlobalNews;
+    static const QString templateQueryGetGameCommetaries;
+    static const QString templateQueryGetNewsCommetaries;
 
 public:
     CommentsDatabaseController() = delete;
@@ -29,33 +34,36 @@ public:
     CommentsDatabaseController& operator = (const CommentsDatabaseController&&) = delete;
 
 
-    void addNewCommentaryForGame( const CurrentUser& user
-                                , const BaseGame& game
-                                , Commentary& commentary);
+    static void addNewCommentaryForGame( const CurrentUser& user
+                                       , const BaseGame& game
+                                       , Commentary& commentary);
 
-    void modifyCommentaryForGame( const CurrentUser& user
-                                , const Commentary& commentary);
+    static void modifyCommentaryForGame( const CurrentUser& user
+                                       , const Commentary& commentary);
 
-    void deleteCommentaryForGame( const CurrentUser& user
-                                , const Commentary& commentary);
+    static void deleteCommentaryForGame( const CurrentUser& user
+                                       , const Commentary& commentary);
 
-    void deleteUserCommentaryForGame( const CurrentUser& user
-                                    , const BaseUser& targetUser
-                                    , const Commentary& commentary);
+    static void deleteUserCommentaryForGame( const CurrentUser& user
+                                           , const BaseUser& targetUser
+                                           , const Commentary& commentary);
 
-    void addNewCommentaryForGameNews(const CurrentUser& user, Commentary& commentary);
-    void modifyCommentaryForGameNews(const CurrentUser& user, Commentary& commentary);
-    void deleteCommentaryForGameNews(const CurrentUser& user, Commentary& commentary);
-    void deleteUserCommentaryForGameNews( const CurrentUser& user
-                                        , const BaseUser& targetUser
-                                        , const Commentary& commentary);
+    static void addNewCommentaryForGameNews(const CurrentUser& user, Commentary& commentary);
+    static void modifyCommentaryForGameNews(const CurrentUser& user, Commentary& commentary);
+    static void deleteCommentaryForGameNews(const CurrentUser& user, Commentary& commentary);
+    static void deleteUserCommentaryForGameNews( const CurrentUser& user
+                                               , const BaseUser& targetUser
+                                               , const Commentary& commentary);
 
-    void addNewCommentaryForGlobalNews(const CurrentUser& user, Commentary& commentary);
-    void modifyCommentaryForGlobalNews(const CurrentUser& user, Commentary& commentary);
-    void deleteCommentaryForGlobalNews(const CurrentUser& user, Commentary& commentary);
-    void deleteUserCommentaryForGlobalNews( const CurrentUser& user
-                                          , const BaseUser& targetUser
-                                          , const Commentary& commentary);
+    static void addNewCommentaryForGlobalNews(const CurrentUser& user, Commentary& commentary);
+    static void modifyCommentaryForGlobalNews(const CurrentUser& user, Commentary& commentary);
+    static void deleteCommentaryForGlobalNews(const CurrentUser& user, Commentary& commentary);
+    static void deleteUserCommentaryForGlobalNews( const CurrentUser& user
+                                                 , const BaseUser& targetUser
+                                                 , const Commentary& commentary);
+
+    static QVector<Commentary> getGameCommetaries(const BaseGame& game, int limit, int offset);
+    static QVector<Commentary> getNewsCommetaries(const BaseNews& news, int limit, int offset);
 };
 
 #endif // COMMENTSDATABASECONTROLLER_H

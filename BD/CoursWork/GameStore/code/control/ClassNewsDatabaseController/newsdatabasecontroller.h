@@ -21,13 +21,13 @@ public:
     NewsDatabaseController& operator = (const NewsDatabaseController&&) = delete;
 
 
-    void addNewGameNews(News& news);
-    void modifyGameNews(const News& news);
-    void deleteGameNews(const News& news);
+    static void addNewGameNews(News& news);
+    static void modifyGameNews(const News& news);
+    static void deleteGameNews(const News& news);
 
-    void addNewGlobalNews(News& news);
-    void modifyGlobalNews(const News& news);
-    void deleteGlobalNews(const News& news);
+    static void addNewGlobalNews(News& news);
+    static void modifyGlobalNews(const News& news);
+    static void deleteGlobalNews(const News& news);
 };
 
 #endif // NEWSDATABASECONTROLLER_H

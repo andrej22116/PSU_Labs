@@ -6,6 +6,7 @@
 #include <QDateTime>
 
 struct Commentary {
+    QString userNickname;
     QDateTime createTime;
     QDateTime modifyTime;
     QString text;

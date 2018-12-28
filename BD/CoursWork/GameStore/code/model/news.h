@@ -5,13 +5,16 @@
 #include <QDateTime>
 #include <QUuid>
 
-struct News {
-    QDateTime createTime;
-    QDateTime modifyTime;
-    QString text;
+struct BaseNews {
+    QUuid id;
     QString title;
     QString authorNickname;
-    QUuid id;
+    QDateTime createTime;
+    QDateTime modifyTime;
+};
+
+struct News : public BaseNews {
+    QString text;
 };
 
 #endif // NEWS_H

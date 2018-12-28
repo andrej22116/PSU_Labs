@@ -8,6 +8,7 @@
 #include "code/model/game_addon.h"
 #include "code/model/game_statistic.h"
 #include "code/model/user.h"
+#include "code/model/purchase.h"
 
 class GameDatabaseController
 {
@@ -58,6 +59,8 @@ public:
     static void lockGame(const CurrentUser& user,  const BaseGame& game);
     static void unlockGame(const CurrentUser& user,  const BaseGame& game);
 
+    //static QVector<Purchase> getAllCurrentUserPurchases(const CurrentUser& user);
+    
 };
 
 #endif // GAMEDATABASECONTROLLER_H

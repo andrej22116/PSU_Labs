@@ -1056,7 +1056,7 @@ language plpgsql;
 /*---------||------------||------------||------------||---------------||---------------||------------*/
 
 /*
- *  Р’РђР–РќР«Р™ Р—РђРџР РћРЎ [Р—РђР”РђРќР�Р•] - РџРµСЂРІС‹Р№ Р·Р°РїСЂРѕСЃ
+ *  Р вЂ™Р С’Р вЂ“Р СњР В«Р в„ў Р вЂ”Р С’Р СџР В Р С›Р РЋ [Р вЂ”Р С’Р вЂќР С’Р СњР пїЅР вЂў] - Р СџР ВµРЎР‚Р Р†РЎвЂ№Р в„– Р В·Р В°Р С—РЎР‚Р С•РЎРѓ
  */
 create or replace function public_function_get_cooments_for_game(name_of_game text, commemts_amount integer, list_offset integer)
 returns table (id_uuid uuid, nickname text, "role" text, status text, add_comment_time timestamp, modify_comment_time timestamp, "comment" text)
@@ -1085,7 +1085,7 @@ language sql;
 
 
 /*
- *  Р’РђР–РќР«Р™ Р—РђРџР РћРЎ [Р—РђР”РђРќР�Р•] - Р’С‚РѕСЂРѕР№ Р·Р°РїСЂРѕСЃ
+ *  Р вЂ™Р С’Р вЂ“Р СњР В«Р в„ў Р вЂ”Р С’Р СџР В Р С›Р РЋ [Р вЂ”Р С’Р вЂќР С’Р СњР пїЅР вЂў] - Р вЂ™РЎвЂљР С•РЎР‚Р С•Р в„– Р В·Р В°Р С—РЎР‚Р С•РЎРѓ
  */
 create or replace function public_function_get_summary_game_cost_with_addons(user_token text, name_of_game text)
 returns table (game_cost float, summary_addons_cost float)
@@ -1122,7 +1122,7 @@ language plpgsql;
 
 
 /*
- *  Р’РђР–РќР«Р™ Р—РђРџР РћРЎ [Р—РђР”РђРќР�Р•] - РўСЂРµС‚РёР№ Р·Р°РїСЂРѕСЃ
+ *  Р вЂ™Р С’Р вЂ“Р СњР В«Р в„ў Р вЂ”Р С’Р СџР В Р С›Р РЋ [Р вЂ”Р С’Р вЂќР С’Р СњР пїЅР вЂў] - Р СћРЎР‚Р ВµРЎвЂљР С‘Р в„– Р В·Р В°Р С—РЎР‚Р С•РЎРѓ
  */
 create or replace function public_function_get_developer_of_most_discussed_game()
 returns table (developer_name text)
@@ -1140,7 +1140,7 @@ language sql;
 
 
 /*
- *  Р’РђР–РќР«Р™ Р—РђРџР РћРЎ [Р—РђР”РђРќР�Р•] - РџСЏС‚С‹Р№ Р·Р°РїСЂРѕСЃ
+ *  Р вЂ™Р С’Р вЂ“Р СњР В«Р в„ў Р вЂ”Р С’Р СџР В Р С›Р РЋ [Р вЂ”Р С’Р вЂќР С’Р СњР пїЅР вЂў] - Р СџРЎРЏРЎвЂљРЎвЂ№Р в„– Р В·Р В°Р С—РЎР‚Р С•РЎРѓ
  */
 create or replace function public_function_get_game_addons(target_game_name text)
 returns table (addon_name text, addon_cost float, addon_description text)
@@ -1156,7 +1156,7 @@ language sql;
 
 
 /*
- *  Р’РђР–РќР«Р™ Р—РђРџР РћРЎ [Р—РђР”РђРќР�Р•] - РЁРµСЃС‚РѕР№ Р·Р°РїСЂРѕСЃ
+ *  Р вЂ™Р С’Р вЂ“Р СњР В«Р в„ў Р вЂ”Р С’Р СџР В Р С›Р РЋ [Р вЂ”Р С’Р вЂќР С’Р СњР пїЅР вЂў] - Р РЃР ВµРЎРѓРЎвЂљР С•Р в„– Р В·Р В°Р С—РЎР‚Р С•РЎРѓ
  */
 create or replace function public_function_get_top_spending_money(begin_date date, end_date date)
 returns table (user_nickname text)
@@ -1175,11 +1175,11 @@ language sql;
 
 
 /*
- *  Р’РђР–РќР«Р™ Р—РђРџР РћРЎ [Р—РђР”РђРќР�Р•] - Р’РѕСЃСЊРјРѕР№ Р·Р°РїСЂРѕСЃ - СЃРј. С‚СЂРёРіРіРµСЂ
+ *  Р вЂ™Р С’Р вЂ“Р СњР В«Р в„ў Р вЂ”Р С’Р СџР В Р С›Р РЋ [Р вЂ”Р С’Р вЂќР С’Р СњР пїЅР вЂў] - Р вЂ™Р С•РЎРѓРЎРЉР С�Р С•Р в„– Р В·Р В°Р С—РЎР‚Р С•РЎРѓ - РЎРѓР С�. РЎвЂљРЎР‚Р С‘Р С–Р С–Р ВµРЎР‚
  */
 
 /*
- *  Р’РђР–РќР«Р™ Р—РђРџР РћРЎ [Р—РђР”РђРќР�Р•] - 11 Р·Р°РїСЂРѕСЃ
+ *  Р вЂ™Р С’Р вЂ“Р СњР В«Р в„ў Р вЂ”Р С’Р СџР В Р С›Р РЋ [Р вЂ”Р С’Р вЂќР С’Р СњР пїЅР вЂў] - 11 Р В·Р В°Р С—РЎР‚Р С•РЎРѓ
  */
 create or replace function public_function_get_user_game_addons(user_token text, target_game_name text)
 returns table (addon_name text, addon_description text)
@@ -1210,7 +1210,7 @@ language plpgsql;
 
 
 /*
- *  Р’РђР–РќР«Р™ Р—РђРџР РћРЎ [Р—РђР”РђРќР�Р•] - 12 Р·Р°РїСЂРѕСЃ
+ *  Р вЂ™Р С’Р вЂ“Р СњР В«Р в„ў Р вЂ”Р С’Р СџР В Р С›Р РЋ [Р вЂ”Р С’Р вЂќР С’Р СњР пїЅР вЂў] - 12 Р В·Р В°Р С—РЎР‚Р С•РЎРѓ
  */
 create or replace function public_function_get_games_nobody_bought(game_amount integer, list_offset integer)
 returns table (game_name text, game_cost float, game_discount float4, date_of_release_game date)
@@ -1225,7 +1225,7 @@ as $body$
 $body$
 language sql;
 
--- Р’С‚РѕСЂР°СЏ С‡Р°СЃС‚СЊ
+-- Р вЂ™РЎвЂљР С•РЎР‚Р В°РЎРЏ РЎвЂЎР В°РЎРѓРЎвЂљРЎРЉ
 create or replace function public_function_lock_game(user_token text, target_game_name text)
 returns void
 as $body$
@@ -1261,7 +1261,7 @@ language plpgsql;
 
 
 /*
- *  Р’РђР–РќР«Р™ Р—РђРџР РћРЎ [Р—РђР”РђРќР�Р•] - 13 Р·Р°РїСЂРѕСЃ
+ *  Р вЂ™Р С’Р вЂ“Р СњР В«Р в„ў Р вЂ”Р С’Р СџР В Р С›Р РЋ [Р вЂ”Р С’Р вЂќР С’Р СњР пїЅР вЂў] - 13 Р В·Р В°Р С—РЎР‚Р С•РЎРѓ
  */
 create or replace function public_function_get_user_desired_games(nickname text)
 returns table (desired_game text)
@@ -1384,3 +1384,64 @@ as $body$
 $body$
 SECURITY DEFINER
 language plpgsql;
+
+
+/*===================================================================================================*/
+/*---------||------------||------------||------------||---------------||---------------||------------*/
+/*===================================================================================================*/
+/*---------||------------||------------||------------||---------------||---------------||------------*/
+
+
+create or replace function public_function_get_current_user_profile(user_token text)
+returns table( 	role_id integer,
+				user_role boolean
+			 )
+as $body$
+	declare
+		user_id uuid;
+		
+	begin
+		if ( private_function_check_permissions(user_token, 0) = false ) then
+			raise exception using message = 'Permission denied!';
+		end if;
+	
+		user_id := private_function_get_user_id_by_token(user_token);
+	
+		return query
+		select 	users.id_role, users_developers.main_developer
+		from	users
+				left join users_developers on users_developers.id_uuid_user = users.id_uuid
+		where	users.id_uuid = user_id;
+	end
+$body$
+SECURITY DEFINER
+language plpgsql;
+
+
+/*===================================================================================================*/
+/*---------||------------||------------||------------||---------------||---------------||------------*/
+/*===================================================================================================*/
+/*---------||------------||------------||------------||---------------||---------------||------------*/
+
+
+create or replace function public_function_get_game_commentaries(target_game_name text, comment_amount integer, comments_offset integer)
+returns table (	user_nickname 	text,
+				comment_time 	timestamp,
+				modify_time 	timestamp,
+				"comment"		text,
+				id				uuid
+			  )
+as $body$
+	select 	users.user_nickname, commentaries.comment_time, commentaries.modify_time,
+			commentaries."comment", commentaries.id_uuid
+	from 	users
+			inner join commentaries 		on commentaries.id_uuid_user = users.id_uuid
+			inner join games_commentaries 	on games_commentaries.id_uuid_comment = commentaries.id_uuid
+			inner join games 				on games.id_uuid = games_commentaries.id_uuid_game
+	where 	games.game_name = target_game_name
+	order by commentaries.comment_time
+	limit 	comment_amount
+	offset	comments_offset;
+$body$
+SECURITY DEFINER
+language sql;

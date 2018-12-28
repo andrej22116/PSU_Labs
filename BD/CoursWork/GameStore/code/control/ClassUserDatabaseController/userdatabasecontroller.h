@@ -2,6 +2,7 @@
 #define USERDATABASECONTROLLER_H
 
 #include "code/model/user.h"
+#include "code/model/user_profile.h"
 
 class UserDatabaseController
 {
@@ -33,11 +34,13 @@ public:
 
     static void changeLogin(const CurrentUser& user, const QString& newUserLogin);
     static void changePassword(const CurrentUser& user, const QString& oldUserPassword, const QString& newUserPassword);
-    static void changeNickname(const CurrentUser& user, const const QString& newUserNickname);
+    static void changeNickname(const CurrentUser& user, const QString& newUserNickname);
 
     static void putMoney(CurrentUser& user, double money);
     static void updateCurrentUserInfo(CurrentUser& user);
     static User getUserInfo();
+
+    //static UserProfile getUserProfile(const CurrentUser& user);
 
     static void deleteAccount(const CurrentUser& user);
 };

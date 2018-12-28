@@ -125,7 +125,7 @@ void UserDatabaseController::changePassword(const CurrentUser& user, const QStri
 
 const QString UserDatabaseController::templateQueryChangeNickname{".................."};
 
-void UserDatabaseController::changeNickname(const CurrentUser& user, const const QString& newUserNickname)
+void UserDatabaseController::changeNickname(const CurrentUser& user, const QString& newUserNickname)
 {
     throw QString("Function unavailable!");
 }

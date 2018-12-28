@@ -6,17 +6,29 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>880</width>
-    <height>542</height>
+    <width>800</width>
+    <height>600</height>
    </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>800</width>
+    <height>600</height>
+   </size>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">#MainWindow, #centralWidget {
+	background-color: rgb(54, 52, 61);
+	color: white;
+}</string>
+  </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
-     <widget class="QWidget" name="widget" native="true">
+     <widget class="QWidget" name="header" native="true">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
         <horstretch>0</horstretch>
@@ -61,133 +73,193 @@
          </property>
         </spacer>
        </item>
-       <item>
-        <widget class="QStackedWidget" name="stackedWidget_2">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>16777215</width>
-           <height>50</height>
-          </size>
-         </property>
-         <property name="currentIndex">
-          <number>0</number>
-         </property>
-         <widget class="QWidget" name="page_3">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <layout class="QHBoxLayout" name="horizontalLayout_2">
-           <property name="spacing">
-            <number>0</number>
-           </property>
-           <property name="leftMargin">
-            <number>0</number>
-           </property>
-           <property name="topMargin">
-            <number>0</number>
-           </property>
-           <property name="rightMargin">
-            <number>0</number>
-           </property>
-           <property name="bottomMargin">
-            <number>0</number>
-           </property>
-           <item>
-            <widget class="QPushButton" name="pushButton">
-             <property name="text">
-              <string>Авторизация</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QPushButton" name="pushButton_2">
-             <property name="text">
-              <string>Регистрация</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </widget>
-         <widget class="QWidget" name="page_4">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-         </widget>
-        </widget>
-       </item>
       </layout>
      </widget>
     </item>
     <item>
-     <widget class="QStackedWidget" name="stackedWidget">
-      <property name="currentIndex">
-       <number>0</number>
+     <widget class="QTabWidget" name="mainTabWidget">
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
       </property>
-      <widget class="QWidget" name="page">
-       <layout class="QGridLayout" name="gridLayout">
-        <item row="0" column="0">
-         <widget class="QTabWidget" name="tabWidget">
-          <property name="tabPosition">
-           <enum>QTabWidget::North</enum>
-          </property>
-          <property name="tabShape">
-           <enum>QTabWidget::Rounded</enum>
-          </property>
-          <property name="currentIndex">
-           <number>1</number>
-          </property>
-          <property name="iconSize">
+      <property name="tabPosition">
+       <enum>QTabWidget::North</enum>
+      </property>
+      <property name="tabShape">
+       <enum>QTabWidget::Rounded</enum>
+      </property>
+      <property name="currentIndex">
+       <number>1</number>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>48</width>
+        <height>48</height>
+       </size>
+      </property>
+      <property name="elideMode">
+       <enum>Qt::ElideNone</enum>
+      </property>
+      <property name="usesScrollButtons">
+       <bool>true</bool>
+      </property>
+      <property name="documentMode">
+       <bool>false</bool>
+      </property>
+      <property name="movable">
+       <bool>false</bool>
+      </property>
+      <property name="tabBarAutoHide">
+       <bool>false</bool>
+      </property>
+      <widget class="QWidget" name="tabGlobalNews">
+       <attribute name="icon">
+        <iconset resource="src/sources.qrc">
+         <normaloff>:/icons/images/news.png</normaloff>:/icons/images/news.png</iconset>
+       </attribute>
+       <attribute name="title">
+        <string>Новости</string>
+       </attribute>
+      </widget>
+      <widget class="QWidget" name="tabGameStore">
+       <attribute name="icon">
+        <iconset resource="src/sources.qrc">
+         <normaloff>:/icons/images/games.png</normaloff>:/icons/images/games.png</iconset>
+       </attribute>
+       <attribute name="title">
+        <string>Магазин</string>
+       </attribute>
+       <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <item>
+         <widget class="QListWidget" name="listGames">
+          <property name="maximumSize">
            <size>
-            <width>48</width>
-            <height>48</height>
+            <width>600</width>
+            <height>16777215</height>
            </size>
           </property>
-          <property name="elideMode">
-           <enum>Qt::ElideMiddle</enum>
+          <property name="styleSheet">
+           <string notr="true">#listGames {
+	background-color: rgb(81, 68, 94);
+}</string>
           </property>
-          <property name="usesScrollButtons">
-           <bool>true</bool>
-          </property>
-          <property name="documentMode">
-           <bool>false</bool>
-          </property>
-          <property name="movable">
-           <bool>true</bool>
-          </property>
-          <property name="tabBarAutoHide">
-           <bool>false</bool>
-          </property>
-          <widget class="QWidget" name="tabGameStore">
-           <attribute name="icon">
-            <iconset resource="src/sources.qrc">
-             <normaloff>:/icons/images/games.png</normaloff>:/icons/images/games.png</iconset>
-           </attribute>
-           <attribute name="title">
-            <string>Магазин</string>
-           </attribute>
-          </widget>
-          <widget class="QWidget" name="tabLibrary">
-           <attribute name="title">
-            <string>Библиотека</string>
-           </attribute>
-          </widget>
+         </widget>
+        </item>
+        <item>
+         <widget class="QWidget" name="widgetGameInfo" native="true">
+          <layout class="QVBoxLayout" name="verticalLayout_3">
+           <item>
+            <widget class="QWidget" name="widgetGameTitle" native="true">
+             <layout class="QHBoxLayout" name="horizontalLayout_3">
+              <item>
+               <widget class="QLabel" name="labelGameName">
+                <property name="text">
+                 <string>TextLabel</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <spacer name="horizontalSpacer_2">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item>
+               <widget class="QPushButton" name="buttonBuyGame">
+                <property name="text">
+                 <string>Купить</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item>
+            <widget class="QScrollArea" name="scrollGameInfo">
+             <property name="widgetResizable">
+              <bool>true</bool>
+             </property>
+             <widget class="QWidget" name="scrollAreaWidgetContents">
+              <property name="geometry">
+               <rect>
+                <x>0</x>
+                <y>0</y>
+                <width>356</width>
+                <height>390</height>
+               </rect>
+              </property>
+              <layout class="QVBoxLayout" name="verticalLayout_4">
+               <item>
+                <widget class="QLabel" name="labelGameInfoTitle">
+                 <property name="text">
+                  <string>Информация об игре</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="labelGameCommentsTitle">
+                 <property name="text">
+                  <string>Комментарии:</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <spacer name="verticalSpacer">
+                 <property name="orientation">
+                  <enum>Qt::Vertical</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>20</width>
+                   <height>40</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+              </layout>
+             </widget>
+            </widget>
+           </item>
+          </layout>
          </widget>
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="page_2"/>
+      <widget class="QWidget" name="tabLibrary">
+       <attribute name="icon">
+        <iconset resource="src/sources.qrc">
+         <normaloff>:/icons/images/library.png</normaloff>:/icons/images/library.png</iconset>
+       </attribute>
+       <attribute name="title">
+        <string>Библиотека</string>
+       </attribute>
+      </widget>
+      <widget class="QWidget" name="tabDevelopment">
+       <attribute name="icon">
+        <iconset resource="src/sources.qrc">
+         <normaloff>:/icons/images/develop.png</normaloff>:/icons/images/develop.png</iconset>
+       </attribute>
+       <attribute name="title">
+        <string>Разработка</string>
+       </attribute>
+      </widget>
+      <widget class="QWidget" name="tabUser">
+       <attribute name="icon">
+        <iconset resource="src/sources.qrc">
+         <normaloff>:/icons/images/user.png</normaloff>:/icons/images/user.png</iconset>
+       </attribute>
+       <attribute name="title">
+        <string>Профиль</string>
+       </attribute>
+      </widget>
      </widget>
     </item>
    </layout>

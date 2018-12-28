@@ -29,7 +29,14 @@ SOURCES += \
     code/control/ClassGameDatabaseController/gamedatabasecontroller.cpp \
     code/control/ClassUserDatabaseController/userdatabasecontroller.cpp \
     code/control/ClassNewsDatabaseController/newsdatabasecontroller.cpp \
-    code/control/ClassCommentsDatabaseController/commentsdatabasecontroller.cpp
+    code/control/ClassCommentsDatabaseController/commentsdatabasecontroller.cpp \
+    code/control/ClassGameListItem/gamelistitem.cpp \
+    code/control/ClassElidedLabel/elidedlabel.cpp \
+    code/control/ClassGameTabController/gametabcontroller.cpp \
+    code/control/ClassLibraryTabController/librarytabcontroller.cpp \
+    code/control/ClassGlobalNewsTabController/globalnewstabcontroller.cpp \
+    code/control/ClassDevelopmentTabController/developmenttabcontroller.cpp \
+    code/control/ClassUserProfileTabController/userprofiletabcontroller.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -47,10 +54,19 @@ HEADERS += \
     code/model/game_statistic.h \
     code/model/full_game_info.h \
     code/control/ClassNewsDatabaseController/newsdatabasecontroller.h \
-    code/control/ClassCommentsDatabaseController/commentsdatabasecontroller.h
+    code/control/ClassCommentsDatabaseController/commentsdatabasecontroller.h \
+    code/model/user_profile.h \
+    code/control/ClassGameListItem/gamelistitem.h \
+    code/control/ClassElidedLabel/elidedlabel.h \
+    code/control/ClassGameTabController/gametabcontroller.h \
+    code/control/ClassLibraryTabController/librarytabcontroller.h \
+    code/control/ClassGlobalNewsTabController/globalnewstabcontroller.h \
+    code/control/ClassDevelopmentTabController/developmenttabcontroller.h \
+    code/control/ClassUserProfileTabController/userprofiletabcontroller.h
 
 FORMS += \
-        mainwindow.ui
+        mainwindow.ui \
+    code/control/ClassGameListItem/gamelistitem.ui
 
 CONFIG += mobility
 MOBILITY = 
