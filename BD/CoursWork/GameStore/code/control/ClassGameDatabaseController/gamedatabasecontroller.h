@@ -50,7 +50,7 @@ public:
 
     static QVector<BaseGame> getGameNobodyBoughtList(int amount, int offset);
 
-    static Game getGameInfo(const BaseGame& game);
+    static ExtendedGame getGameInfo(const BaseGame& game);
     static GameStatistic getGameStatistic(const CurrentUser& user, const BaseGame& game, int year);
     static QVector<GameStatistic> getFullGameStatisticList(const CurrentUser& user, const BaseGame& game);
 

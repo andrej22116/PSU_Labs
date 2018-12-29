@@ -20,13 +20,44 @@
    <string>MainWindow</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">#MainWindow, #centralWidget {
+   <string notr="true">* {
+	background-color: transparent;
+}
+
+#MainWindow {
 	background-color: rgb(54, 52, 61);
 	color: white;
+}
+
+#centralWidget  {
+	background-color: rgb(108, 78, 101);
+}
+
+#mainTabWidget, #tabGameStore {
+	background-color: transparent;
+}
+
+#listGames {
+	background-color: rgb(81, 68, 94);
 }</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QVBoxLayout" name="verticalLayout">
+    <property name="spacing">
+     <number>0</number>
+    </property>
+    <property name="leftMargin">
+     <number>0</number>
+    </property>
+    <property name="topMargin">
+     <number>0</number>
+    </property>
+    <property name="rightMargin">
+     <number>0</number>
+    </property>
+    <property name="bottomMargin">
+     <number>0</number>
+    </property>
     <item>
      <widget class="QWidget" name="header" native="true">
       <property name="sizePolicy">
@@ -123,6 +154,17 @@
        </attribute>
       </widget>
       <widget class="QWidget" name="tabGameStore">
+       <property name="styleSheet">
+        <string notr="true">#tagGameStore {
+	background-color: transparent;
+}
+
+QLabel {
+	font-size: 18px;
+}
+
+</string>
+       </property>
        <attribute name="icon">
         <iconset resource="src/sources.qrc">
          <normaloff>:/icons/images/games.png</normaloff>:/icons/images/games.png</iconset>
@@ -133,16 +175,20 @@
        <layout class="QHBoxLayout" name="horizontalLayout_2">
         <item>
          <widget class="QListWidget" name="listGames">
+          <property name="minimumSize">
+           <size>
+            <width>400</width>
+            <height>0</height>
+           </size>
+          </property>
           <property name="maximumSize">
            <size>
-            <width>600</width>
+            <width>500</width>
             <height>16777215</height>
            </size>
           </property>
           <property name="styleSheet">
-           <string notr="true">#listGames {
-	background-color: rgb(81, 68, 94);
-}</string>
+           <string notr="true"/>
           </property>
          </widget>
         </item>
@@ -153,24 +199,11 @@
             <widget class="QWidget" name="widgetGameTitle" native="true">
              <layout class="QHBoxLayout" name="horizontalLayout_3">
               <item>
-               <widget class="QLabel" name="labelGameName">
+               <widget class="QLabel" name="labelGameCost">
                 <property name="text">
-                 <string>TextLabel</string>
+                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;kek&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                 </property>
                </widget>
-              </item>
-              <item>
-               <spacer name="horizontalSpacer_2">
-                <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>40</width>
-                  <height>20</height>
-                 </size>
-                </property>
-               </spacer>
               </item>
               <item>
                <widget class="QPushButton" name="buttonBuyGame">
@@ -180,52 +213,6 @@
                </widget>
               </item>
              </layout>
-            </widget>
-           </item>
-           <item>
-            <widget class="QScrollArea" name="scrollGameInfo">
-             <property name="widgetResizable">
-              <bool>true</bool>
-             </property>
-             <widget class="QWidget" name="scrollAreaWidgetContents">
-              <property name="geometry">
-               <rect>
-                <x>0</x>
-                <y>0</y>
-                <width>356</width>
-                <height>390</height>
-               </rect>
-              </property>
-              <layout class="QVBoxLayout" name="verticalLayout_4">
-               <item>
-                <widget class="QLabel" name="labelGameInfoTitle">
-                 <property name="text">
-                  <string>Информация об игре</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QLabel" name="labelGameCommentsTitle">
-                 <property name="text">
-                  <string>Комментарии:</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <spacer name="verticalSpacer">
-                 <property name="orientation">
-                  <enum>Qt::Vertical</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>20</width>
-                   <height>40</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-              </layout>
-             </widget>
             </widget>
            </item>
           </layout>

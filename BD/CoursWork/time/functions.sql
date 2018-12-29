@@ -1056,7 +1056,7 @@ language plpgsql;
 /*---------||------------||------------||------------||---------------||---------------||------------*/
 
 /*
- *  Р вЂ™Р С’Р вЂ“Р СњР В«Р в„ў Р вЂ”Р С’Р СџР В Р С›Р РЋ [Р вЂ”Р С’Р вЂќР С’Р СњР пїЅР вЂў] - Р СџР ВµРЎР‚Р Р†РЎвЂ№Р в„– Р В·Р В°Р С—РЎР‚Р С•РЎРѓ
+ *  Р В РІР‚в„ўР В РЎвЂ™Р В РІР‚вЂњР В РЎСљР В Р’В«Р В РІвЂћСћ Р В РІР‚вЂќР В РЎвЂ™Р В РЎСџР В Р’В Р В РЎвЂєР В Р Р‹ [Р В РІР‚вЂќР В РЎвЂ™Р В РІР‚СњР В РЎвЂ™Р В РЎСљР В РїС—Р…Р В РІР‚Сћ] - Р В РЎСџР В Р’ВµР РЋР вЂљР В Р вЂ Р РЋРІР‚в„–Р В РІвЂћвЂ“ Р В Р’В·Р В Р’В°Р В РЎвЂ”Р РЋР вЂљР В РЎвЂўР РЋР С“
  */
 create or replace function public_function_get_cooments_for_game(name_of_game text, commemts_amount integer, list_offset integer)
 returns table (id_uuid uuid, nickname text, "role" text, status text, add_comment_time timestamp, modify_comment_time timestamp, "comment" text)
@@ -1085,7 +1085,7 @@ language sql;
 
 
 /*
- *  Р вЂ™Р С’Р вЂ“Р СњР В«Р в„ў Р вЂ”Р С’Р СџР В Р С›Р РЋ [Р вЂ”Р С’Р вЂќР С’Р СњР пїЅР вЂў] - Р вЂ™РЎвЂљР С•РЎР‚Р С•Р в„– Р В·Р В°Р С—РЎР‚Р С•РЎРѓ
+ *  Р В РІР‚в„ўР В РЎвЂ™Р В РІР‚вЂњР В РЎСљР В Р’В«Р В РІвЂћСћ Р В РІР‚вЂќР В РЎвЂ™Р В РЎСџР В Р’В Р В РЎвЂєР В Р Р‹ [Р В РІР‚вЂќР В РЎвЂ™Р В РІР‚СњР В РЎвЂ™Р В РЎСљР В РїС—Р…Р В РІР‚Сћ] - Р В РІР‚в„ўР РЋРІР‚С™Р В РЎвЂўР РЋР вЂљР В РЎвЂўР В РІвЂћвЂ“ Р В Р’В·Р В Р’В°Р В РЎвЂ”Р РЋР вЂљР В РЎвЂўР РЋР С“
  */
 create or replace function public_function_get_summary_game_cost_with_addons(user_token text, name_of_game text)
 returns table (game_cost float, summary_addons_cost float)
@@ -1122,7 +1122,7 @@ language plpgsql;
 
 
 /*
- *  Р вЂ™Р С’Р вЂ“Р СњР В«Р в„ў Р вЂ”Р С’Р СџР В Р С›Р РЋ [Р вЂ”Р С’Р вЂќР С’Р СњР пїЅР вЂў] - Р СћРЎР‚Р ВµРЎвЂљР С‘Р в„– Р В·Р В°Р С—РЎР‚Р С•РЎРѓ
+ *  Р В РІР‚в„ўР В РЎвЂ™Р В РІР‚вЂњР В РЎСљР В Р’В«Р В РІвЂћСћ Р В РІР‚вЂќР В РЎвЂ™Р В РЎСџР В Р’В Р В РЎвЂєР В Р Р‹ [Р В РІР‚вЂќР В РЎвЂ™Р В РІР‚СњР В РЎвЂ™Р В РЎСљР В РїС—Р…Р В РІР‚Сћ] - Р В РЎС›Р РЋР вЂљР В Р’ВµР РЋРІР‚С™Р В РЎвЂ�Р В РІвЂћвЂ“ Р В Р’В·Р В Р’В°Р В РЎвЂ”Р РЋР вЂљР В РЎвЂўР РЋР С“
  */
 create or replace function public_function_get_developer_of_most_discussed_game()
 returns table (developer_name text)
@@ -1140,7 +1140,7 @@ language sql;
 
 
 /*
- *  Р вЂ™Р С’Р вЂ“Р СњР В«Р в„ў Р вЂ”Р С’Р СџР В Р С›Р РЋ [Р вЂ”Р С’Р вЂќР С’Р СњР пїЅР вЂў] - Р СџРЎРЏРЎвЂљРЎвЂ№Р в„– Р В·Р В°Р С—РЎР‚Р С•РЎРѓ
+ *  Р В РІР‚в„ўР В РЎвЂ™Р В РІР‚вЂњР В РЎСљР В Р’В«Р В РІвЂћСћ Р В РІР‚вЂќР В РЎвЂ™Р В РЎСџР В Р’В Р В РЎвЂєР В Р Р‹ [Р В РІР‚вЂќР В РЎвЂ™Р В РІР‚СњР В РЎвЂ™Р В РЎСљР В РїС—Р…Р В РІР‚Сћ] - Р В РЎСџР РЋР РЏР РЋРІР‚С™Р РЋРІР‚в„–Р В РІвЂћвЂ“ Р В Р’В·Р В Р’В°Р В РЎвЂ”Р РЋР вЂљР В РЎвЂўР РЋР С“
  */
 create or replace function public_function_get_game_addons(target_game_name text)
 returns table (addon_name text, addon_cost float, addon_description text)
@@ -1156,7 +1156,7 @@ language sql;
 
 
 /*
- *  Р вЂ™Р С’Р вЂ“Р СњР В«Р в„ў Р вЂ”Р С’Р СџР В Р С›Р РЋ [Р вЂ”Р С’Р вЂќР С’Р СњР пїЅР вЂў] - Р РЃР ВµРЎРѓРЎвЂљР С•Р в„– Р В·Р В°Р С—РЎР‚Р С•РЎРѓ
+ *  Р В РІР‚в„ўР В РЎвЂ™Р В РІР‚вЂњР В РЎСљР В Р’В«Р В РІвЂћСћ Р В РІР‚вЂќР В РЎвЂ™Р В РЎСџР В Р’В Р В РЎвЂєР В Р Р‹ [Р В РІР‚вЂќР В РЎвЂ™Р В РІР‚СњР В РЎвЂ™Р В РЎСљР В РїС—Р…Р В РІР‚Сћ] - Р В Р РѓР В Р’ВµР РЋР С“Р РЋРІР‚С™Р В РЎвЂўР В РІвЂћвЂ“ Р В Р’В·Р В Р’В°Р В РЎвЂ”Р РЋР вЂљР В РЎвЂўР РЋР С“
  */
 create or replace function public_function_get_top_spending_money(begin_date date, end_date date)
 returns table (user_nickname text)
@@ -1175,11 +1175,11 @@ language sql;
 
 
 /*
- *  Р вЂ™Р С’Р вЂ“Р СњР В«Р в„ў Р вЂ”Р С’Р СџР В Р С›Р РЋ [Р вЂ”Р С’Р вЂќР С’Р СњР пїЅР вЂў] - Р вЂ™Р С•РЎРѓРЎРЉР С�Р С•Р в„– Р В·Р В°Р С—РЎР‚Р С•РЎРѓ - РЎРѓР С�. РЎвЂљРЎР‚Р С‘Р С–Р С–Р ВµРЎР‚
+ *  Р В РІР‚в„ўР В РЎвЂ™Р В РІР‚вЂњР В РЎСљР В Р’В«Р В РІвЂћСћ Р В РІР‚вЂќР В РЎвЂ™Р В РЎСџР В Р’В Р В РЎвЂєР В Р Р‹ [Р В РІР‚вЂќР В РЎвЂ™Р В РІР‚СњР В РЎвЂ™Р В РЎСљР В РїС—Р…Р В РІР‚Сћ] - Р В РІР‚в„ўР В РЎвЂўР РЋР С“Р РЋР Р‰Р В РЎпїЅР В РЎвЂўР В РІвЂћвЂ“ Р В Р’В·Р В Р’В°Р В РЎвЂ”Р РЋР вЂљР В РЎвЂўР РЋР С“ - Р РЋР С“Р В РЎпїЅ. Р РЋРІР‚С™Р РЋР вЂљР В РЎвЂ�Р В РЎвЂ“Р В РЎвЂ“Р В Р’ВµР РЋР вЂљ
  */
 
 /*
- *  Р вЂ™Р С’Р вЂ“Р СњР В«Р в„ў Р вЂ”Р С’Р СџР В Р С›Р РЋ [Р вЂ”Р С’Р вЂќР С’Р СњР пїЅР вЂў] - 11 Р В·Р В°Р С—РЎР‚Р С•РЎРѓ
+ *  Р В РІР‚в„ўР В РЎвЂ™Р В РІР‚вЂњР В РЎСљР В Р’В«Р В РІвЂћСћ Р В РІР‚вЂќР В РЎвЂ™Р В РЎСџР В Р’В Р В РЎвЂєР В Р Р‹ [Р В РІР‚вЂќР В РЎвЂ™Р В РІР‚СњР В РЎвЂ™Р В РЎСљР В РїС—Р…Р В РІР‚Сћ] - 11 Р В Р’В·Р В Р’В°Р В РЎвЂ”Р РЋР вЂљР В РЎвЂўР РЋР С“
  */
 create or replace function public_function_get_user_game_addons(user_token text, target_game_name text)
 returns table (addon_name text, addon_description text)
@@ -1210,7 +1210,7 @@ language plpgsql;
 
 
 /*
- *  Р вЂ™Р С’Р вЂ“Р СњР В«Р в„ў Р вЂ”Р С’Р СџР В Р С›Р РЋ [Р вЂ”Р С’Р вЂќР С’Р СњР пїЅР вЂў] - 12 Р В·Р В°Р С—РЎР‚Р С•РЎРѓ
+ *  Р В РІР‚в„ўР В РЎвЂ™Р В РІР‚вЂњР В РЎСљР В Р’В«Р В РІвЂћСћ Р В РІР‚вЂќР В РЎвЂ™Р В РЎСџР В Р’В Р В РЎвЂєР В Р Р‹ [Р В РІР‚вЂќР В РЎвЂ™Р В РІР‚СњР В РЎвЂ™Р В РЎСљР В РїС—Р…Р В РІР‚Сћ] - 12 Р В Р’В·Р В Р’В°Р В РЎвЂ”Р РЋР вЂљР В РЎвЂўР РЋР С“
  */
 create or replace function public_function_get_games_nobody_bought(game_amount integer, list_offset integer)
 returns table (game_name text, game_cost float, game_discount float4, date_of_release_game date)
@@ -1225,7 +1225,7 @@ as $body$
 $body$
 language sql;
 
--- Р вЂ™РЎвЂљР С•РЎР‚Р В°РЎРЏ РЎвЂЎР В°РЎРѓРЎвЂљРЎРЉ
+-- Р В РІР‚в„ўР РЋРІР‚С™Р В РЎвЂўР РЋР вЂљР В Р’В°Р РЋР РЏ Р РЋРІР‚РЋР В Р’В°Р РЋР С“Р РЋРІР‚С™Р РЋР Р‰
 create or replace function public_function_lock_game(user_token text, target_game_name text)
 returns void
 as $body$
@@ -1261,7 +1261,7 @@ language plpgsql;
 
 
 /*
- *  Р вЂ™Р С’Р вЂ“Р СњР В«Р в„ў Р вЂ”Р С’Р СџР В Р С›Р РЋ [Р вЂ”Р С’Р вЂќР С’Р СњР пїЅР вЂў] - 13 Р В·Р В°Р С—РЎР‚Р С•РЎРѓ
+ *  Р В РІР‚в„ўР В РЎвЂ™Р В РІР‚вЂњР В РЎСљР В Р’В«Р В РІвЂћСћ Р В РІР‚вЂќР В РЎвЂ™Р В РЎСџР В Р’В Р В РЎвЂєР В Р Р‹ [Р В РІР‚вЂќР В РЎвЂ™Р В РІР‚СњР В РЎвЂ™Р В РЎСљР В РїС—Р…Р В РІР‚Сћ] - 13 Р В Р’В·Р В Р’В°Р В РЎвЂ”Р РЋР вЂљР В РЎвЂўР РЋР С“
  */
 create or replace function public_function_get_user_desired_games(nickname text)
 returns table (desired_game text)
@@ -1445,3 +1445,64 @@ as $body$
 $body$
 SECURITY DEFINER
 language sql;
+
+
+/*===================================================================================================*/
+/*---------||------------||------------||------------||---------------||---------------||------------*/
+/*===================================================================================================*/
+/*---------||------------||------------||------------||---------------||---------------||------------*/
+
+
+create or replace function public_function_get_full_game_info(target_game_name text)
+returns table( 	game_name text,
+				game_cost float,
+				discount float4,
+				date_of_release_game date,
+				game_description text,
+				developer_name text,
+				game_genres text[],
+				game_tags text[],
+				game_devices text[]
+			 )
+as $body$
+	declare
+		game_id uuid;
+		game_genres text[];
+		game_tags text[];
+		game_devices text[];
+		
+	begin
+		game_id := private_function_get_game_id_by_name(target_game_name);
+		
+		game_genres := array(
+			select 	games_genres.genre_name
+			from 	games_genres
+					inner join games_genres_list on games_genres.id = games_genres_list.id_genre
+			where	games_genres_list.id_uuid_game = game_id
+		);
+	
+		game_tags := array(
+			select 	games_tags.tag_name
+			from 	games_tags
+					inner join games_tags_list on games_tags.id = games_tags_list.id_tag
+			where	games_tags_list.id_uuid_game = game_id
+		);
+	
+		game_devices := array(
+			select 	devices.device_name
+			from 	devices
+					inner join games_supported_devices on devices.id = games_supported_devices.id_device
+			where	games_supported_devices.id_uuid_game = game_id
+		);
+	
+		return query
+		select 	games.game_name, games.game_cost, games.discount,
+				games.date_of_release_game, games.game_description,
+				developers.developer_name, game_genres, game_tags, game_devices
+		from	games
+				left join developers on games.id_developer = developers.id
+		where	games.id_uuid = game_id and games.available;
+	end
+$body$
+SECURITY DEFINER
+language plpgsql;

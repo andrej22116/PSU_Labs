@@ -209,11 +209,47 @@ QVector<BaseGame> GameDatabaseController::getGameNobodyBoughtList(int amount, in
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-const QString GameDatabaseController::templateQueryGetGameInfo{"select * from ......"};
+const QString GameDatabaseController::templateQueryGetGameInfo{
+    "select * from public_function_get_full_game_info('%1');"
+};
 
-Game GameDatabaseController::getGameInfo(const BaseGame& game)
+ExtendedGame GameDatabaseController::getGameInfo(const BaseGame& game)
 {
-    throw QString("Function unavailable!");
+    auto connection = DatabaseBaseController::getConnection();
+    QString queryString = templateQueryGetGameInfo.arg(game.gameName);
+
+    QSqlQuery query(connection);
+    if ( !query.exec(queryString) ) {
+        throw query.lastError().databaseText().section('\n', 0, 0);
+    }
+
+    auto parceStringArray = [](const QString& stringArray, QVector<QString>& target) {
+        QStringRef stringRef(&stringArray, 1, stringArray.length() - 2);
+        QVector<QStringRef> stringRefSplitVector = stringRef.split(",");
+        for (auto& ref : stringRefSplitVector) {
+            QString item = ref.toString();
+
+            if ( item.length() > 0 ) {
+                target << item;
+            }
+        }
+    };
+
+    ExtendedGame gameInfo;
+    while ( query.next() ) {
+        gameInfo.gameName = query.value(0).toString();
+        gameInfo.gameCost = query.value(1).toDouble();
+        gameInfo.discount = query.value(2).toFloat();
+        gameInfo.dateOfReleaseGame = query.value(3).toDate();
+        gameInfo.gameDiscription = query.value(4).toString();
+        gameInfo.developerName = query.value(5).toString();
+
+        parceStringArray(query.value(6).toString(), gameInfo.genres);
+        parceStringArray(query.value(7).toString(), gameInfo.tags);
+        parceStringArray(query.value(8).toString(), gameInfo.devices);
+    }
+
+    return gameInfo;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

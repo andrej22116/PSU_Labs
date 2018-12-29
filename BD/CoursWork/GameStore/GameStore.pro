@@ -36,7 +36,9 @@ SOURCES += \
     code/control/ClassLibraryTabController/librarytabcontroller.cpp \
     code/control/ClassGlobalNewsTabController/globalnewstabcontroller.cpp \
     code/control/ClassDevelopmentTabController/developmenttabcontroller.cpp \
-    code/control/ClassUserProfileTabController/userprofiletabcontroller.cpp
+    code/control/ClassUserProfileTabController/userprofiletabcontroller.cpp \
+    code/control/ClassGameInfoWidget/gameinfowidget.cpp \
+    code/control/ClassCommentaryWidget/commentarywidget.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -62,11 +64,15 @@ HEADERS += \
     code/control/ClassLibraryTabController/librarytabcontroller.h \
     code/control/ClassGlobalNewsTabController/globalnewstabcontroller.h \
     code/control/ClassDevelopmentTabController/developmenttabcontroller.h \
-    code/control/ClassUserProfileTabController/userprofiletabcontroller.h
+    code/control/ClassUserProfileTabController/userprofiletabcontroller.h \
+    code/control/ClassGameInfoWidget/gameinfowidget.h \
+    code/control/ClassCommentaryWidget/commentarywidget.h
 
 FORMS += \
         mainwindow.ui \
-    code/control/ClassGameListItem/gamelistitem.ui
+    code/control/ClassGameListItem/gamelistitem.ui \
+    code/control/ClassGameInfoWidget/gameinfowidget.ui \
+    code/control/ClassCommentaryWidget/commentarywidget.ui
 
 CONFIG += mobility
 MOBILITY = 

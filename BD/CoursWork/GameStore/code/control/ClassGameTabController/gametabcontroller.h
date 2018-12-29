@@ -9,12 +9,14 @@ class MainWindow;
 
 class QListWidgetItem;
 class GameListItem;
+class QScrollBar;
+class GameInfoWidget;
 
 class GameTabController : public QObject
 {
 public:
     GameTabController(Ui::MainWindow* mainWindow);
-    ~GameTabController() = default;
+    ~GameTabController() override;
     GameTabController(const GameTabController&) = delete;
     GameTabController(GameTabController&&) = delete;
     GameTabController& operator = (const GameTabController&) = delete;
@@ -23,6 +25,7 @@ public:
 private slots:
     void onSelectTab(int index);
     void onUpdateGameList();
+    void onScrollToBack(int value);
     void onSelectGameItem(QListWidgetItem* item);
 
 private:
@@ -31,7 +34,8 @@ private:
 
 private:
     Ui::MainWindow* mainWindow;
-
+    QScrollBar* gameListScrollBar;
+    GameInfoWidget* gameInfoWidget;
 };
 
 #endif // GAMETABCONTROLLER_H
