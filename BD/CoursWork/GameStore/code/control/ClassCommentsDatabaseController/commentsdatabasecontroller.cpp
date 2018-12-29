@@ -192,7 +192,7 @@ QVector<Commentary> CommentsDatabaseController::getGameCommetaries(const BaseGam
     }
 
     QVector<Commentary> result;
-    if ( query.next() ) {
+    while ( query.next() ) {
         result.push_back({
                              query.value(0).toString(),
                              query.value(1).toDateTime(),

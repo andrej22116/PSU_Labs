@@ -31,6 +31,10 @@ protected slots:
     void onSetGameDescription();
 
 private:
+    void updateCommentsList();
+    void loadGameCommentsToList(int limit, int offset);
+
+private:
     Ui::GameInfoWidget *ui;
 };
 
