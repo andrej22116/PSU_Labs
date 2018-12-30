@@ -51,7 +51,7 @@ CurrentUser UserDatabaseController::login(const QString& userLogin, const QStrin
 
 const QString UserDatabaseController::templateQueryLogout{"select public_function_logout('%1');"};
 
-void UserDatabaseController::logout(CurrentUser& user)
+void UserDatabaseController::logout(const CurrentUser& user)
 {
     auto connection = DatabaseBaseController::getConnection();
     QString queryString = templateQueryLogout.arg(user.token);
@@ -135,7 +135,7 @@ void UserDatabaseController::changeNickname(const CurrentUser& user, const QStri
 
 const QString UserDatabaseController::templateQueryPutMoney{"select public_function_put_money('%1', '%2');"};
 
-void UserDatabaseController::putMoney(CurrentUser& user, double money)
+void UserDatabaseController::putMoney(const CurrentUser& user, double money)
 {
     auto connection = DatabaseBaseController::getConnection();
     QString queryString = templateQueryPutMoney.arg(user.token).arg(money);

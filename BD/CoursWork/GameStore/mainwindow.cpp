@@ -15,11 +15,16 @@
 #include "code/control/ClassGlobalNewsTabController/globalnewstabcontroller.h"
 #include "code/control/ClassLibraryTabController/librarytabcontroller.h"
 
+#include "code/control/ClassLoginWidget/loginwidget.h"
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+    auto dialog = new LoginWidget(this, ui->centralWidget);
+    dialog->showDialog();
 
     gameTabController = std::make_shared<GameTabController>(ui);
     userProfileTabController = std::make_shared<UserProfileTabController>(ui);

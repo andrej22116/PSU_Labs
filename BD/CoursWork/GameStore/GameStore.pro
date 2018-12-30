@@ -38,7 +38,10 @@ SOURCES += \
     code/control/ClassDevelopmentTabController/developmenttabcontroller.cpp \
     code/control/ClassUserProfileTabController/userprofiletabcontroller.cpp \
     code/control/ClassGameInfoWidget/gameinfowidget.cpp \
-    code/control/ClassCommentaryWidget/commentarywidget.cpp
+    code/control/ClassCommentaryWidget/commentarywidget.cpp \
+    code/control/ClassAccountController/accountcontroller.cpp \
+    code/control/ClassBaseOverlayDialog/baseoverlaydialog.cpp \
+    code/control/ClassLoginWidget/loginwidget.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -66,13 +69,17 @@ HEADERS += \
     code/control/ClassDevelopmentTabController/developmenttabcontroller.h \
     code/control/ClassUserProfileTabController/userprofiletabcontroller.h \
     code/control/ClassGameInfoWidget/gameinfowidget.h \
-    code/control/ClassCommentaryWidget/commentarywidget.h
+    code/control/ClassCommentaryWidget/commentarywidget.h \
+    code/control/ClassAccountController/accountcontroller.h \
+    code/control/ClassBaseOverlayDialog/baseoverlaydialog.h \
+    code/control/ClassLoginWidget/loginwidget.h
 
 FORMS += \
         mainwindow.ui \
     code/control/ClassGameListItem/gamelistitem.ui \
     code/control/ClassGameInfoWidget/gameinfowidget.ui \
-    code/control/ClassCommentaryWidget/commentarywidget.ui
+    code/control/ClassCommentaryWidget/commentarywidget.ui \
+    code/control/ClassLoginWidget/loginwidget.ui
 
 CONFIG += mobility
 MOBILITY = 
