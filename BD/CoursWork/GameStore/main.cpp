@@ -6,13 +6,16 @@
 #include <code/control/ClassDatabaseBaseController/databasebasecontroller.h>
 #include "code/control/ClassGameDatabaseController/gamedatabasecontroller.h"
 #include "code/control/ClassCommentsDatabaseController/commentsdatabasecontroller.h"
-#include <QDebug>
+#include <QCoreApplication>
 
 void initializeDatabaseConnection();
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
+    QCoreApplication::setOrganizationName("15-IT-1");
+    QCoreApplication::setOrganizationDomain("15-it-1.psu");
+    QCoreApplication::setApplicationName("GameStore");
 
     if ( !DatabaseBaseController::connect() ) {
         QMessageBox msg{};

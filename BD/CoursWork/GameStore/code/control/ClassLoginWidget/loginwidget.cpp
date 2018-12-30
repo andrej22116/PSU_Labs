@@ -32,6 +32,7 @@ void LoginWidget::onTryAuthorize()
 {
     try {
         AccountController::get().login(ui->editLogin->text(), ui->editPassword->text());
+        hideDialog();
     }
     catch ( QString& errorMsg ) {
         QMessageBox errorMsgDialog(this);

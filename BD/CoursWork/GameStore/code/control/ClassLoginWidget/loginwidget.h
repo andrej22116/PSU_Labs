@@ -15,6 +15,7 @@ public:
     explicit LoginWidget(QWidget* parent = nullptr, QWidget* blurTarget = nullptr);
     ~LoginWidget() override;
 
+public slots:
     void showDialog() override;
 
 private slots:

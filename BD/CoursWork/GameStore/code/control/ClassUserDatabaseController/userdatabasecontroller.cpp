@@ -156,7 +156,7 @@ const QString UserDatabaseController::templateQueryUpdateCurrentUserInfo{
 void UserDatabaseController::updateCurrentUserInfo(CurrentUser& user)
 {
     auto connection = DatabaseBaseController::getConnection();
-    QString queryString = templateQueryTestToken.arg(user.token);
+    QString queryString = templateQueryUpdateCurrentUserInfo.arg(user.token);
 
     QSqlQuery query(connection);
     if ( !query.exec(queryString) ) {

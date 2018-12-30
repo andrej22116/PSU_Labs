@@ -41,7 +41,8 @@ SOURCES += \
     code/control/ClassCommentaryWidget/commentarywidget.cpp \
     code/control/ClassAccountController/accountcontroller.cpp \
     code/control/ClassBaseOverlayDialog/baseoverlaydialog.cpp \
-    code/control/ClassLoginWidget/loginwidget.cpp
+    code/control/ClassLoginWidget/loginwidget.cpp \
+    code/control/CLassRegistrationWidget/registrationwidget.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -72,14 +73,16 @@ HEADERS += \
     code/control/ClassCommentaryWidget/commentarywidget.h \
     code/control/ClassAccountController/accountcontroller.h \
     code/control/ClassBaseOverlayDialog/baseoverlaydialog.h \
-    code/control/ClassLoginWidget/loginwidget.h
+    code/control/ClassLoginWidget/loginwidget.h \
+    code/control/CLassRegistrationWidget/registrationwidget.h
 
 FORMS += \
         mainwindow.ui \
     code/control/ClassGameListItem/gamelistitem.ui \
     code/control/ClassGameInfoWidget/gameinfowidget.ui \
     code/control/ClassCommentaryWidget/commentarywidget.ui \
-    code/control/ClassLoginWidget/loginwidget.ui
+    code/control/ClassLoginWidget/loginwidget.ui \
+    code/control/CLassRegistrationWidget/registrationwidget.ui
 
 CONFIG += mobility
 MOBILITY = 

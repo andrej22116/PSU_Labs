@@ -1377,7 +1377,7 @@ as $body$
 		from	users
 				inner join roles on users.id_role = roles.id
 				inner join user_statuses on user_statuses.id_uuid_user = user_id
-				inner join statuses on user_statuses.id_status = statuses
+				inner join statuses on user_statuses.id_status = statuses.id
 				inner join user_purses on users.id_uuid = user_purses.id_uuid_user
 		where	users.id_uuid = user_id;
 	end

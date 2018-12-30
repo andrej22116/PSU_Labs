@@ -6,18 +6,18 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>1024</width>
+    <height>768</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>800</width>
-    <height>600</height>
+    <width>1024</width>
+    <height>768</height>
    </size>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>GameStore</string>
   </property>
   <property name="styleSheet">
    <string notr="true">* {
@@ -30,7 +30,7 @@
 }
 
 #centralWidget  {
-	background-color: rgb(108, 78, 101);
+	background-color: rgb(60, 41, 72);
 }
 /*
 #mainTabWidget, #tabGameStore {
@@ -39,7 +39,46 @@
 */
 #listGames {
 	background-color: rgb(81, 68, 94);
+}
+
+#header QPushButton {
+	border: none;
+	background: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 0.1,
+  							stop: 0 #00000000, 
+  							stop: 0.1 #00000000,
+ 							stop: 0.11 rgb(245, 223, 93),
+  							stop: 0.97  rgb(245, 223, 93),
+  							stop: 0.98 #00000000, 
+  							stop: 1 #00000000);
+
+	width: 100px;
+	font-weight: bold;
+}
+
+#header QPushButton:hover {
+	border: none;
+	background: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 0.1,
+  							stop: 0 #00000000, 
+  							stop: 0.1 #00000000,
+ 							stop: 0.11 rgb(251, 255, 5),
+  							stop: 0.97  rgb(251, 255, 5),
+  							stop: 0.98 #00000000, 
+  							stop: 1 #00000000);
+}
+
+#header QPushButton:pressed {
+	border: none;
+	background: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 0.1,
+  							stop: 0 #00000000, 
+  							stop: 0.1 #00000000,
+ 							stop: 0.11 rgb(208, 138, 16),
+  							stop: 0.97  rgb(208, 138, 16),
+  							stop: 0.98 #00000000, 
+  							stop: 1 #00000000);
 }</string>
+  </property>
+  <property name="tabShape">
+   <enum>QTabWidget::Rounded</enum>
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QVBoxLayout" name="verticalLayout">
@@ -116,7 +155,7 @@
         </spacer>
        </item>
        <item>
-        <widget class="QLabel" name="labelNickname">
+        <widget class="QLabel" name="labelUserNickname">
          <property name="text">
           <string>TextLabel</string>
          </property>
@@ -167,7 +206,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>4</number>
       </property>
       <property name="iconSize">
        <size>
@@ -292,6 +331,89 @@ QLabel {
        <attribute name="title">
         <string>Профиль</string>
        </attribute>
+       <widget class="QGroupBox" name="groupBox">
+        <property name="geometry">
+         <rect>
+          <x>30</x>
+          <y>70</y>
+          <width>211</width>
+          <height>171</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string>Ваши средства</string>
+        </property>
+        <layout class="QFormLayout" name="formLayout">
+         <item row="0" column="0">
+          <widget class="QLabel" name="labelUserProfileMoney">
+           <property name="text">
+            <string>TextLabel</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QLabel" name="labelUserProfileCashBack">
+           <property name="text">
+            <string>TextLabel</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="0">
+          <widget class="QLabel" name="labelUserProfilePersonalDiscount">
+           <property name="text">
+            <string>TextLabel</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QLabel" name="labelUserProfileMoneyValue">
+           <property name="text">
+            <string>TextLabel</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="QLabel" name="labelUserProfileCashBackValue">
+           <property name="text">
+            <string>TextLabel</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="1">
+          <widget class="QLabel" name="labelUserProfilePersonalDiscountValue">
+           <property name="text">
+            <string>TextLabel</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QGroupBox" name="groupBox_2">
+        <property name="geometry">
+         <rect>
+          <x>420</x>
+          <y>110</y>
+          <width>211</width>
+          <height>131</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string>GroupBox</string>
+        </property>
+       </widget>
+       <widget class="QGroupBox" name="groupBox_3">
+        <property name="geometry">
+         <rect>
+          <x>700</x>
+          <y>130</y>
+          <width>171</width>
+          <height>191</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string>GroupBox</string>
+        </property>
+       </widget>
       </widget>
      </widget>
     </item>
