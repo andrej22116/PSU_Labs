@@ -495,7 +495,7 @@ as $body$
 		
 		game_cost := game_cost - game_cost * game_discount;
 	
-		purchase_id := private_function_buy(user_id, 'Buying a game for personal use.', game_cost);
+		purchase_id := private_function_buy(user_id, 'Buying a game ' || target_game_name || ' for personal use.', game_cost);
 	
 		insert into game_purchases(id_uuid_game, id_uuid_purchase)
 			values(game_id, purchase_id);
@@ -542,7 +542,7 @@ as $body$
 			raise 'Addon ''%'' for game ''%'' not found!', target_addon_name, target_game_name;
 		end if;
 	
-		purchase_id := private_function_buy(user_id, 'Buying a game addon for personal use.', game_addon_cost);
+		purchase_id := private_function_buy(user_id, 'Buying a game addon' || target_addon_name || ' for personal use.', game_addon_cost);
 	
 		insert into game_addon_purchases(id_uuid_game_addon, id_uuid_purchase)
 			values(game_addon_id, purchase_id);
