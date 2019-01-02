@@ -1,8 +1,10 @@
 #include "gameinfowidget.h"
 #include "ui_gameinfowidget.h"
 
-#include <code/control/ClassCommentsDatabaseController/commentsdatabasecontroller.h>
-#include <code/control/ClassCommentaryWidget/commentarywidget.h>
+#include "code/control/ClassCommentsDatabaseController/commentsdatabasecontroller.h"
+#include "code/control/ClassAccountController/accountcontroller.h"
+#include "code/control/ClassMessenger/messenger.h"
+#include "code/control/ClassCommentariesWidget/commentarieswidget.h"
 
 #include <QListWidgetItem>
 
@@ -12,13 +14,25 @@ GameInfoWidget::GameInfoWidget(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    connect( ui->textGameDescription, &QTextBrowser::textChanged,
-             this, &GameInfoWidget::onSetGameDescription );
+    connect(ui->textGameDescription, &QTextBrowser::textChanged,
+            this, &GameInfoWidget::onSetGameDescription );
+
+    commentaries = new CommentariesWidget();
+    commentaries->setCommentariesLoader([this](int limit, int offset) {
+        return CommentsDatabaseController::getGameCommetaries(game, limit, offset);
+    });
+    commentaries->setCommentariesSender([this](Commentary& comment) {
+        auto user = AccountController::get().user();
+        comment.userNickname = user.nickname;
+        CommentsDatabaseController::addNewCommentaryForGame(user, game, comment);
+    });
+    ui->tabComments->layout()->addWidget(commentaries);
 }
 
 GameInfoWidget::~GameInfoWidget()
 {
     delete ui;
+    delete commentaries;
 }
 
 const ExtendedGame& GameInfoWidget::getExtendedGameInfo()
@@ -26,7 +40,7 @@ const ExtendedGame& GameInfoWidget::getExtendedGameInfo()
     return game;
 }
 
-void GameInfoWidget::setExtendedGameInfo(const ExtendedGame& game)
+void GameInfoWidget::setExtendedGameInfo(const ExtendedGame &game)
 {
     this->game = game;
     ui->textGameDescription->setText(game.gameDiscription);
@@ -43,9 +57,9 @@ void GameInfoWidget::setExtendedGameInfo(const ExtendedGame& game)
         ui->listGenres->addItem(item);
     }
 
-    ui->textEditComment->setPlainText("");
+    ui->labelDateOfRelease->setText(game.dateOfReleaseGame.toString());
 
-    updateCommentsList();
+    commentaries->updateCommentsList();
 }
 
 void GameInfoWidget::resizeEvent(QResizeEvent *event)
@@ -57,22 +71,4 @@ void GameInfoWidget::onSetGameDescription()
 {
       QSize size = ui->textGameDescription->document()->size().toSize();
       ui->textGameDescription->setFixedHeight( std::max(400, size.height() + 20) );
-}
-
-void GameInfoWidget::updateCommentsList()
-{
-    ui->listComments->clear();
-    loadGameCommentsToList(20, 0);
-}
-
-void GameInfoWidget::loadGameCommentsToList(int limit, int offset)
-{
-    for ( auto& comment : CommentsDatabaseController::getGameCommetaries(game, limit, offset)) {
-        auto item = new QListWidgetItem(ui->listComments);
-        auto commentItem = new CommentaryWidget(item, ui->listComments);
-        commentItem->setCommentary(comment);
-
-        ui->listComments->addItem(item);
-        ui->listComments->setItemWidget(item, commentItem);
-    }
 }

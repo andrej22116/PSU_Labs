@@ -21,11 +21,17 @@ public:
     void setCommentary(const Commentary& comment);
     const Commentary& getCommentary();
 
+signals:
+    void deleteCommentary(QListWidgetItem* item);
+
 protected slots:
     void onDeleteCommentary();
     void onModifyCommentary();
     void onSaveModifyCommentary();
     void onCancelModifyCommentary();
+
+    void onUserLogin();
+    void onUserLogout();
 
 private:
     void setDefaultState();

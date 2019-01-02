@@ -11,7 +11,7 @@ GlobalNewsTabController::GlobalNewsTabController(Ui::MainWindow* mainWindow)
     this->mainWindow = mainWindow;
 }
 
-void GlobalNewsTabController::onSelectTab(int index)
+void GlobalNewsTabController::onSelectTab(int)
 {
     if ( mainWindow->mainTabWidget->currentWidget() != mainWindow->tabGameStore ) {
         return;

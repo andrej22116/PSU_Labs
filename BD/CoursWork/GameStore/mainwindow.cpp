@@ -19,18 +19,18 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    gameTabController = std::make_shared<GameTabController>(ui);
-    userProfileTabController = std::make_shared<UserProfileTabController>(ui);
-    developmentTabController = std::make_shared<DevelopmentTabController>(ui);
-    globalNewsTabController = std::make_shared<GlobalNewsTabController>(ui);
-    libraryTabController = std::make_shared<LibraryTabController>(ui);
-
-    onUserLogout();
-
     connect(&AccountController::get(), &AccountController::userLoggedIn,
             this, &MainWindow::onUserLogin);
     connect(&AccountController::get(), &AccountController::userLoggedOut,
             this, &MainWindow::onUserLogout);
+
+    userProfileTabController = std::make_shared<UserProfileTabController>(ui);
+    libraryTabController = std::make_shared<LibraryTabController>(ui);
+    developmentTabController = std::make_shared<DevelopmentTabController>(ui);
+    gameTabController = std::make_shared<GameTabController>(ui);
+    globalNewsTabController = std::make_shared<GlobalNewsTabController>(ui);
+
+    onUserLogout();
 
     AccountController::get().loadUserToken();
 }

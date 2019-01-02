@@ -2,6 +2,8 @@
 #define ACCOUNTCONTROLLER_H
 
 #include "code/model/user.h"
+#include "code/model/game.h"
+#include "code/model/game_addon.h"
 
 #include <QObject>
 
@@ -11,6 +13,7 @@ class AccountController : public QObject
 
 public:
     enum AccountLevel {
+        LevelNoUser = -1,
         LevelUser = 0,
         LevelModerator = 1,
         LevelAdministrator = 2
@@ -19,7 +22,7 @@ public:
 private:
     CurrentUser user_;
     AccountLevel accountLevel_ = LevelUser;
-    QString userTokenPath = "user/token";
+    const QString userTokenPath = "user/token";
 
 public:
 
@@ -48,6 +51,13 @@ public:
 
     void saveUserToken();
     void loadUserToken();
+
+    void putMoney(double amount);
+    void buyGame(const BaseGame& game);
+    void buyGameAddon(const GameAddon& gameAddon);
+    void buyDeveloperStatus();
+
+    void addGameToDesired(const BaseGame& game);
 
 signals:
     void userLoggedIn();

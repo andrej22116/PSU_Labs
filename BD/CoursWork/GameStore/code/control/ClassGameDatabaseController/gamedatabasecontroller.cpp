@@ -92,6 +92,31 @@ QVector<QString> GameDatabaseController::getUserGameNameList(const CurrentUser& 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+const QString GameDatabaseController::templateQueryGetUserDesiredGameList{
+    "select public_function_get_user_desired_games('%1');"
+};
+
+QVector<QString> GameDatabaseController::getUserDesiredGameList(const BaseUser &user)
+{
+    auto connection = DatabaseBaseController::getConnection();
+    QString queryString = templateQueryGetUserDesiredGameList.arg(user.nickname);
+
+    QSqlQuery query(connection);
+    if ( !query.exec(queryString) ) {
+        throw query.lastError().databaseText().section('\n', 0, 0);
+    }
+
+    QVector<QString> result;
+    while ( query.next() ) {
+        result.push_back(query.value(0).toString());
+    }
+
+    return result;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 const QString GameDatabaseController::templateQueryBuyGame{"select public_function_buy_game('%1', '%2');"};
 
 void GameDatabaseController::buyGame(const CurrentUser& user, const BaseGame& game)

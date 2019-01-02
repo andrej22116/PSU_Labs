@@ -2,6 +2,8 @@
 #define USERPROFILETABCONTROLLER_H
 
 #include <QObject>
+#include <QVector>
+#include "code/model/purchase.h"
 
 namespace Ui {
 class MainWindow;
@@ -27,10 +29,25 @@ public slots:
     void onUserLogout();
     void onUpdateUserInfo();
 
+    void onEnterTextForChangeLogin();
+    void onEnterTextForChangePassword();
+
+    void onTryChangeLogin();
+    void onTryChangePassword();
+
+    void onSelectDayInCalendar();
+
+    void onEnterTextForPayMoney();
+    void onTryPayMoney();
+
+private:
+    void loadUserDesiredGames();
+
 private:
     Ui::MainWindow* mainWindow;
     LoginWidget* loginDialog;
     RegistrationWidget* registrationDialog;
+    QVector<Purchase> userPurchases;
 };
 
 #endif // USERPROFILETABCONTROLLER_H

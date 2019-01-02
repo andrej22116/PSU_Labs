@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>400</width>
-    <height>300</height>
+    <height>316</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -126,6 +126,9 @@
    </item>
    <item>
     <widget class="QWidget" name="widgetModifyButtons" native="true">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
      <layout class="QHBoxLayout" name="horizontalLayout_3">
       <item>
        <spacer name="horizontalSpacer_3">

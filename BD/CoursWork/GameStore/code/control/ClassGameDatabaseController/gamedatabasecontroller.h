@@ -15,6 +15,7 @@ class GameDatabaseController
     static const QString templateQueryGetGameList;
     static const QString templateQueryGetGameAddonList;
     static const QString templateQueryGetUserGameNameList;
+    static const QString templateQueryGetUserDesiredGameList;
     static const QString templateQueryBuyGame;
     static const QString templateQueryBuyGameForUser;
     static const QString templateQueryBuyGameAddon;
@@ -40,6 +41,7 @@ public:
     static QVector<BaseGame> getGameList(int amount, int offset);
     static QVector<GameAddon> getGameAddonList(const BaseGame& game);
     static QVector<QString> getUserGameNameList(const CurrentUser& user);
+    static QVector<QString> getUserDesiredGameList(const BaseUser& user);
 
     static void buyGame(const CurrentUser& user, const BaseGame& game);
     static void buyGameForUser(const CurrentUser& user, const BaseUser& targetUser, const BaseGame& game);

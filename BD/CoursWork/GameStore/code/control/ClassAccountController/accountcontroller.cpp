@@ -1,6 +1,7 @@
 #include "accountcontroller.h"
 
 #include "code/control/ClassUserDatabaseController/userdatabasecontroller.h"
+#include "code/control/ClassGameDatabaseController/gamedatabasecontroller.h"
 #include <QSettings>
 
 AccountController& AccountController::get()
@@ -12,13 +13,13 @@ AccountController& AccountController::get()
 void AccountController::registration(const QString& login, const QString& password, const QString& nickname)
 {
     UserDatabaseController::registration(login, password, nickname);
-    user_ = UserDatabaseController::login(login, password);
 }
 
 void AccountController::login(const QString& login, const QString& password)
 {
     user_ = UserDatabaseController::login(login, password);
     saveUserToken();
+    accountLevel_ = LevelUser;
     emit userLoggedIn();
 }
 
@@ -28,10 +29,12 @@ void AccountController::login(const QString& token)
     if ( isAuthorized() ) {
         UserDatabaseController::updateCurrentUserInfo(user_);
         saveUserToken();
+        accountLevel_ = LevelUser;
         emit userLoggedIn();
     }
     else {
         user_.token = "";
+        accountLevel_ = LevelNoUser;
     }
 }
 
@@ -39,6 +42,7 @@ void AccountController::logout()
 {
     UserDatabaseController::logout(user_);
     user_.token = "";
+    accountLevel_ = LevelNoUser;
     emit userLoggedOut();
 }
 
@@ -92,6 +96,34 @@ void AccountController::loadUserToken()
     if ( userToken.length() > 0 ) {
         login(userToken);
     }
+}
+
+void AccountController::putMoney(double amount)
+{
+    UserDatabaseController::putMoney(user_, amount);
+    updateUserInfo();
+}
+
+void AccountController::buyGame(const BaseGame &game)
+{
+    GameDatabaseController::buyGame(user_, game);
+    updateUserInfo();
+}
+
+void AccountController::buyGameAddon(const GameAddon &gameAddon)
+{
+    GameDatabaseController::buyGameAddon(user_, gameAddon);
+    updateUserInfo();
+}
+
+void AccountController::buyDeveloperStatus()
+{
+}
+
+void AccountController::addGameToDesired(const BaseGame &game)
+{
+    GameDatabaseController::addGameToDesiredGames(user_, game);
+    updateUserInfo();
 }
 
 

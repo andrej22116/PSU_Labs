@@ -750,7 +750,7 @@ as $body$
 		select count(*) into updated_rows
 			from update_result;
 		
-		if ( deleted_rows <> 1 ) then
+		if ( updated_rows <> 1 ) then
 			raise 'Error on modify comment!';
 		end if;
 	end

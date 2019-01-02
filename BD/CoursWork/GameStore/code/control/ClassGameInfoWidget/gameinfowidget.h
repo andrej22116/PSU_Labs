@@ -6,6 +6,7 @@
 
 
 class QResizeEvent;
+class CommentariesWidget;
 
 namespace Ui {
 class GameInfoWidget;
@@ -31,11 +32,8 @@ protected slots:
     void onSetGameDescription();
 
 private:
-    void updateCommentsList();
-    void loadGameCommentsToList(int limit, int offset);
-
-private:
     Ui::GameInfoWidget *ui;
+    CommentariesWidget* commentaries;
 };
 
 #endif // GAMEINFOWIDGET_H

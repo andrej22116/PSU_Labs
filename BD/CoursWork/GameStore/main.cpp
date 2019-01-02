@@ -13,6 +13,7 @@ void initializeDatabaseConnection();
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
+    QCoreApplication::addLibraryPath("./");
     QCoreApplication::setOrganizationName("15-IT-1");
     QCoreApplication::setOrganizationDomain("15-it-1.psu");
     QCoreApplication::setApplicationName("GameStore");

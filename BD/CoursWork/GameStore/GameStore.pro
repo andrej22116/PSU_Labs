@@ -42,7 +42,9 @@ SOURCES += \
     code/control/ClassAccountController/accountcontroller.cpp \
     code/control/ClassBaseOverlayDialog/baseoverlaydialog.cpp \
     code/control/ClassLoginWidget/loginwidget.cpp \
-    code/control/CLassRegistrationWidget/registrationwidget.cpp
+    code/control/CLassRegistrationWidget/registrationwidget.cpp \
+    code/control/ClassMessenger/messenger.cpp \
+    code/control/ClassCommentariesWidget/commentarieswidget.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -74,7 +76,9 @@ HEADERS += \
     code/control/ClassAccountController/accountcontroller.h \
     code/control/ClassBaseOverlayDialog/baseoverlaydialog.h \
     code/control/ClassLoginWidget/loginwidget.h \
-    code/control/CLassRegistrationWidget/registrationwidget.h
+    code/control/CLassRegistrationWidget/registrationwidget.h \
+    code/control/ClassMessenger/messenger.h \
+    code/control/ClassCommentariesWidget/commentarieswidget.h
 
 FORMS += \
         mainwindow.ui \
@@ -82,7 +86,8 @@ FORMS += \
     code/control/ClassGameInfoWidget/gameinfowidget.ui \
     code/control/ClassCommentaryWidget/commentarywidget.ui \
     code/control/ClassLoginWidget/loginwidget.ui \
-    code/control/CLassRegistrationWidget/registrationwidget.ui
+    code/control/CLassRegistrationWidget/registrationwidget.ui \
+    code/control/ClassCommentariesWidget/commentarieswidget.ui
 
 CONFIG += mobility
 MOBILITY = 
@@ -95,3 +100,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 RESOURCES += \
     src/sources.qrc
+
+QT_ANGLE_PLATFORM = d3d9
