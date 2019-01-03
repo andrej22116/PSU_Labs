@@ -1105,8 +1105,7 @@ as $body$
 			select games.game_cost, sum(games_addons.addon_cost::float) as summary_addons_cost
 			from 	games
 					inner join user_games			on user_games.id_uuid_game = games.id_uuid
-					left join games_addons_list 	on games.id_uuid = games_addons_list.id_uuid_game
-					left join games_addons 		on games_addons.id_uuid = games_addons_list.id_uuid_addon
+					left join games_addons 		on games_addons.id_uuid_game = games.id_uuid
 					left join user_game_addons		on user_game_addons.id_uuid_game_addon = games_addons.id_uuid
 			where	games.game_name = name_of_game and
 					user_games.id_uuid_user = user_id and
@@ -1133,7 +1132,8 @@ as $body$
 			inner join games_commentaries	on games_commentaries.id_uuid_game = games.id_uuid
 			inner join commentaries			on games_commentaries.id_uuid_comment = commentaries.id_uuid
 	group by developers.developer_name
-	order by count(commentaries.id_uuid) desc, max(commentaries.comment_time) desc;
+	order by count(commentaries.id_uuid) desc, max(commentaries.comment_time) desc
+	limit 5;
 $body$
 SECURITY DEFINER
 language sql;
@@ -1147,8 +1147,7 @@ returns table (addon_name text, addon_cost float, addon_description text)
 as $body$
 	select 	games_addons.addon_name, games_addons.addon_cost, games_addons.addon_description
 	from	games_addons
-			inner join games_addons_list	on games_addons.id_uuid = games_addons_list.id_uuid_addon
-			inner join games				on games.id_uuid = games_addons_list.id_uuid_game
+			inner join games				on games.id_uuid = games_addons.id_uuid_game
 	where	games.game_name = target_game_name;
 $body$
 SECURITY DEFINER
@@ -1199,10 +1198,10 @@ as $body$
 		return query
 			select	games_addons.addon_name, games_addons.addon_description
 			from 	games_addons
-					inner join games_addons_list 	on games_addons.id_uuid = games_addons_list.id_uuid_addon
-					inner join user_game_addons		on games_addons_list.id_uuid_addon = user_game_addons.id_uuid_game_addon
+					inner join user_game_addons		on games_addons.id_uuid = user_game_addons.id_uuid_game_addon
+					inner join games				on games.id_uuid = games_addons.id_uuid_game
 			where 	user_game_addons.id_uuid_user = user_id and
-					games_addons_list.id_uuid_game = game_id;
+					games.id_uuid = game_id;
 	end
 $body$
 SECURITY DEFINER
@@ -1223,6 +1222,7 @@ as $body$
 	limit game_amount
 	offset list_offset;
 $body$
+SECURITY DEFINER
 language sql;
 
 -- Р В РІР‚в„ўР РЋРІР‚С™Р В РЎвЂўР РЋР вЂљР В Р’В°Р РЋР РЏ Р РЋРІР‚РЋР В Р’В°Р РЋР С“Р РЋРІР‚С™Р РЋР Р‰
