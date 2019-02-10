@@ -3,7 +3,6 @@
 
 
 class QImage;
-using uchar = unsigned char;
 
 class GrayProcessor
 {
@@ -24,11 +23,13 @@ public:
     void setBy(By by) noexcept;
 
 private:
-    void redProcess(uchar* begin, uchar* end, uchar offset) noexcept;
-    void greenProcess(uchar* begin, uchar* end, uchar offset) noexcept;
-    void blueProcess(uchar* begin, uchar* end, uchar offset) noexcept;
-    void deltaProcess(uchar* begin, uchar* end, uchar offset) noexcept;
-    void smartProcess(uchar* begin, uchar* end, uchar offset) noexcept;
+    struct ProcessData;
+
+    void redProcess(ProcessData& data) noexcept;
+    void greenProcess(ProcessData& data) noexcept;
+    void blueProcess(ProcessData& data) noexcept;
+    void deltaProcess(ProcessData& data) noexcept;
+    void smartProcess(ProcessData& data) noexcept;
 
 private:
     By _byComponent;

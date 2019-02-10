@@ -2,6 +2,17 @@
 
 #include <QImage>
 
+
+struct GrayProcessor::ProcessData {
+    uchar oldOffset;
+    const uchar* oldBegin;
+    const uchar* oldEnd;
+    uchar* newBegin;
+    uchar* newEnd;
+};
+
+
+
 GrayProcessor::GrayProcessor(By by) :
     _byComponent(by)
 {
@@ -9,27 +20,31 @@ GrayProcessor::GrayProcessor(By by) :
 
 QImage GrayProcessor::operator () (const QImage &image)
 {
-    auto newImage = image.copy();
-    uchar* bits = newImage.bits();
+    QImage newImage(image.width(), image.height(), QImage::Format::Format_Grayscale8);
+
     uchar offset = 0;
 
     switch ( image.format() ) {
-    case QImage::Format::Format_ARGB32: { offset = 1; } break;
-    case QImage::Format::Format_RGB32: { offset = 1; } break;
+    case QImage::Format::Format_ARGB32:
+    case QImage::Format::Format_RGB32: { offset = 4; } break;
+
     default: return image;
     }
 
-    int bitsCount = image.width() * image.height() * ( 3 + offset );
-
-    uchar* beginPointer = bits;
-    uchar* endPointer = bits + bitsCount;
+    ProcessData data {
+        offset,
+        image.bits(),
+        image.bits() + image.width() * image.height() * offset,
+        newImage.bits(),
+        newImage.bits() + newImage.width() * newImage.height()
+    };
 
     switch ( _byComponent ) {
-    case Red: { redProcess(beginPointer, endPointer, offset); } break;
-    case Green: { greenProcess(beginPointer, endPointer, offset); } break;
-    case Blue: { blueProcess(beginPointer, endPointer, offset); } break;
-    case Delta: { deltaProcess(beginPointer, endPointer, offset); } break;
-    case Smart: { smartProcess(beginPointer, endPointer, offset); } break;
+    case Red: { redProcess(data); } break;
+    case Green: { greenProcess(data); } break;
+    case Blue: { blueProcess(data); } break;
+    case Delta: { deltaProcess(data); } break;
+    case Smart: { smartProcess(data); } break;
     }
 
     return newImage;
@@ -45,69 +60,64 @@ void GrayProcessor::setBy(GrayProcessor::By by) noexcept
     _byComponent = by;
 }
 
-void GrayProcessor::redProcess(uchar* begin, uchar* end, uchar offset) noexcept
+void GrayProcessor::redProcess(ProcessData& data) noexcept
 {
-    while ( begin != end ) {
-        uchar newValue = *begin;
+    auto iteratorOld = data.oldBegin;
+    auto iteratorNew = data.newBegin;
 
-        *begin++ = newValue;
-        *begin++ = newValue;
-        *begin++ = newValue;
-
-        begin += offset;
+    while ( iteratorOld != data.oldEnd ) {
+        *iteratorNew++ = *iteratorOld;
+        iteratorOld += data.oldOffset;
     }
 }
 
-void GrayProcessor::greenProcess(uchar* begin, uchar* end, uchar offset) noexcept
+void GrayProcessor::greenProcess(ProcessData& data) noexcept
 {
-    while ( begin != end ) {
-        uchar newValue = *(begin + 1);
+    auto iteratorOld = data.oldBegin;
+    auto iteratorNew = data.newBegin;
 
-        *begin++ = newValue;
-        *begin++ = newValue;
-        *begin++ = newValue;
-
-        begin += offset;
+    while ( iteratorOld != data.oldEnd ) {
+        *iteratorNew++ = *(iteratorOld + 1);
+        iteratorOld += data.oldOffset;
     }
 }
 
-void GrayProcessor::blueProcess(uchar* begin, uchar* end, uchar offset) noexcept
+void GrayProcessor::blueProcess(ProcessData& data) noexcept
 {
-    while ( begin != end ) {
-        uchar newValue = *(begin + 2);
+    auto iteratorOld = data.oldBegin;
+    auto iteratorNew = data.newBegin;
 
-        *begin++ = newValue;
-        *begin++ = newValue;
-        *begin++ = newValue;
-
-        begin += offset;
+    while ( iteratorOld != data.oldEnd ) {
+        *iteratorNew++ = *(iteratorOld + 2);
+        iteratorOld += data.oldOffset;
     }
 }
 
-void GrayProcessor::deltaProcess(uchar* begin, uchar* end, uchar offset) noexcept
+void GrayProcessor::deltaProcess(ProcessData& data) noexcept
 {
-    while ( begin != end ) {
-        uchar newValue = (*begin + *(begin + 1) + *(begin + 2)) / 3;
+    auto iteratorOld = data.oldBegin;
+    auto iteratorNew = data.newBegin;
 
-        *begin++ = newValue;
-        *begin++ = newValue;
-        *begin++ = newValue;
+    while ( iteratorOld != data.oldEnd ) {
+        *iteratorNew++ = ( *iteratorOld
+                         + *(iteratorOld + 1)
+                         + *(iteratorOld + 2)
+                         ) / 3;
 
-        begin += offset;
+        iteratorOld += data.oldOffset;
     }
 }
 
-void GrayProcessor::smartProcess(uchar* begin, uchar* end, uchar offset) noexcept
+void GrayProcessor::smartProcess(ProcessData& data) noexcept
 {
-    while ( begin != end ) {
-        uchar newValue = uchar( float( *begin )       * 0.3f
-                              + float( *(begin + 1) ) * 0.59f
-                              + float( *(begin + 2) ) * 0.11f );
+    auto iteratorOld = data.oldBegin;
+    auto iteratorNew = data.newBegin;
 
-        *begin++ = newValue;
-        *begin++ = newValue;
-        *begin++ = newValue;
+    while ( iteratorOld != data.oldEnd ) {
+        *iteratorNew++ = uchar( float( *iteratorOld )       * 0.2125f
+                              + float( *(iteratorOld + 1) ) * 0.7154f
+                              + float( *(iteratorOld + 2) ) * 0.0721f );
 
-        begin += offset;
+        iteratorOld += data.oldOffset;
     }
 }

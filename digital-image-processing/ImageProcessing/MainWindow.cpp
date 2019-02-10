@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 #include "ImageController.hpp"
 #include "GrayProcessor.hpp"
+#include "ScaleProcessor.hpp"
 
 #include <QImage>
 #include <QPixmap>
@@ -15,7 +16,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
     _imageController->load("test.jpg");
-    _imageController->process(GrayProcessor{GrayProcessor::By::Blue});
+    _imageController->process(GrayProcessor{ GrayProcessor::By::Smart });
+    _imageController->apply();
+    _imageController->process(ScaleProcessor{ 2, 2 });
 
     ui->imageLabel->setPixmap(QPixmap::fromImage(*_imageController->processedImage()));
 }

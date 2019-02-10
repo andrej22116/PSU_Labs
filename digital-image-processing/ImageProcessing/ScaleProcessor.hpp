@@ -18,7 +18,9 @@ public:
     };
 
 
-    ScaleProcessor(Method method = NearestNeighbor);
+    ScaleProcessor( double scaleWidth = 1
+                  , double scaleHeight = 1
+                  , Method method = NearestNeighbor );
 
     QImage operator () (const QImage& image);
 
@@ -32,10 +34,16 @@ public:
     void setScaleHeight(double scale) noexcept(false);
 
 private:
+    void nearestNeighborScaleProcess() noexcept;
+    void bilinearScaleProcess() noexcept;
+    void bisquareScaleProcess() noexcept;
+    void supersamplingScaleProcess() noexcept;
+    void convolutionScaleProcess() noexcept;
 
 private:
     double _scaleWidth;
     double _scaleHeight;
+    Method _scaleMethod;
 };
 
 

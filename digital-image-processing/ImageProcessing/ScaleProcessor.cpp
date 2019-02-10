@@ -2,20 +2,25 @@
 #include <stdexcept>
 
 #include <QImage>
+#include <iostream>
 
-ScaleProcessor::ScaleProcessor()
+ScaleProcessor::ScaleProcessor( double scaleWidth
+                              , double scaleHeight
+                              , Method method ) :
+    _scaleWidth(scaleWidth),
+    _scaleHeight(scaleHeight),
+    _scaleMethod(method)
 {
-
 }
 
 QImage ScaleProcessor::operator ()(const QImage& image) noexcept(false)
 {
     int width = image.width();
     int height = image.height();
-    int newWindth = int( width * _scaleWidth );
-    int newheight = int( height * _scaleHeight );
+    int newWidth = int( width * _scaleWidth );
+    int newHeight = int( height * _scaleHeight );
 
-    QImage newImage{ newWindth, newheight, image.format() };
+    QImage newImage{ newWidth, newHeight, image.format() };
 
     auto inputImageBits = image.bits();
     auto outputImageBits = newImage.bits();
@@ -23,9 +28,13 @@ QImage ScaleProcessor::operator ()(const QImage& image) noexcept(false)
     int inputBitsCount = image.width() * image.height() * 4;
 
     auto iterator = inputImageBits;
-    for (int y = 0; y < height; ++y) {
-        for (int x = 0; x < width; ++x) {
+    for (int y = 0; y < newHeight; ++y) {
+        for (int x = 0; x < newWidth; ++x) {
+            int newX = int( double( x ) / _scaleWidth );
+            int newY = int( double( y ) / _scaleHeight );
 
+            outputImageBits[ y * newWidth + x ] =
+                    inputImageBits[ newY * width + newX ];
         }
     }
 
