@@ -5,6 +5,7 @@
 
 struct GrayProcessor::ProcessData {
     uchar oldOffset;
+    ushort width;
     const uchar* oldBegin;
     const uchar* oldEnd;
     uchar* newBegin;
@@ -20,8 +21,6 @@ GrayProcessor::GrayProcessor(By by) :
 
 QImage GrayProcessor::operator () (const QImage &image)
 {
-    QImage newImage(image.width(), image.height(), QImage::Format::Format_Grayscale8);
-
     uchar offset = 0;
 
     switch ( image.format() ) {
@@ -31,12 +30,16 @@ QImage GrayProcessor::operator () (const QImage &image)
     default: return image;
     }
 
+    QImage newImage(image.width(), image.height(), QImage::Format::Format_Grayscale8);
+
     ProcessData data {
         offset,
+        ushort(image.width()),
         image.bits(),
         image.bits() + image.width() * image.height() * offset,
         newImage.bits(),
-        newImage.bits() + newImage.width() * newImage.height()
+        newImage.bits() + newImage.width() * newImage.height(),
+
     };
 
     switch ( _byComponent ) {
@@ -65,8 +68,18 @@ void GrayProcessor::redProcess(ProcessData& data) noexcept
     auto iteratorOld = data.oldBegin;
     auto iteratorNew = data.newBegin;
 
+    size_t lineOffset = 0;
+    size_t lineGarbage = data.width % 4 ? 4 - data.width % 4 : 0;
+
     while ( iteratorOld != data.oldEnd ) {
         *iteratorNew++ = *iteratorOld;
+
+        ++lineOffset;
+        if ( lineOffset == data.width ) {
+            iteratorNew += lineGarbage;
+            lineOffset = 0;
+        }
+
         iteratorOld += data.oldOffset;
     }
 }
@@ -76,8 +89,18 @@ void GrayProcessor::greenProcess(ProcessData& data) noexcept
     auto iteratorOld = data.oldBegin;
     auto iteratorNew = data.newBegin;
 
+    size_t lineOffset = 0;
+    size_t lineGarbage = data.width % 4 ? 4 - data.width % 4 : 0;
+
     while ( iteratorOld != data.oldEnd ) {
         *iteratorNew++ = *(iteratorOld + 1);
+
+        ++lineOffset;
+        if ( lineOffset == data.width ) {
+            iteratorNew += lineGarbage;
+            lineOffset = 0;
+        }
+
         iteratorOld += data.oldOffset;
     }
 }
@@ -87,8 +110,18 @@ void GrayProcessor::blueProcess(ProcessData& data) noexcept
     auto iteratorOld = data.oldBegin;
     auto iteratorNew = data.newBegin;
 
+    size_t lineOffset = 0;
+    size_t lineGarbage = data.width % 4 ? 4 - data.width % 4 : 0;
+
     while ( iteratorOld != data.oldEnd ) {
         *iteratorNew++ = *(iteratorOld + 2);
+
+        ++lineOffset;
+        if ( lineOffset == data.width ) {
+            iteratorNew += lineGarbage;
+            lineOffset = 0;
+        }
+
         iteratorOld += data.oldOffset;
     }
 }
@@ -98,11 +131,20 @@ void GrayProcessor::deltaProcess(ProcessData& data) noexcept
     auto iteratorOld = data.oldBegin;
     auto iteratorNew = data.newBegin;
 
+    size_t lineOffset = 0;
+    size_t lineGarbage = data.width % 4 ? 4 - data.width % 4 : 0;
+
     while ( iteratorOld != data.oldEnd ) {
         *iteratorNew++ = ( *iteratorOld
                          + *(iteratorOld + 1)
                          + *(iteratorOld + 2)
                          ) / 3;
+
+        ++lineOffset;
+        if ( lineOffset == data.width ) {
+            iteratorNew += lineGarbage;
+            lineOffset = 0;
+        }
 
         iteratorOld += data.oldOffset;
     }
@@ -113,10 +155,19 @@ void GrayProcessor::smartProcess(ProcessData& data) noexcept
     auto iteratorOld = data.oldBegin;
     auto iteratorNew = data.newBegin;
 
+    size_t lineOffset = 0;
+    size_t lineGarbage = data.width % 4 ? 4 - data.width % 4 : 0;
+
     while ( iteratorOld != data.oldEnd ) {
         *iteratorNew++ = uchar( float( *iteratorOld )       * 0.2125f
                               + float( *(iteratorOld + 1) ) * 0.7154f
                               + float( *(iteratorOld + 2) ) * 0.0721f );
+
+        ++lineOffset;
+        if ( lineOffset == data.width ) {
+            iteratorNew += lineGarbage;
+            lineOffset = 0;
+        }
 
         iteratorOld += data.oldOffset;
     }

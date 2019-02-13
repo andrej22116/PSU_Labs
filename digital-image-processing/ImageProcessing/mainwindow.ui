@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>803</width>
-    <height>436</height>
+    <width>800</width>
+    <height>503</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -40,8 +40,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>801</width>
-         <height>393</height>
+         <width>798</width>
+         <height>480</height>
         </rect>
        </property>
        <layout class="QHBoxLayout" name="horizontalLayout">
@@ -68,6 +68,9 @@
           <property name="scaledContents">
            <bool>false</bool>
           </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
          </widget>
         </item>
        </layout>
@@ -81,13 +84,13 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>803</width>
+     <width>800</width>
      <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menufile">
     <property name="title">
-     <string>файл</string>
+     <string>Файл</string>
     </property>
     <addaction name="actionOpen"/>
     <addaction name="actionSave"/>
@@ -97,18 +100,19 @@
    </widget>
    <widget class="QMenu" name="menu">
     <property name="title">
-     <string>фильтр</string>
+     <string>Преобразования</string>
     </property>
-    <addaction name="action"/>
+    <addaction name="actionGray"/>
+    <addaction name="actionBin"/>
    </widget>
    <widget class="QMenu" name="menu_2">
     <property name="title">
-     <string>коррекция</string>
+     <string>Коррекция</string>
     </property>
    </widget>
    <widget class="QMenu" name="menu_3">
     <property name="title">
-     <string>редактирование</string>
+     <string>Редактирование</string>
     </property>
     <addaction name="actionScale"/>
    </widget>
@@ -117,7 +121,6 @@
    <addaction name="menu"/>
    <addaction name="menu_2"/>
   </widget>
-  <widget class="QStatusBar" name="statusBar"/>
   <action name="actionOpen">
    <property name="text">
     <string>Открыть</string>
@@ -148,9 +151,14 @@
     <string>Масштабирование</string>
    </property>
   </action>
-  <action name="action">
+  <action name="actionGray">
    <property name="text">
     <string>Полутон</string>
+   </property>
+  </action>
+  <action name="actionBin">
+   <property name="text">
+    <string>Бинаризация</string>
    </property>
   </action>
  </widget>

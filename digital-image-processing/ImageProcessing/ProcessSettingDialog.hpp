@@ -17,14 +17,27 @@ class ProcessSettingDialog : public QDialog
 
 public:
     explicit ProcessSettingDialog(QWidget *parent = nullptr);
-    ~ProcessSettingDialog();
+    ~ProcessSettingDialog() override;
 
     void setImage(const QImage& image);
+    void setImage(QImage&& image);
     virtual ImageProcessor imageProcessor() = 0;
 
+protected:
+    void updatePreviewImage();
+
 private:
-    Ui::ProcessSettingDialog *ui;
+    void setImage();
+
+protected:
+    QWidget* centralWidget;
     ImageController _imageController;
+
+private:
+    inline static int IMAGE_SHORT_SIDE_LENGTH = 300;
+
+    Ui::ProcessSettingDialog *ui;
+
 };
 
 #endif // PROCESSSETTINGDIALOG_H

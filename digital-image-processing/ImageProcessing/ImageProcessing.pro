@@ -30,18 +30,26 @@ SOURCES += \
     ScaleProcessor.cpp \
     GrayProcessor.cpp \
     ImageController.cpp \
-    MainWindow.cpp
+    MainWindow.cpp \
+    GrayProcessSettingDialog.cpp \
+    BinaryProcessSettingDialog.cpp \
+    BinaryProcessor.cpp
 
 HEADERS += \
     ImageController.hpp \
     GrayProcessor.hpp \
     MainWindow.hpp \
     ProcessSettingDialog.hpp \
-    ScaleProcessor.hpp
+    ScaleProcessor.hpp \
+    GrayProcessSettingDialog.hpp \
+    BinaryProcessSettingDialog.hpp \
+    BinaryProcessor.hpp
 
 FORMS += \
         mainwindow.ui \
-    ProcessSettingDialog.ui
+    ProcessSettingDialog.ui \
+    GrayProcessSettingDialog.ui \
+    BinaryProcessSettingDialog.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
