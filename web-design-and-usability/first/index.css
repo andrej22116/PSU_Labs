@@ -1,0 +1,101 @@
+.index-content {
+    top: 0;
+
+    width: 100%;
+    min-height: 100vh;/*calc(100vh - 192px);*/
+
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.index-content a {
+    top: 0;
+    display: block;
+    position: relative;
+    margin: 64px;
+}
+
+.creeper, .pig, .stive, .diamond {
+    color: #0000;
+    user-select: none;
+
+    width: 256px;
+    height: 256px;
+    background-size: contain; /*no-repeat*/
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: local;
+
+    filter: brightness(0);
+    background-blend-mode: multiply;
+
+    text-align: center;
+}
+
+.creeper p, .pig p, .stive p, .diamond p {
+    padding-top: 256px;
+    margin-top: -64px;
+}
+
+.creeper {
+    background-image: url("src/Creeper.png");
+    transform: rotate(-20deg);
+}
+
+.pig {
+    background-image: url("src/Pig.png");
+    transform: rotate(15deg);
+}
+
+.stive {
+    background-image: url("src/Steve.png");
+    transform: rotate(-135deg);
+}
+
+.diamond {
+    background-image: url("src/Diamond.png");
+    transform: rotate(32deg);
+}
+
+.creeper:hover, .pig:hover, .stive:hover, .diamond:hover {
+    width: 320px;
+    height: 320px;
+}
+
+.creeper:hover p, .pig:hover p, .stive:hover p, .diamond:hover p {
+    padding-top: 320px;
+}
+
+.creeper:hover {
+    color: #48bc2d;
+    text-shadow: 0 0 5px #9ee8ff;
+    filter: drop-shadow(0 0 32px #48bc2d);
+}
+
+.pig:hover {
+    color: #ffc9ee;
+    text-shadow: 0 0 5px #ffeefa;
+    filter: drop-shadow(0 0 32px #ffc9ee);
+}
+
+.stive:hover {
+    color: #688ee8;
+    text-shadow: 0 0 5px #5aff0e;
+    filter: drop-shadow(0 0 32px #688ee8);
+}
+
+.diamond:hover {
+    color: #5bffff;
+    text-shadow: 0 0 5px #d7ffff;
+    filter: drop-shadow(0 0 32px #5bffff);
+}
+
+.hover-effect {
+    transition: width 0.5s,
+                height 0.5s,
+                padding 0.5s,
+                color 0.5s,
+                text-shadow 0.5s;
+}
