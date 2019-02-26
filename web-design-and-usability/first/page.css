@@ -1,0 +1,20 @@
+.govno-content {
+    background-color: darkgrey;
+    height: 100vh;
+}
+
+.creeper {
+    background-image: url(src/Creeper.png);
+}
+
+.steve {
+    background-image: url(src/Steve.png);
+}
+
+.diamond {
+    background-image: url(src/Diamond.png);
+}
+
+.pig {
+    background-image: url(src/Pig.png);
+}

@@ -115,3 +115,16 @@ govno {
 .govno-footer .govno-text {
     font-size: 14px;
 }
+
+.govno-go-home {
+    color: gold;
+    text-shadow:    0 0 10px darkmagenta,
+                    0 0 15px darkmagenta,
+                    0 0 20px darkmagenta;
+}
+
+.govno-go-home:hover {
+    font-size: 34px;
+    padding-top: calc(0.5em - 2px);
+    padding-left: calc(0.5em - 2px);
+}
