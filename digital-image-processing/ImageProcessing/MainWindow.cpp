@@ -4,6 +4,16 @@
 
 #include "GrayProcessSettingDialog.hpp"
 #include "BinaryProcessSettingDialog.hpp"
+#include "SaltAndPepeerNoiseSettingDialog.hpp"
+#include "ColorCorrectionProcessSettingDialog.hpp"
+#include "FormHighPassFilterSettingDialog.hpp"
+#include "GaussianBlureSetupDialog.hpp"
+#include "EmbossSettingDialog.hpp"
+#include "BorderSelectionSettingDialog.hpp"
+#include "LowPassFilterSettingDialog.hpp"
+#include "MedianFilterSettingDialog.hpp"
+
+#include "GaussianNoiseProcessor.hpp"
 
 #include <QImage>
 #include <QPixmap>
@@ -50,14 +60,6 @@ void MainWindow::openImage()
     }
 
     _imageController->load(_savePath);
-    //_imageController->process(GrayProcessor{ GrayProcessor::By::Smart });
-    /*
-    _imageController->process(ScaleProcessor{ double(300) / double(_imageController->image()->height())
-                                            , double(300) / double(_imageController->image()->height()) });
-    _imageController->apply();
-    _imageController->process(GrayProcessor{ GrayProcessor::By::Smart });
-    _imageController->apply();
-    */
 
     ui->imageLabel->setPixmap(QPixmap::fromImage(*_imageController->image()));
 }
@@ -97,5 +99,63 @@ void MainWindow::on_actionSaveAs_triggered()
 void MainWindow::on_actionBin_triggered()
 {
     BinaryProcessSettingDialog dialog(this);
+    runProcessDialog(dialog);
+}
+
+void MainWindow::on_actionNoiseSaltAndPepper_triggered()
+{
+    SaltAndPepeerNoiseSettingDialog dialog(this);
+    runProcessDialog(dialog);
+}
+
+void MainWindow::on_actionNoiseGause_triggered()
+{
+    _imageController->process(GaussianNoiseProcessor{});
+    _imageController->apply();
+
+    ui->imageLabel->setPixmap(QPixmap::fromImage(*_imageController->image()));
+}
+
+void MainWindow::on_actionLightCorrection_triggered()
+{
+    ColorCorrectionProcessSettingDialog dialog(this);
+    runProcessDialog(dialog);
+}
+
+void MainWindow::on_actionStamping_triggered()
+{
+    EmbossSettingDialog dialog{ this };
+    runProcessDialog(dialog);
+
+    ui->imageLabel->setPixmap(QPixmap::fromImage(*_imageController->image()));
+}
+
+void MainWindow::on_actionFilterLL_triggered()
+{
+    LowPassFilterSettingDialog dialog{ this };
+    runProcessDialog(dialog);
+}
+
+void MainWindow::on_actionFilterHL_triggered()
+{
+    FormHighPassFilterSettingDialog dialog{ this };
+    runProcessDialog(dialog);
+}
+
+void MainWindow::on_actionFilterMedian_triggered()
+{
+    MedianFilterSettingDialog dialog{ this };
+    runProcessDialog(dialog);
+}
+
+void MainWindow::on_actionBlure_triggered()
+{
+    GaussianBlureSetupDialog dialog{ this };
+    runProcessDialog(dialog);
+}
+
+void MainWindow::on_actionBorders_triggered()
+{
+    BorderSelectionSettingDialog dialog{ this };
     runProcessDialog(dialog);
 }

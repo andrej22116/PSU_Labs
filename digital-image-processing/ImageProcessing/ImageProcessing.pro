@@ -33,7 +33,26 @@ SOURCES += \
     MainWindow.cpp \
     GrayProcessSettingDialog.cpp \
     BinaryProcessSettingDialog.cpp \
-    BinaryProcessor.cpp
+    BinaryProcessor.cpp \
+    SaltAndPapeerNoiseProcessor.cpp \
+    SaltAndPepeerNoiseSettingDialog.cpp \
+    GaussianNoiseProcessor.cpp \
+    ColorCorrectionProcessor.cpp \
+    ColorCorrectionProcessSettingDialog.cpp \
+    BaseMatrixCoreProcessor.cpp \
+    BorderSelectionProcessor.cpp \
+    LowPassFilterProcessor.cpp \
+    HighPassFilterProcessor.cpp \
+    GaussianBlureProcessor.cpp \
+    FormHighPassFilterSettingDialog.cpp \
+    KernelSetupWidget.cpp \
+    GaussianBlureSetupDialog.cpp \
+    EmbossProcessor.cpp \
+    EmbossSettingDialog.cpp \
+    LowPassFilterSettingDialog.cpp \
+    BorderSelectionSettingDialog.cpp \
+    MedianFilterProcessor.cpp \
+    MedianFilterSettingDialog.cpp
 
 HEADERS += \
     ImageController.hpp \
@@ -43,13 +62,35 @@ HEADERS += \
     ScaleProcessor.hpp \
     GrayProcessSettingDialog.hpp \
     BinaryProcessSettingDialog.hpp \
-    BinaryProcessor.hpp
+    BinaryProcessor.hpp \
+    SaltAndPapeerNoiseProcessor.hpp \
+    SaltAndPepeerNoiseSettingDialog.hpp \
+    GaussianNoiseProcessor.hpp \
+    ColorCorrectionProcessor.hpp \
+    ColorCorrectionProcessSettingDialog.hpp \
+    BaseMatrixCoreProcessor.hpp \
+    BorderSelectionProcessor.hpp \
+    LowPassFilterProcessor.hpp \
+    HighPassFilterProcessor.hpp \
+    GaussianBlureProcessor.hpp \
+    FormHighPassFilterSettingDialog.hpp \
+    KernelSetupWidget.hpp \
+    GaussianBlureSetupDialog.hpp \
+    EmbossProcessor.hpp \
+    EmbossSettingDialog.hpp \
+    LowPassFilterSettingDialog.hpp \
+    BorderSelectionSettingDialog.hpp \
+    MedianFilterProcessor.hpp \
+    MedianFilterSettingDialog.hpp
 
 FORMS += \
         mainwindow.ui \
     ProcessSettingDialog.ui \
     GrayProcessSettingDialog.ui \
-    BinaryProcessSettingDialog.ui
+    BinaryProcessSettingDialog.ui \
+    SaltAndPepeerNoiseSettingDialog.ui \
+    ColorCorrectionProcessSettingDialog.ui \
+    CoreSetupWidget.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

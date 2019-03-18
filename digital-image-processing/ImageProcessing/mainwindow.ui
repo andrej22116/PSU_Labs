@@ -98,28 +98,44 @@
     <addaction name="separator"/>
     <addaction name="actionExit"/>
    </widget>
-   <widget class="QMenu" name="menu">
+   <widget class="QMenu" name="menuModify">
     <property name="title">
      <string>Преобразования</string>
     </property>
     <addaction name="actionGray"/>
     <addaction name="actionBin"/>
+    <addaction name="actionLightCorrection"/>
+    <addaction name="actionContrast"/>
    </widget>
-   <widget class="QMenu" name="menu_2">
+   <widget class="QMenu" name="menuFilter">
     <property name="title">
-     <string>Коррекция</string>
+     <string>Фильрация</string>
     </property>
+    <addaction name="actionFilterLL"/>
+    <addaction name="actionFilterHL"/>
+    <addaction name="actionFilterMedian"/>
+    <addaction name="actionBlure"/>
+    <addaction name="actionStamping"/>
+    <addaction name="actionBorders"/>
    </widget>
-   <widget class="QMenu" name="menu_3">
+   <widget class="QMenu" name="menuEdit">
     <property name="title">
      <string>Редактирование</string>
     </property>
     <addaction name="actionScale"/>
    </widget>
+   <widget class="QMenu" name="menuNoise">
+    <property name="title">
+     <string>Шум</string>
+    </property>
+    <addaction name="actionNoiseSaltAndPepper"/>
+    <addaction name="actionNoiseGause"/>
+   </widget>
    <addaction name="menufile"/>
-   <addaction name="menu_3"/>
-   <addaction name="menu"/>
-   <addaction name="menu_2"/>
+   <addaction name="menuEdit"/>
+   <addaction name="menuModify"/>
+   <addaction name="menuNoise"/>
+   <addaction name="menuFilter"/>
   </widget>
   <action name="actionOpen">
    <property name="text">
@@ -159,6 +175,56 @@
   <action name="actionBin">
    <property name="text">
     <string>Бинаризация</string>
+   </property>
+  </action>
+  <action name="actionNoiseSaltAndPepper">
+   <property name="text">
+    <string>Соль и очень крутой перчик</string>
+   </property>
+  </action>
+  <action name="actionNoiseGause">
+   <property name="text">
+    <string>Гаус</string>
+   </property>
+  </action>
+  <action name="actionFilterLL">
+   <property name="text">
+    <string>НЧ фильтр</string>
+   </property>
+  </action>
+  <action name="actionFilterHL">
+   <property name="text">
+    <string>ВЧ фильтр</string>
+   </property>
+  </action>
+  <action name="actionFilterMedian">
+   <property name="text">
+    <string>Медианный фильтр</string>
+   </property>
+  </action>
+  <action name="actionLightCorrection">
+   <property name="text">
+    <string>Коррекция яркости</string>
+   </property>
+  </action>
+  <action name="actionBlure">
+   <property name="text">
+    <string>Блюр</string>
+   </property>
+  </action>
+  <action name="actionStamping">
+   <property name="text">
+    <string>Тиснение</string>
+   </property>
+  </action>
+  <action name="actionContrast">
+   <property name="text">
+    <string>Улучшение контраста</string>
+   </property>
+  </action>
+  <action name="actionBorders">
+   <property name="text">
+    <string>Выделение контуров</string>
    </property>
   </action>
  </widget>

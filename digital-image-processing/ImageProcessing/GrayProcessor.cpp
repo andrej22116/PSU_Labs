@@ -159,9 +159,9 @@ void GrayProcessor::smartProcess(ProcessData& data) noexcept
     size_t lineGarbage = data.width % 4 ? 4 - data.width % 4 : 0;
 
     while ( iteratorOld != data.oldEnd ) {
-        *iteratorNew++ = uchar( float( *iteratorOld )       * 0.2125f
-                              + float( *(iteratorOld + 1) ) * 0.7154f
-                              + float( *(iteratorOld + 2) ) * 0.0721f );
+        *iteratorNew++ = uchar( float( *iteratorOld )       * 0.299f
+                              + float( *(iteratorOld + 1) ) * 0.587f
+                              + float( *(iteratorOld + 2) ) * 0.114f );
 
         ++lineOffset;
         if ( lineOffset == data.width ) {

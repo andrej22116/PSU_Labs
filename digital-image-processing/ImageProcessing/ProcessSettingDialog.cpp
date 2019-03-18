@@ -61,4 +61,6 @@ void ProcessSettingDialog::setImage()
     _imageController.apply();
 
     updatePreviewImage();
+
+    this->setFixedSize(this->minimumSizeHint());
 }
