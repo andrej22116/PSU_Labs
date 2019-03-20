@@ -3,18 +3,22 @@
 
 
 #include "BaseMatrixCoreProcessor.hpp"
+#include <vector>
 
-
-class EmbossProcessor : public BaseMatrixCoreProcessor<int>
+class EmbossProcessor
 {
-public:
-    enum Mask {
-        Mask_3x3,
-        Mask_5x5,
-        Mask_7x7
-    };
+    std::vector<double> _matrix;
 
-    EmbossProcessor(Mask mask = Mask_3x3) noexcept;
+public:
+    EmbossProcessor(int angle) noexcept;
+
+    QImage operator () (const QImage& image) noexcept;
+
+    static std::vector<double> matrix(int angle);
+
+protected:
+    void rgbProcessing(const QImage& inputImage, QImage& outputImage);
+    void grayProcessing(const QImage& inputImage, QImage& outputImage);
 };
 
 #endif // EMBOSSPROCESSOR_HPP

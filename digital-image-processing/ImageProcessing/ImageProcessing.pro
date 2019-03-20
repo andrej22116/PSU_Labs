@@ -52,7 +52,14 @@ SOURCES += \
     LowPassFilterSettingDialog.cpp \
     BorderSelectionSettingDialog.cpp \
     MedianFilterProcessor.cpp \
-    MedianFilterSettingDialog.cpp
+    MedianFilterSettingDialog.cpp \
+    ScaleSettingDialog.cpp \
+    QProgressIndicator.cpp \
+    modalmessageoverlaywidget.cpp \
+    WaitAnimationOverlayWidget.cpp \
+    ContrastProcessorSettingDialog.cpp \
+    ContrastProcessor.cpp \
+    EmbossProcessorSettingDialog.cpp
 
 HEADERS += \
     ImageController.hpp \
@@ -81,7 +88,14 @@ HEADERS += \
     LowPassFilterSettingDialog.hpp \
     BorderSelectionSettingDialog.hpp \
     MedianFilterProcessor.hpp \
-    MedianFilterSettingDialog.hpp
+    MedianFilterSettingDialog.hpp \
+    ScaleSettingDialog.hpp \
+    QProgressIndicator.h \
+    modalmessageoverlaywidget.h \
+    WaitAnimationOverlayWidget.hpp \
+    ContrastProcessorSettingDialog.hpp \
+    ContrastProcessor.hpp \
+    EmbossProcessorSettingDialog.hpp
 
 FORMS += \
         mainwindow.ui \
@@ -90,7 +104,10 @@ FORMS += \
     BinaryProcessSettingDialog.ui \
     SaltAndPepeerNoiseSettingDialog.ui \
     ColorCorrectionProcessSettingDialog.ui \
-    CoreSetupWidget.ui
+    CoreSetupWidget.ui \
+    ScaleSettingDialog.ui \
+    ContrastProcessorSettingDialog.ui \
+    EmbossProcessorSettingDialog.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

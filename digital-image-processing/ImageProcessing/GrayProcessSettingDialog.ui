@@ -63,7 +63,7 @@
    <item>
     <widget class="QRadioButton" name="radioSmart">
      <property name="text">
-      <string>By smart ( Red 21.25% | Green 71.54% | Blue 7.21% )</string>
+      <string>By smart ( Red 29.9% | Green 58.7% | Blue 11.4% )</string>
      </property>
     </widget>
    </item>

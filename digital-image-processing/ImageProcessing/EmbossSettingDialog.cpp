@@ -9,8 +9,8 @@ EmbossSettingDialog::EmbossSettingDialog(QWidget* parent) :
 ImageProcessor EmbossSettingDialog::imageProcessor()
 {
     switch( maskType() ) {
-    case MaskType::Mask_3x3: return EmbossProcessor{ EmbossProcessor::Mask_3x3 };
-    case MaskType::Mask_5x5: return EmbossProcessor{ EmbossProcessor::Mask_5x5 };
-    case MaskType::Mask_7x7: return EmbossProcessor{ EmbossProcessor::Mask_7x7 };
+    case MaskType::Mask_3x3: return EmbossProcessor{ 0 };
+    case MaskType::Mask_5x5: return EmbossProcessor{ 0 };
+    case MaskType::Mask_7x7: return EmbossProcessor{ 0 };
     }
 }

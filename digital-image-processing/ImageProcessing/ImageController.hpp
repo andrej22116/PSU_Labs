@@ -1,7 +1,7 @@
 #ifndef IMAGECONTROLLER_H
 #define IMAGECONTROLLER_H
 
-#include <QObject>
+#include <QThread>
 #include <QException>
 #include <memory>
 #include <functional>
@@ -12,18 +12,19 @@ class QImage;
 using uchar = unsigned char;
 using ImageProcessor = std::function<QImage (const QImage&)>;
 
-class ImageController : public QObject
+class ImageController : public QThread
 {
     Q_OBJECT
 
 public:
     ImageController();
     ImageController(const QImage& image);
+    ~ImageController() override;
 
     void load(const QString& path) noexcept(false);
     void save(const QString& path) noexcept(false);
 
-    void process(const ImageProcessor& processor) noexcept(false);
+    void process(const ImageProcessor& processor, bool usageThread = true) noexcept(false);
     void apply() noexcept;
 
     void setImage(const QImage& image);
@@ -38,8 +39,16 @@ signals:
     void saveEnded();
 
 private:
+    void init();
+    void run() override;
+
+private slots:
+    void endProcess();
+
+private:
     std::shared_ptr<QImage> _initialImage;
     std::shared_ptr<QImage> _finalImage;
+    ImageProcessor _processor;
 };
 
 

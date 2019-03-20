@@ -10,6 +10,7 @@ class ProcessSettingDialog;
 }
 
 class QImage;
+class WaitAnimationOverlayWidget;
 
 class ProcessSettingDialog : public QDialog
 {
@@ -29,6 +30,9 @@ protected:
 private:
     void setImage();
 
+private slots:
+    void onEndProcess();
+
 protected:
     QWidget* centralWidget;
     ImageController _imageController;
@@ -37,6 +41,7 @@ private:
     inline static int IMAGE_SHORT_SIDE_LENGTH = 300;
 
     Ui::ProcessSettingDialog *ui;
+    WaitAnimationOverlayWidget* _waitAnimationOverlayWidget;
 
 };
 

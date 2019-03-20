@@ -1,17 +1,23 @@
 #include "ImageController.hpp"
 
 #include <QImage>
+#include <thread>
 
 ImageController::ImageController() :
     _initialImage( new QImage{} ),
     _finalImage( new QImage{} )
 {
-
+    init();
 }
 
 ImageController::ImageController(const QImage& image) :
     _initialImage( new QImage{ image } ),
     _finalImage( new QImage{} )
+{
+    init();
+}
+
+ImageController::~ImageController()
 {
 }
 
@@ -38,15 +44,20 @@ void ImageController::save(const QString& path)
     emit saveEnded();
 }
 
-void ImageController::process(const ImageProcessor& processor)
+void ImageController::process(const ImageProcessor& processor, bool usageThread)
 {
     if ( !_initialImage ) {
         throw ProcessException{};
     }
 
-    _finalImage = std::make_shared<QImage>(processor(*_initialImage));
+    _processor = processor;
 
-    emit processEnded();
+    if ( usageThread ) {
+        start();
+    }
+    else {
+        run();
+    }
 }
 
 void ImageController::apply() noexcept
@@ -79,6 +90,21 @@ const std::shared_ptr<QImage> ImageController::image() const
 const std::shared_ptr<QImage> ImageController::processedImage() const
 {
     return _finalImage;
+}
+
+void ImageController::init()
+{
+    connect(this, &QThread::finished, this, &ImageController::endProcess);
+}
+
+void ImageController::run()
+{
+    _finalImage = std::make_shared<QImage>(_processor(*_initialImage));
+}
+
+void ImageController::endProcess()
+{
+    emit processEnded();
 }
 
 void LoadImageException::raise() const

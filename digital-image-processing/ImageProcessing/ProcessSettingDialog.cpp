@@ -2,6 +2,7 @@
 #include "ui_ProcessSettingDialog.h"
 
 #include "ScaleProcessor.hpp"
+#include "WaitAnimationOverlayWidget.hpp"
 
 #include <QPixmap>
 #include <QGridLayout>
@@ -12,12 +13,19 @@ ProcessSettingDialog::ProcessSettingDialog(QWidget *parent) :
     ui(new Ui::ProcessSettingDialog)
 {
     ui->setupUi(this);
+    _waitAnimationOverlayWidget = new WaitAnimationOverlayWidget{ 64, ui->labelImage };
+
+    connect( &_imageController, &ImageController::processEnded
+           , this, &ProcessSettingDialog::onEndProcess );
 }
 
 ProcessSettingDialog::~ProcessSettingDialog()
 {
     delete centralWidget;
     delete ui;
+
+    _imageController.terminate();
+    _imageController.wait();
 }
 
 void ProcessSettingDialog::setImage(const QImage& image)
@@ -34,8 +42,9 @@ void ProcessSettingDialog::setImage(QImage&& image)
 
 void ProcessSettingDialog::updatePreviewImage()
 {
+    _waitAnimationOverlayWidget->showModal();
+    _imageController.wait();
     _imageController.process( imageProcessor() );
-    ui->labelImage->setPixmap(QPixmap::fromImage(*_imageController.processedImage()));
 }
 
 void ProcessSettingDialog::setImage()
@@ -57,10 +66,15 @@ void ProcessSettingDialog::setImage()
         layout->addWidget(centralWidget, 1, 0);
     }
 
-    _imageController.process( ScaleProcessor{ scale, scale } );
+    _imageController.process( ScaleProcessor{ scale, scale }, false );
     _imageController.apply();
 
     updatePreviewImage();
+}
 
+void ProcessSettingDialog::onEndProcess()
+{
+    _waitAnimationOverlayWidget->hideModal();
+    ui->labelImage->setPixmap(QPixmap::fromImage(*_imageController.processedImage()));
     this->setFixedSize(this->minimumSizeHint());
 }

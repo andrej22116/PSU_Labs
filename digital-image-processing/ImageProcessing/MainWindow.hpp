@@ -9,6 +9,8 @@ class MainWindow;
 
 class ImageController;
 class ProcessSettingDialog;
+class QLabel;
+class WaitAnimationOverlayWidget;
 
 
 class MainWindow : public QMainWindow
@@ -17,7 +19,7 @@ class MainWindow : public QMainWindow
 
 public:
     explicit MainWindow(QWidget *parent = nullptr);
-    ~MainWindow();
+    ~MainWindow() override;
 
 private slots:
     void on_actionGray_triggered();
@@ -48,14 +50,33 @@ private slots:
 
     void on_actionBorders_triggered();
 
+    void on_actionScale_triggered();
+
 private:
     void runProcessDialog(ProcessSettingDialog& dialog);
     void openImage();
 
+    void updateStatusBar();
+
+    void disableAllActions();
+    void enableAllActions();
+    void disableAllAlgorithmActions();
+    void enableAllAlgorithmActions();
+
+private slots:
+    void onEndProcess();
+
+    void on_actionExit_triggered();
+
+    void on_actionContrast_triggered();
+
 private:
     Ui::MainWindow* ui;
     ImageController* _imageController;
+    QLabel* _labelPath;
+    QLabel* _labelSize;
     QString _savePath;
+    WaitAnimationOverlayWidget* _waitAnimationOverlayWidget;
 
 };
 
