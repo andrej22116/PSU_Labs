@@ -2,7 +2,6 @@
 
 #include <QImage>
 
-
 EmbossProcessor::EmbossProcessor(int angle) noexcept
 {
     _matrix = matrix(angle);
@@ -49,17 +48,17 @@ std::vector<double> EmbossProcessor::matrix(int angle)
 
     int ost = angle % 45;
 
-    double weightLeft = static_cast<double>(ost) / 45.0;
+    double weightRight = static_cast<double>(ost) / 45.0;
 
-    double weightRight = 1.0 - weightLeft;
+    size_t firstLeftIndex = (3 + rotate) % 8;
+    size_t firstRightIndex = (4 + rotate) % 8;
+    size_t secondLeftIndex = (7 + rotate) % 8;
+    size_t secondRightIndex = (rotate) % 8;
 
-    if ( ost > 0 ) {
-        for (int i = 0; i < 8; ++i) {
-            double delta = static_cast<double>(matrix[i]) - static_cast<double>(matrix[(i + 1) % 8]);
-            newMatrix[i] += delta * weightLeft;
-            newMatrix[(i + 1) % 8] -= delta * weightRight;
-        }
-    }
+    newMatrix[firstRightIndex] = matrix[firstRightIndex] - weightRight;
+    newMatrix[firstLeftIndex] = matrix[firstLeftIndex] - weightRight;
+    newMatrix[secondRightIndex] = matrix[secondRightIndex] + weightRight;
+    newMatrix[secondLeftIndex] = matrix[secondLeftIndex] + weightRight;
 
     return {
         newMatrix[0], newMatrix[1], newMatrix[2],
